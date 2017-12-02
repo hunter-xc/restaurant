@@ -1,0 +1,19 @@
+{
+  "name": "server",
+  "description": "project",
+  "author": "Chris",
+  "version": "0.0.1",
+  "dependencies": {
+    "body-parser": "*",
+    "cookie-parser": "~1.0.1",
+    "ejs": "*",
+    "express": "latest",
+    "express-fileupload": "latest",
+    "cookie-session": "*",
+    "mongodb": "latest"
+  },
+  "engine": "node >= 0.10.0",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
