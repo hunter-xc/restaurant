@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <style>
+      img {
+         width: 100%;
+         height: auto;
+      }
+   </style>
+</head>
+<body>
+
+<div class="container">
+  <h2><%=restaurant.name %></h2>
+  <% if (restaurant.image) { %>
+	<img src="data:<%= restaurant.mimetype %>;base64, <%= restaurant.image %>">
+  <% } %>
+
+  <!--<form class="form-horizontal" method="post"> -->
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="borough">Borough: </label>
+      <div class="col-sm-10">
+	<% if (restaurant.borough) { %>
+        <input type="text" class="form-control" id="borough" name="borough" value="<%=restaurant.borough %>" readonly>
+	<% } else { %>
+  	<input type="text" class="form-control" id="borough" name="borough" value="" readonly>
+	<% } %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="cuisine">Cuisine:</label>
+      <div class="col-sm-10">          
+	<% if (restaurant.cuisine) { %>  
+        <input type="text" class="form-control" id="cuisine" name="cuisine" value="<%=restaurant.cuisine %>" readonly>
+	<% } else { %>
+	<input type="text" class="form-control" id="cuisine" name="cuisine" value="" readonly>
+	<% } %>
+      </div>
+    </div>    
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="street">Street:</label>
+      <div class="col-sm-10">     
+	<% if (restaurant.address.street) { %>       
+        <input type="text" class="form-control" id="street" name="street" value="<%=restaurant.address.street %>" readonly>
+	<% } else { %>
+	<input type="text" class="form-control" id="street" name="street" value="" readonly>
+	<% } %>
+      </div>
+    </div> 
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="building">Building:</label>
+      <div class="col-sm-10">  
+	<% if (restaurant.address.building) { %>          
+        <input type="text" class="form-control" id="building" name="building" value="<%=restaurant.address.building %>" readonly>
+	<% } else { %>
+	<input type="text" class="form-control" id="building" name="building" value="" readonly>
+	<% } %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="zipcode">Zipcode:</label>
+      <div class="col-sm-10">    
+	<% if (restaurant.address.zipcode) { %>       
+        <input type="text" class="form-control" id="zipcode" name="zipcode" value="<%=restaurant.address.zipcode %>" readonly>
+	<% } else { %>
+	<input type="text" class="form-control" id="zipcode" name="zipcode" value="" readonly>
+	<% } %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="coord_lon">GPS</label>
+      <div class="col-sm-10">     
+	<% if (restaurant.address.coord) { %>     
+        <input type="text" class="form-control" id="coord_lon" name="coord_lon" value="<%=restaurant.address.coord[0] %>, <%=restaurant.address.coord[1] %>" readonly>
+	<% } %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2">Rating:</label>
+      <div class="col-sm-10"> 
+	<% if (!restaurant.ratings) { %>
+		<input type="text" class="form-control" value="" readonly>
+	<% } %>
+	<% if (restaurant.ratings) { %>        
+        <% for (var i=0; i<restaurant.ratings.length; i++) { %>
+		<label class="control-label"><%=i+1 %>. <%=restaurant.ratings[i].score %> (<%=restaurant.ratings[i].user %>)</label><br>
+	<% } } %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="owner">Created by:</label>
+      <div class="col-sm-10">          
+        <input type="text" class="form-control" id="owner" name="owner" value="<%=restaurant.owner %>" readonly>
+      </div>
+    </div>
+    <div class="form-group">
+	<div class="col-sm-offset-2 col-sm-10">
+	<a href='/map?lat=<%=restaurant.address.coord[0]%>&lon=<%=restaurant.address.coord[1]%>&title=<%=restaurant.name%>'>Google Map</a>
+	</div>
+    </div>
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+	<a href="/edit?_id=<%=restaurant._id %>"><button type="submit" class="btn btn-default">Edit</button></a>
+	<a href="/delete?_id=<%=restaurant._id %>"><button type="submit" class="btn btn-default">Delete</button></a>
+	<a href="/rate?_id=<%=restaurant._id %>"><button type="submit" class="btn btn-default">Rate</button></a>
+      </div>
+    </div>
+<!--  </form>  --> 
+  
+
+
+</div>
+
+</body>
+</html>
+

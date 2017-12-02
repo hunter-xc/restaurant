@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Restaurants</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h1>Restaurants</h1>
+  <h2>User: <%=username %></h2> <input type='button' value='Logout' onclick='window.location.href="logout"'>
+  <h2>Showing <%=restaurant.length %> document(s)</h2>
+  
+  <input type='button' value='Create New Document' onclick='window.location.href="new"'>
+  <table class="table table-bordered">
+	<% if (restaurant.length > 0) { %>
+		<thead><tr><th>Name</th><tr></thead>
+	<% } %>
+	
+	<tbody>
+  	<% for(var i=0; i<restaurant.length; i++) { %>
+		<tr><td><a href="/display?_id=<%=restaurant[i]._id %>"> <%=restaurant[i].name %></a></td></tr>
+	<% } %>
+	</tbody>
+  </table>
+  
+</div>
+
+</body>
+</html>
+
