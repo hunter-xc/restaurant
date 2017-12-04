@@ -23,6 +23,7 @@ app.use(fileUpload());
 
 var users = new Array(
 	{name: 'demo', password: ''},
+	{name: 'student', password: ''},	
 	{name: 'user1', password: 'password'},
 	{name: 'user2', password: 'password'}
 );
