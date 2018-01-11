@@ -77,14 +77,24 @@ app.post('/register', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err,null);   
 		console.log('Connected to MongoDB\n');
-		db.collection('users').insertOne(criteria, function(err, result) {  
-			assert.equal(err,null); 
-			db.close();
 		
-			res.send('register successfully!');
-			res.end();	
-
+		db.collection('users').findOne({'username':req.body.username}.toArray(function(err, result) {
+			assert.equal(err, null);
+			if (result.length > 0) {
+				res.send('Sorry! Someone has register for this username');
+				db.close();
+			}	else {
+				db.collection('users').insertOne(criteria, function(err, result) {  
+					assert.equal(err,null); 
+					db.close();
+				
+					res.send('register successfully!');
+					res.end();	
+				});				
+			}
 		});
+		
+
 	});	
 })
 
