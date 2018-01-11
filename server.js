@@ -1,9 +1,7 @@
 var http = require('http');
-var url  = require('url');
-var fs = require('fs');
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
-var ExifImage = require('exif').ExifImage;
+//var ExifImage = require('exif').ExifImage;
 var ObjectId = require('mongodb').ObjectID;
 var mongourl = 'mongodb://user2:password@ds137054.mlab.com:37054/my_database';
 var fileUpload = require('express-fileupload');
@@ -11,7 +9,6 @@ var express = require('express');
 var session = require('cookie-session');
 var bodyParser = require('body-parser');
 var app = express();
-
 
 
 app.listen(process.env.PORT || 8099);
@@ -29,6 +26,8 @@ var users = new Array(
 	{name: 'user1', password: 'password'},
 	{name: 'user2', password: 'password'}
 );
+
+
 
 app.use(session({
   name: 'session',
@@ -65,6 +64,30 @@ app.get('/logout', function(req, res) {
 	res.redirect('/');
 });
 
+app.get('/register', function(req, res) {
+	res.status.render('register.ejs');
+})
+
+app.post('/register', function(req, res) {
+	var criteria = {};
+	criteria['username'] = req.body.username;
+	criteria['password'] = req.body.password;
+	
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err,null);   
+		console.log('Connected to MongoDB\n');
+		db.collection('users').insertOne(criteria, function(err, result) {  
+			assert.equal(err,null); 
+			db.close();
+		
+			res.send('register successfully!');
+			res.end();	
+
+		});
+	});	
+})
+
+
 app.get('/read', function(req, res) {
 	if (!req.session.authenticated)
 		res.render('login.ejs');
@@ -97,10 +120,11 @@ app.get('/api/restaurant/read/:c/:x', function(req, res) {
 });
 
 
-app.get('/api/restaurant/create', function(req, res) {
+app.post('/api/restaurant/create', function(req, res) {
 	if (!req.session.authenticated)
 		res.render('login.ejs');
-
+	console.log(req.body);
+	
 	var criteria = {};
 	criteria['name'] = (req.body.name != null)? req.body.name : null;
 	criteria['borough'] = (req.body.borough != null)? req.body.borough : null;
@@ -128,8 +152,10 @@ app.get('/api/restaurant/create', function(req, res) {
 			res.json(result.ops[0]);
 			res.end();
 		});	
-	});		
+	});
+			
 });
+
 
 
 
@@ -146,6 +172,7 @@ app.get('/new', function(req, res) {
 
 
 app.post('/create', function(req, res) {
+	console.log(JSON.stringify(req.body));
 	if (!req.session.authenticated)
 		res.render('login.ejs');
 	var new_r = {};
@@ -164,30 +191,13 @@ app.post('/create', function(req, res) {
 	
 
 	if (req.files.photo) {
-		var filename = req.files.photo.name;
 		var mimetype = req.files.photo.mimetype;	
-		image['image'] = filename;
-		new_r['mimetype'] = mimetype;
-
-		try {
-			new ExifImage(image, function(error, exifData) {
-				if (error)
-					console.log('ExifImage: ' + error.message);
-				else {
-					//exif['image'] = exifData.image;
-					//exif['exif'] = exifData.exif;
-					//exif['gps'] = exifData.gps;
-					new_r['gps'] = exifData.gps;
-
-				}
-			})
-		} catch(error) {}	
+		new_r['mimetype'] = mimetype;	
 
 		//image file should put together with folder, or set path for fs.read()
-		fs.readFile(filename, function(err, data) {  
-			new_r['image'] = new Buffer(data).toString('base64');
-			//new_r['gps'] = exif;
-		});			
+ 
+		new_r['image'] = new Buffer(req.files.photo.data).toString('base64');
+				
 	}	
 	
 
@@ -313,30 +323,13 @@ app.post('/update', function(req, res) {
 	
 
 	if (req.files.photo) {
-		var filename = req.files.photo.name;
 		var mimetype = req.files.photo.mimetype;	
-		image['image'] = filename;
-		new_r['mimetype'] = mimetype;
-
-		try {
-			new ExifImage(image, function(error, exifData) {
-				if (error)
-					console.log('ExifImage: ' + error.message);
-				else {
-					//exif['image'] = exifData.image;
-					//exif['exif'] = exifData.exif;
-					//exif['gps'] = exifData.gps;
-					new_r['gps'] = exifData.gps;
-
-				}
-			})
-		} catch(error) {}	
+		new_r['mimetype'] = mimetype;	
 
 		//image file should put together with folder, or set path for fs.read()
-		fs.readFile(filename, function(err, data) {  
-			new_r['image'] = new Buffer(data).toString('base64');
-			//new_r['gps'] = exif;
-		});			
+ 
+		new_r['image'] = new Buffer(req.files.photo.data).toString('base64');
+				
 	}	
 	
 
