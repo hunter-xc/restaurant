@@ -1,7 +1,9 @@
 var http = require('http');
+var url  = require('url');
+var fs = require('fs');
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
-//var ExifImage = require('exif').ExifImage;
+var ExifImage = require('exif').ExifImage;
 var ObjectId = require('mongodb').ObjectID;
 var mongourl = 'mongodb://user2:password@ds137054.mlab.com:37054/my_database';
 var fileUpload = require('express-fileupload');
@@ -9,6 +11,7 @@ var express = require('express');
 var session = require('cookie-session');
 var bodyParser = require('body-parser');
 var app = express();
+
 
 
 app.listen(process.env.PORT || 8099);
@@ -94,11 +97,10 @@ app.get('/api/restaurant/read/:c/:x', function(req, res) {
 });
 
 
-app.post('/api/restaurant/create', function(req, res) {
+app.get('/api/restaurant/create', function(req, res) {
 	if (!req.session.authenticated)
 		res.render('login.ejs');
-	console.log(req.body);
-	
+
 	var criteria = {};
 	criteria['name'] = (req.body.name != null)? req.body.name : null;
 	criteria['borough'] = (req.body.borough != null)? req.body.borough : null;
@@ -126,10 +128,8 @@ app.post('/api/restaurant/create', function(req, res) {
 			res.json(result.ops[0]);
 			res.end();
 		});	
-	});
-			
+	});		
 });
-
 
 
 
@@ -146,7 +146,6 @@ app.get('/new', function(req, res) {
 
 
 app.post('/create', function(req, res) {
-	console.log(JSON.stringify(req.body));
 	if (!req.session.authenticated)
 		res.render('login.ejs');
 	var new_r = {};
@@ -165,13 +164,30 @@ app.post('/create', function(req, res) {
 	
 
 	if (req.files.photo) {
+		var filename = req.files.photo.name;
 		var mimetype = req.files.photo.mimetype;	
-		new_r['mimetype'] = mimetype;	
+		image['image'] = filename;
+		new_r['mimetype'] = mimetype;
+
+		try {
+			new ExifImage(image, function(error, exifData) {
+				if (error)
+					console.log('ExifImage: ' + error.message);
+				else {
+					//exif['image'] = exifData.image;
+					//exif['exif'] = exifData.exif;
+					//exif['gps'] = exifData.gps;
+					new_r['gps'] = exifData.gps;
+
+				}
+			})
+		} catch(error) {}	
 
 		//image file should put together with folder, or set path for fs.read()
- 
-		new_r['image'] = new Buffer(req.files.photo.data).toString('base64');
-				
+		fs.readFile(filename, function(err, data) {  
+			new_r['image'] = new Buffer(data).toString('base64');
+			//new_r['gps'] = exif;
+		});			
 	}	
 	
 
@@ -297,13 +313,30 @@ app.post('/update', function(req, res) {
 	
 
 	if (req.files.photo) {
+		var filename = req.files.photo.name;
 		var mimetype = req.files.photo.mimetype;	
-		new_r['mimetype'] = mimetype;	
+		image['image'] = filename;
+		new_r['mimetype'] = mimetype;
+
+		try {
+			new ExifImage(image, function(error, exifData) {
+				if (error)
+					console.log('ExifImage: ' + error.message);
+				else {
+					//exif['image'] = exifData.image;
+					//exif['exif'] = exifData.exif;
+					//exif['gps'] = exifData.gps;
+					new_r['gps'] = exifData.gps;
+
+				}
+			})
+		} catch(error) {}	
 
 		//image file should put together with folder, or set path for fs.read()
- 
-		new_r['image'] = new Buffer(req.files.photo.data).toString('base64');
-				
+		fs.readFile(filename, function(err, data) {  
+			new_r['image'] = new Buffer(data).toString('base64');
+			//new_r['gps'] = exif;
+		});			
 	}	
 	
 
