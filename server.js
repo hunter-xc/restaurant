@@ -24,9 +24,7 @@ app.get('/', function(req, res) {
 	res.render('login.ejs');
 });
 
-app.get('/new', function(req, res) {
-	res.render('new.ejs');
-});
+
 
 app.get('/register', function(req, res) {
 	res.render('register.ejs');
@@ -61,7 +59,7 @@ app.post('/register', function(req, res) {
 	res.end();
 });
 
-/*
+
 var users = new Array(
 	{name: 'demo', password: ''},
 	{name: 'user1', password: 'password'},
@@ -103,6 +101,7 @@ app.get('/logout', function(req, res) {
 	res.redirect('/');
 });
 
+/*
 app.get('/read', function(req, res) {
 	if (!req.session.authenticated)
 		res.render('login.ejs');
@@ -179,6 +178,7 @@ app.get('/search', function(req, res) {
 	username = req.session.username;
 	findRestaurant(res, req.query, username);
 });
+*/
 
 app.get('/new', function(req, res) {
 	res.status(200);
@@ -237,7 +237,7 @@ app.post('/create', function(req, res) {
 
 
 
-
+/*
 app.get('/display', function(req, res) {
 	var criteria = {};
 	criteria['_id'] = ObjectId(req.query._id);
