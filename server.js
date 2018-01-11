@@ -27,8 +27,6 @@ var users = new Array(
 	{name: 'user2', password: 'password'}
 );
 
-
-
 app.use(session({
   name: 'session',
   keys: ['ouhk', 'comps381f']
@@ -63,8 +61,6 @@ app.get('/logout', function(req, res) {
 	req.session = null;
 	res.redirect('/');
 });
-
-
 
 app.get('/read', function(req, res) {
 	if (!req.session.authenticated)
