@@ -48,13 +48,36 @@ app.post("/login", function(req, res) {
 	// attribute name inside login.ejs should be the same as database, or it can not match
 	console.log(req.body);
 	
+	var criteria = {};
+	criteria['username'] = req.body.username;
+	criteria['password'] = req.body.password;
+	
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err,null);   
+		console.log('Connected to MongoDB\n');
+	
+		db.collection('users').find(criteria, function(err, result) {  
+			assert.equal(err,null); 
+			db.close();
+			req.session.authenticated = true;
+			req.session.username = req.body.username;
+			res.send('login successfully');
+			res.end();	
+
+		});
+	});	
+	
+	
+	
+	/*
 	for (var i=0; i<users.length; i++) {
 		if (users[i].name == req.body.username &&
 		    users[i].password == req.body.password) {
 			req.session.authenticated = true;
 			req.session.username = users[i].name;
 		}
-	}
+	}*/
+	
 	res.redirect('/');
 
 });
@@ -77,9 +100,8 @@ app.post('/register', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err,null);   
 		console.log('Connected to MongoDB\n');
-		
-		
-		
+	
+
 		db.collection('users').insertOne(criteria, function(err, result) {  
 			assert.equal(err,null); 
 			db.close();
@@ -386,10 +408,10 @@ function findRestaurant(res, criteria, username) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err,null);   
 		console.log('Connected to MongoDB\n');
-		db.collection('restaurant').find(criteria).toArray(function(err, result) {  //convert db data into array
+		db.collection('restaurant').find(criteria).toArray(function(err, result) {  //convert db data into array  
 			assert.equal(err,null); 
 			db.close();
-			if (result.length == 0) {
+			if (result.length == 0) {    
 				res.writeHead(500, {"Content-Type": "text/plain"});
 				res.end('Not Found!');
 			}  else {
