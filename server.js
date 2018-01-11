@@ -21,6 +21,8 @@ app.use(express.static(__dirname +  '/public'));
 app.use(fileUpload());
 
 
+
+
 var users = new Array(
 	{name: 'demo', password: ''},
 	{name: 'user1', password: 'password'},
@@ -60,6 +62,7 @@ app.post("/login", function(req, res) {
 		db.collection('users').find(criteria, function(err, result) {  
 			assert.equal(err,null); 
 			db.close();
+			
 			req.session.authenticated = true;
 			req.session.username = req.body.username;
 			res.send('login successfully');
