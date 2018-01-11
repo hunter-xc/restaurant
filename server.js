@@ -68,7 +68,7 @@ app.get('/register', function(req, res) {
 	res.render('register.ejs');
 })
 
-/*
+
 app.post('/register', function(req, res) {
 	var criteria = {};
 	criteria['username'] = req.body.username;
@@ -87,7 +87,7 @@ app.post('/register', function(req, res) {
 		});
 	});	
 })
-*/
+
 
 app.get('/read', function(req, res) {
 	if (!req.session.authenticated)
