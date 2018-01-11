@@ -32,7 +32,26 @@ app.get('/register', function(req, res) {
 	res.render('register.ejs');
 });
 
+app.post('/register', function(req, res) {
+	var criteria = {};
+	criteria['username'] = req.body.username;
+	criteria['password'] = req.body.password;
 
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err,null);   
+		console.log('Connected to MongoDB\n');
+
+		db.collection('users').insertOne(criteria, function(err, result) {
+			assert.equal(err, null);
+			console.log('create new user successfully');
+			console.log(JSON.stringify(result));
+			db.close();
+			res.status(200);
+			res.send('New user has been created! <a href="/">Back to Home</a>');
+			res.end();
+		});
+	});	
+});
 
 /*
 var users = new Array(
