@@ -28,6 +28,12 @@ app.get('/new', function(req, res) {
 	res.render('new.ejs');
 });
 
+app.get('/register', function(req, res) {
+	res.render('register.ejs');
+});
+
+
+
 /*
 var users = new Array(
 	{name: 'demo', password: ''},
