@@ -82,7 +82,6 @@ app.post('/register', function(req, res) {
 			assert.equal(err, null);
 			if (result.length > 0) {
 				res.send('Sorry! Someone has register for this username');
-				db.close();
 			}	else {
 				db.collection('users').insertOne(criteria, function(err, result) {  
 					assert.equal(err,null); 
