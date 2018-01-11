@@ -237,7 +237,7 @@ app.post('/create', function(req, res) {
 
 
 
-/*
+
 app.get('/display', function(req, res) {
 	var criteria = {};
 	criteria['_id'] = ObjectId(req.query._id);
@@ -253,6 +253,7 @@ app.get('/display', function(req, res) {
 	});
 });
 
+/*
 app.get('/map', function(req,res) {
   res.status(200);
   // lat and lon will be limited by the current area, then display map
