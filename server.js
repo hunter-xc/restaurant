@@ -20,51 +20,14 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname +  '/public'));
 app.use(fileUpload());
 
-app.get('/', function(req, res) {
-	res.render('login.ejs');
-});
-
-
-
-app.get('/register', function(req, res) {
-	res.render('register.ejs');
-});
-
-app.post('/register', function(req, res) {
-	var criteria = {};
-	criteria['username'] = req.body.username;
-	criteria['password'] = req.body.password;
-	res.send(req.body.username + '' + req.body.password);
-	
-	
-	MongoClient.connect(mongourl, function(err, db) {
-		assert.equal(err,null);   
-		console.log('Connected to MongoDB\n');
-
-		res.send('connect db successfully');
-		
-		/*
-		db.collection('users').insertOne(criteria, function(err, result) {
-			assert.equal(err, null);
-			console.log('create new user successfully');
-			console.log(JSON.stringify(result));
-			db.close();
-			res.status(200);
-			res.send('New user has been created! <a href="/">Back to Home</a>');
-			res.end();
-		});
-		*/
-	});
-	
-	res.end();
-});
-
 
 var users = new Array(
 	{name: 'demo', password: ''},
 	{name: 'user1', password: 'password'},
 	{name: 'user2', password: 'password'}
 );
+
+
 
 app.use(session({
   name: 'session',
@@ -101,7 +64,8 @@ app.get('/logout', function(req, res) {
 	res.redirect('/');
 });
 
-/*
+
+
 app.get('/read', function(req, res) {
 	if (!req.session.authenticated)
 		res.render('login.ejs');
@@ -178,7 +142,6 @@ app.get('/search', function(req, res) {
 	username = req.session.username;
 	findRestaurant(res, req.query, username);
 });
-*/
 
 app.get('/new', function(req, res) {
 	res.status(200);
@@ -253,7 +216,6 @@ app.get('/display', function(req, res) {
 	});
 });
 
-/*
 app.get('/map', function(req,res) {
   res.status(200);
   // lat and lon will be limited by the current area, then display map
@@ -411,5 +373,5 @@ function findRestaurant(res, criteria, username) {
 		});
 	});	
 }
-*/
+
 
