@@ -38,11 +38,14 @@ app.post('/register', function(req, res) {
 	criteria['password'] = req.body.password;
 	res.send(req.body.username + '' + req.body.password);
 	
-	/*
+	
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err,null);   
 		console.log('Connected to MongoDB\n');
 
+		res.send('connect db successfully');
+		
+		/*
 		db.collection('users').insertOne(criteria, function(err, result) {
 			assert.equal(err, null);
 			console.log('create new user successfully');
@@ -52,8 +55,9 @@ app.post('/register', function(req, res) {
 			res.send('New user has been created! <a href="/">Back to Home</a>');
 			res.end();
 		});
+		*/
 	});
-	*/
+	
 	res.end();
 });
 
