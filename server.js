@@ -20,7 +20,15 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname +  '/public'));
 app.use(fileUpload());
 
+app.get('/', function(req, res) {
+	res.render('login.ejs');
+});
 
+app.get('/new', function(req, res) {
+	res.render('new.ejs');
+});
+
+/*
 var users = new Array(
 	{name: 'demo', password: ''},
 	{name: 'user1', password: 'password'},
@@ -369,5 +377,5 @@ function findRestaurant(res, criteria, username) {
 		});
 	});	
 }
-
+*/
 
