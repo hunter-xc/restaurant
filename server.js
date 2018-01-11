@@ -52,6 +52,7 @@ app.post("/login", function(req, res) {
 	criteria['username'] = req.body.username;
 	criteria['password'] = req.body.password;
 	
+	/*
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err,null);   
 		console.log('Connected to MongoDB\n');
@@ -63,20 +64,19 @@ app.post("/login", function(req, res) {
 			req.session.username = req.body.username;
 			res.send('login successfully');
 			res.end();	
-
 		});
 	});	
+	*/
 	
 	
 	
-	/*
 	for (var i=0; i<users.length; i++) {
 		if (users[i].name == req.body.username &&
 		    users[i].password == req.body.password) {
 			req.session.authenticated = true;
 			req.session.username = users[i].name;
 		}
-	}*/
+	}
 	
 	res.redirect('/');
 
