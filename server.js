@@ -20,13 +20,14 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname +  '/public'));
 app.use(fileUpload());
 
-
+/*
 var users = new Array(
 	{name: 'demo', password: ''},
-	{name: 'student', password: ''},	
 	{name: 'user1', password: 'password'},
 	{name: 'user2', password: 'password'}
 );
+*/
+
 
 app.use(session({
   name: 'session',
@@ -62,6 +63,29 @@ app.get('/logout', function(req, res) {
 	req.session = null;
 	res.redirect('/');
 });
+
+app.get('/register', function(req, res) {
+	res.render('register.ejs');
+});
+
+app.post('/register', function(req, res) {
+	var criteria = {};
+	criteria['username'] = req.body.username;
+	criteria['password'] = req.body.password;
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err,null);   
+		console.log('Connected to MongoDB\n');
+		db.collection('users').insertOne(criteria, function(err, result) {  
+			assert.equal(err,null); 
+			db.close();
+			res.status(200).send('Register successfully');
+			res.end();	
+		});
+	});	
+	
+});
+
+
 
 app.get('/read', function(req, res) {
 	if (!req.session.authenticated)
