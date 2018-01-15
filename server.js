@@ -210,6 +210,16 @@ app.post('/add_schedule', function(req, res) {
 	});
 });
 
+app.get('/read_schedule', function(req, res) {
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err, null);
+		read_schedule(db, {}, function(result) {
+			db.close();
+			res.render('read_schedule.ejs', {result:result});
+		});		
+	});
+});
+
 
 
 app.get('/read', function(req, res) {
@@ -498,6 +508,13 @@ function add_schedule(db, criteria, callback) {
 	db.collection('schedules').insertOne(criteria, function(err, result) {
 		assert.equal(err, null);
 		console.log('New event was added into schedule!');
+		callback(result);
+	});
+}
+
+function read_schedule(db, criteria, callback) {
+	db.collection('schedules').find(criteria).toArray(function(err, result) {
+		assert.equal(err, null);
 		callback(result);
 	});
 }
