@@ -273,6 +273,15 @@ app.post('/add_budget', function(req, res) {
 	});
 });
 
+app.get('/read_budget', function(req, res) {
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err, null);
+		read_budget(db, {}, function(result) {
+			db.close();
+			res.render('read_budget.ejs', {result:result});
+		});		
+	});	
+});
 
 
 app.get('/read', function(req, res) {
@@ -590,6 +599,13 @@ function add_budget(db, criteria, callback) {
 	db.collection('budget').insertOne(criteria, function(err, result) {
 		assert.equal(err, null);
 		console.log('New item was added into budget!');
+		callback(result);
+	});
+}
+
+function read_budget(db, criteria, callback) {
+	db.collection('budget').find(criteria).sort({'category': 1}).toArray(function(err, result) {
+		assert.equal(err, null);
 		callback(result);
 	});
 }
