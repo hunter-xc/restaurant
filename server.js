@@ -120,7 +120,7 @@ app.get('/helper', function(req, res) {
 	res.render('helper.ejs');
 });
 
-app.post('add_helper', function(req, res) {
+app.post('/add_helper', function(req, res) {
 	var criteria = {};
 	criteria['name'] = req.body.name;
 	criteria['post'] = req.body.post;
