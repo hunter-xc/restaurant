@@ -116,7 +116,7 @@ app.post('/register', function(req, res) {
 	});	
 })
 
-app.get('/helper', function(req, res) {
+app.get('/add_helper', function(req, res) {
 	res.render('helper.ejs');
 });
 
@@ -131,10 +131,20 @@ app.post('/add_helper', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
 		console.log('Connecte db successfully');
-		addHelper(db, criteria, function(result) {
+		add_helper(db, criteria, function(result) {
 			db.close();
 			res.writeHead(200, {'Content-Type': 'text/plain'});
 			res.end('\nNew helper was added successfully!');
+		});
+	});
+});
+
+app.get('/read_helper', function(req, res) {
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err, null);
+		read_helper(db, {}, function(result) {
+			db.close();
+			res.render('read_helper.ejs', {result:result});
 		});
 	});
 });
@@ -449,10 +459,18 @@ function findRestaurant(res, criteria, username) {
 }
 
 
-function addHelper(db, criteria, callback) {
+function add_helper(db, criteria, callback) {
 	db.collection('helpers').insertOne(criteria, function(err, result) {
 		assert.equal(err, null);
 		console.log('New helper was added!');
+		callback(result);
+	});
+}
+
+
+function read_helper(db, criteria, callback) {
+	db.collection('helpers').find(criteria).toArray(function(err, result) {
+		assert.equal(err, null);
 		callback(result);
 	});
 }
