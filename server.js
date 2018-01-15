@@ -177,6 +177,16 @@ app.post('/add_guest', function(req, res) {
 	});
 });
 
+app.get('read_guest', function(req, res) {
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err, null);
+		read_guest(db, {}, function(result) {
+			db.close();
+			res.render('read_guest.ejs', {result:result});
+		});
+	});
+});
+
 
 app.get('/read', function(req, res) {
 	if (!req.session.authenticated)
@@ -508,6 +518,14 @@ function add_guest(db, criteria, callback) {
 	db.collection('guests').insertOne(criteria, function(err, result) {
 		assert.equal(err, null);
 		console.log('New guest was added!');
+		callback(result);
+	});
+}
+
+
+function read_guest(db, criteria, callback) {
+	db.collection('guests').find(criteria).toArray(function(err, result) {
+		assert.equal(err, null);
 		callback(result);
 	});
 }
