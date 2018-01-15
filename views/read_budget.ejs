@@ -13,19 +13,69 @@
 <div class="container">
 
   <table class="table table-bordered">
-	<% if (result.length > 0) { %>
+	<% 
+		if (result.length > 0) {
+			var category_now = "";
+			var total = 0.0;
+			var subtotal_estimate = 0.0;
+			var subtotal_actual = 0.0;
+	%>
 		<thead><tr><th>Category</th><th>Item</th><th>Estimate Cost</th><th>Actual Cost</th><tr></thead>
 	<% } %>
 	
 	<tbody>
-  	<% for(var i=0; i<result.length; i++) { %>
-		<tr>
-			<td><%=result[i].category %></td>
-			<td><%=result[i].item %></td>
-			<td><%=result[i].estimate_cost %></td>
-			<td><%=result[i].actual_cost %></td>
-		</tr>
-	<% } %>
+		<%
+			for (var i=0; i<result.length; i++) {
+				if (result[i].category != category_now) {
+					category_now = result[0].category;
+		%>
+					<tr>
+						<td><%=category_now %></td> 
+						<td>
+		<%
+					for (var j=0; j<result.length; j++) {
+						if (result[j].category == category_now) {
+		%>
+						<%=result[j].item %><br/>
+		<%
+						}
+					}
+		%>
+						Subtotal
+						</td>
+						<td>
+		<%
+					for (var j=0; j<result.length; j++) {
+						if (result[j].category == category_now) {
+							subtotal_estimate += result[j].estimate_cost;
+		%>
+						<%=result[j].estimate_cost %><br/>
+		<%
+						}
+					}
+		%>
+						<%=subtotal_estimate %>
+						</td>
+						<td>
+		<%
+					for (var j=0; j<result.length; j++) {
+						if (result[j].category == category_now) {
+							subtotal_actual += result[j].actual_cost;
+		%>
+						<%=result[j].actual_cost %><br/>
+		<%
+						}
+					}
+		%>
+						<%=subtotal_actual %>
+						</td>						
+		<%
+				}
+
+			}
+		%>
+					</tr>
+
 	</tbody>
   </table>
   
