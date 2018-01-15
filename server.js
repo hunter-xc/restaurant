@@ -232,7 +232,7 @@ app.post('/add_rundown', function(req, res) {
 	criteria['userid'] = req.session.username;
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
-		add_schedule(db, criteria, function(result) {
+		add_rundown(db, criteria, function(result) {
 			db.close();
 			res.writeHead(200, {'Content-Type': 'text/plain'});
 			res.end('\nNew event was added into rundown successfully!');
