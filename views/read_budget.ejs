@@ -16,7 +16,8 @@
 	<% 
 		if (result.length > 0) {
 			var category_now = "";
-			var total = 0.0;
+			var total_estimate = 0.0;
+			var total_actual = 0.0;
 			var subtotal_estimate = 0.0;
 			var subtotal_actual = 0.0;
 	%>
@@ -72,11 +73,15 @@
 						<%=subtotal_actual %>
 						</td>						
 		<%
-				}
-
-			}
+					total_estimate += subtotal_estimate;
+					total_actual += subtotal_actual;
 		%>
 					</tr>
+		<%
+				}
+			}
+		%>
+			<tr><td></td><td>Total</td><td><%=total_estimate %></td><%=total_actual %><td></td></tr>		
 
 	</tbody>
   </table>
