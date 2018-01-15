@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>read budget</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+
+  <table class="table table-bordered">
+	<% if (result.length > 0) { %>
+		<thead><tr><th>Category</th><th>Item</th><th>Estimate Cost</th><th>Actual Cost</th><tr></thead>
+	<% } %>
+	
+	<tbody>
+  	<% for(var i=0; i<result.length; i++) { %>
+		<tr>
+			<td><%=result[i].category %></td>
+			<td><%=result[i].item %></td>
+			<td><%=result[i].estimate_cost %></td>
+			<td><%=result[i].actual_cost %></td>
+		</tr>
+	<% } %>
+	</tbody>
+  </table>
+  
+</div>
+
+</body>
+</html>
+
