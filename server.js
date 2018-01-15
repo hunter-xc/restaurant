@@ -117,7 +117,7 @@ app.post('/register', function(req, res) {
 })
 
 app.get('/add_helper', function(req, res) {
-	res.render('helper.ejs');
+	res.render('add_helper.ejs');
 });
 
 app.post('/add_helper', function(req, res) {
@@ -147,6 +147,10 @@ app.get('/read_helper', function(req, res) {
 			res.render('read_helper.ejs', {result:result});
 		});
 	});
+});
+
+app.get('/add_guest', function(req, res) {
+	res.render('add_guest.ejs');
 });
 
 
