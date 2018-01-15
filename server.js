@@ -153,6 +153,24 @@ app.get('/add_guest', function(req, res) {
 	res.render('add_guest.ejs');
 });
 
+app.post('/add_guest', function(req, res) {
+	var criteria = {};
+	criteria['name'] = req.body.name;
+	criteria['relation'] = req.body.relation;
+	criteria['invited'] = req.body.invited;
+	criteria['attend'] = req.body.attend;
+	criteria['userid'] = req.session.username;
+	
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err, null);
+		add_guest(db, criteria, function(result) {
+			db.close();
+			res.writeHead(200, {'Content-Type': 'text/plain'});
+			res.end('\nNew guest was added successfully!');
+		});
+	});
+});
+
 
 app.get('/read', function(req, res) {
 	if (!req.session.authenticated)
@@ -479,3 +497,11 @@ function read_helper(db, criteria, callback) {
 	});
 }
 
+
+function add_guest(db, criteria, callback) {
+	db.collection('guests').insertOne(criteria, function(err, result) {
+		assert.equal(err, null);
+		console.log('New guest was added!');
+		callback(result);
+	});
+}
