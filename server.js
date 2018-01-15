@@ -157,8 +157,14 @@ app.post('/add_guest', function(req, res) {
 	var criteria = {};
 	criteria['name'] = req.body.name;
 	criteria['relation'] = req.body.relation;
-	criteria['invited'] = req.body.invited;
-	criteria['attend'] = req.body.attend;
+	if (req.body.invited) 
+		criteria['invited'] = req.body.invited;
+	else 
+		criteria['invited'] = "off";
+	if (req.body.attend) 
+		criteria['attend'] = req.body.attend;
+	else 
+		criteria['attend'] = "off";
 	criteria['userid'] = req.session.username;
 	
 	MongoClient.connect(mongourl, function(err, db) {
