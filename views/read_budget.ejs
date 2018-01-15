@@ -47,7 +47,8 @@
 		<%
 					for (var j=0; j<result.length; j++) {
 						if (result[j].category == category_now) {
-							subtotal_estimate += parseFloat(result[j].estimate_cost);
+							if (result[j].estimate_cost)
+								subtotal_estimate += parseFloat(result[j].estimate_cost);
 		%>
 						<%=result[j].estimate_cost %><br/>
 		<%
@@ -60,7 +61,8 @@
 		<%
 					for (var j=0; j<result.length; j++) {
 						if (result[j].category == category_now) {
-							subtotal_actual += parseFloat(result[j].actual_cost);
+							if (result[j].actual_cost)
+								subtotal_actual += parseFloat(result[j].actual_cost);
 		%>
 						<%=result[j].actual_cost %><br/>
 		<%
