@@ -177,7 +177,7 @@ app.post('/add_guest', function(req, res) {
 	});
 });
 
-app.get('read_guest', function(req, res) {
+app.get('/read_guest', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
 		read_guest(db, {}, function(result) {
