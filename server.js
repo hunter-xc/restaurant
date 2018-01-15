@@ -252,14 +252,36 @@ app.get('/read_rundown', function(req, res) {
 });
 
 
+app.get('/add_budget', function(req, res) {
+	res.render('add_budget.ejs');
+});
+
+app.post('/add_budget', function(req, res) {
+	var criteria = {};
+	criteria['category'] = req.body.category;
+	criteria['item'] = req.body.item;
+	criteria['estimate_cost'] = req.body.estimate_cost;
+	criteria['actual_cost'] = req.body.actual_cost;
+	criteria['userid'] = req.session.username;
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err, null);
+		add_budget(db, criteria, function(result) {
+			db.close();
+			res.writeHead(200, {'Content-Type': 'text/plain'});
+			res.end('\nNew item was added into budget successfully!');
+		});		
+	});
+});
+
+
+
 app.get('/read', function(req, res) {
 	if (!req.session.authenticated)
 		res.render('login.ejs');
 	else {
 		username = req.session.username;
 		findRestaurant(res, {}, username);
-	}
-			
+	}		
 });
 
 
@@ -560,6 +582,14 @@ function add_rundown(db, criteria, callback) {
 function read_rundown(db, criteria, callback) {
 	db.collection('rundown').find(criteria).toArray(function(err, result) {
 		assert.equal(err, null);
+		callback(result);
+	});
+}
+
+function add_budget(db, criteria, callback) {
+	db.collection('budget').insertOne(criteria, function(err, result) {
+		assert.equal(err, null);
+		console.log('New item was added into budget!');
 		callback(result);
 	});
 }
