@@ -187,6 +187,30 @@ app.get('/read_guest', function(req, res) {
 	});
 });
 
+app.get('/add_schedule', function(req, res) {
+	res.render('add_schedule.ejs');
+});
+
+app.post('/add_schedule', function(req, res) {
+	var criteria = {};
+	criteria['date'] = req.body.date;
+	criteria['event_name'] = req.body.event_name;
+	if (req.body.done) 
+		criteria['done'] = req.body.done;
+	else 
+		criteria['done'] = "off";
+	criteria['userid'] = req.session.username;
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err, null);
+		add_schedule(db, criteria, function(result) {
+			db.close();
+			res.writeHead(200, {'Content-Type': 'text/plain'});
+			res.end('\nNew event was added into schedule successfully!');
+		});
+	});
+});
+
+
 
 app.get('/read', function(req, res) {
 	if (!req.session.authenticated)
@@ -197,66 +221,6 @@ app.get('/read', function(req, res) {
 	}
 			
 });
-
-app.get('/api/restaurant/read/:c/:x', function(req, res) {
-	c = req.params.c;
-	x = req.params.x;
-	
-	MongoClient.connect(mongourl, function(err, db) {
-		assert.equal(err,null);   
-		console.log('Connected to MongoDB\n');
-		var criteria = {[c] : x};
-		db.collection('restaurant').find(criteria).toArray(function(err, result) {  
-			assert.equal(err,null); 
-			db.close();
-			console.log(JSON.stringify(result));
-		
-			res.json(result);
-			res.end();	
-
-		});
-	});		
-	
-});
-
-
-app.post('/api/restaurant/create', function(req, res) {
-	if (!req.session.authenticated)
-		res.render('login.ejs');
-	console.log(req.body);
-	
-	var criteria = {};
-	criteria['name'] = (req.body.name != null)? req.body.name : null;
-	criteria['borough'] = (req.body.borough != null)? req.body.borough : null;
-	criteria['cuisine'] = (req.body.cuisine != null)? req.body.cuisine : null;
-	criteria['address'] = {};
-	criteria.address.street = (req.body.street != null)? req.body.street : null;
-	criteria.address.building = (req.body.building != null)? req.body.building : null;
-	criteria.address.zipcode = (req.body.zipcode != null)? req.body.zipcode : null;
-	criteria.address['coord'] = [];
-	criteria.address.coord.push(req.body.coord_lon);
-	criteria.address.coord.push(req.body.coord_lat);
-	criteria['ratings'] = [];
-	criteria['image'] = (req.body.image != null) ? req.body.image : null;
-	criteria['mimetype'] = (req.body.mimetype != null) ? req.body.mimetype : null;
-	criteria['owner'] = req.session.username;
-
-	
-	MongoClient.connect(mongourl, function(err, db) {
-		assert.equal(err,null);   
-		console.log('Connected to MongoDB\n')	
-		
-		db.collection('restaurant').insertOne(criteria, function(err, result) {
-			console.log(result);
-			db.close();
-			res.json(result.ops[0]);
-			res.end();
-		});	
-	});
-			
-});
-
-
 
 
 app.get('/search', function(req, res) {
@@ -529,3 +493,12 @@ function read_guest(db, criteria, callback) {
 		callback(result);
 	});
 }
+
+function add_schedule(db, criteria, callback) {
+	db.collection('schedules').insertOne(criteria, function(err, result) {
+		assert.equal(err, null);
+		console.log('New event was added into schedule!');
+		callback(result);
+	});
+}
+
