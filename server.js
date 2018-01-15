@@ -228,20 +228,18 @@ app.post('/add_rundown', function(req, res) {
 	var criteria = {};
 	criteria['time'] = req.body.time;
 	criteria['event_name'] = req.body.event_name;
-	if (req.body.remark)
-		criteria['remark'] = req.body.remark;
-	else 
-		criteria['remark'] = "";
+	criteria['remark'] = req.body.remark;
 	criteria['userid'] = req.session.username;
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
-		add_rundown(db, criteria, function(result) {
+		add_schedule(db, criteria, function(result) {
 			db.close();
 			res.writeHead(200, {'Content-Type': 'text/plain'});
 			res.end('\nNew event was added into rundown successfully!');
-		});		
+		});
 	});
 });
+
 
 app.get('/read_rundown', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
@@ -551,7 +549,7 @@ function read_schedule(db, criteria, callback) {
 	});
 }
 
-function add_schedule(db, criteria, callback) {
+function add_rundown(db, criteria, callback) {
 	db.collection('rundown').insertOne(criteria, function(err, result) {
 		assert.equal(err, null);
 		console.log('New event was added into rundown!');
