@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>read guest</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+
+  <table class="table table-bordered">
+	<% if (result.length > 0) { %>
+		<thead><tr><th>Name</th><th>Relation</th><th>Invited</th><th>Attend</th><tr></thead>
+	<% } %>
+	
+	<tbody>
+  	<% for(var i=0; i<result.length; i++) { %>
+		<tr>
+			<td><%=result[i].name %></td>
+			<td><%=result[i].relation %></td>
+			<td>
+				<% 
+					if (result[i].invited == "on") {
+				%>
+						<input type="checkbox" id="invited" name="invited" checked>
+				<% 
+					}	else {
+				%>
+					<input type="checkbox" id="invited" name="invited">
+				<%
+					}
+				%>
+			</td>
+			<td>
+				<% 
+					if (result[i].attend == "on") {
+				%>
+						<input type="checkbox" id="attend" name="attend" checked>
+				<% 
+					}	else {
+				%>
+					<input type="checkbox" id="attend" name="attend">
+				<%
+					}
+				%>
+			</td>
+		</tr>
+	<% } %>
+	</tbody>
+  </table>
+  
+</div>
+
+</body>
+</html>
+
