@@ -116,7 +116,7 @@ app.post('/register', function(req, res) {
 	});	
 })
 
-app.get('helper', function(req, res) {
+app.get('/helper', function(req, res) {
 	res.render('helper.ejs');
 });
 
