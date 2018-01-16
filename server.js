@@ -24,7 +24,7 @@ app.use(fileUpload());
 
 
 var users = new Array(
-	{name: 'demo', password: ''},
+	{name: 'demo', password: 'password'},
 	{name: 'user1', password: 'password'},
 	{name: 'user2', password: 'password'}
 );
@@ -40,7 +40,7 @@ app.use(session({
 app.get("/", function(req,res) {
 	res.status(200);
 	if (req.session.authenticated)
-		res.redirect('/read');
+		res.redirect('/read_schedule');
 	else 
 		res.render('login.ejs');
 });
@@ -282,6 +282,26 @@ app.get('/read_budget', function(req, res) {
 		});		
 	});	
 });
+
+app.get('/add_seatingplan', function(req, res) {
+	res.render('add_seatingplan.ejs');
+});
+
+app.post('/add_seatingplan', function(req, res) {
+	var criteria = {};
+	criteria['table'] = req.body.table;
+	criteria['seat'] = req.body.seat;
+	criteria['guest'] = req.body.guest;
+	criteria['userid'] = req.session.username;
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err, null);
+		add_seatingplan(db, criteria, function(result) {
+			db.close();
+			res.writeHead(200, {'Content-Type': 'text/plain'});
+			res.end('\nNew guest was added into seating plan successfully!');
+		});	
+});
+
 
 
 app.get('/read', function(req, res) {
@@ -606,6 +626,14 @@ function add_budget(db, criteria, callback) {
 function read_budget(db, criteria, callback) {
 	db.collection('budget').find(criteria).sort({'category': 1}).toArray(function(err, result) {
 		assert.equal(err, null);
+		callback(result);
+	});
+}
+
+function add_seatingplan(db, criteria, callback) {
+	db.collection('seatingplan').insertOne(criteria, function(err, result) {
+		assert.equal(err, null);
+		console.log('New guest was added into seating plan!');
 		callback(result);
 	});
 }
