@@ -365,6 +365,11 @@ app.get('/read_photo', function(req, res) {
 });
 
 
+app.get('/add_vendor', function(req, res) {
+	res.render('add_vendor.ejs');
+});
+
+
 
 
 app.get('/read', function(req, res) {
