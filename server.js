@@ -142,7 +142,7 @@ app.post('/add_helper', function(req, res) {
 app.get('/read_helper', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
-		read_helper(db, {}, function(result) {
+		read_helper(db, {'userid': req.session.username}, function(result) {
 			db.close();
 			res.render('read_helper.ejs', {result:result});
 		});
@@ -180,7 +180,7 @@ app.post('/add_guest', function(req, res) {
 app.get('/read_guest', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
-		read_guest(db, {}, function(result) {
+		read_guest(db, {'userid': req.session.username}, function(result) {
 			db.close();
 			res.render('read_guest.ejs', {result:result});
 		});
@@ -213,7 +213,7 @@ app.post('/add_schedule', function(req, res) {
 app.get('/read_schedule', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
-		read_schedule(db, {}, function(result) {
+		read_schedule(db, {'userid': req.session.username}, function(result) {
 			db.close();
 			res.render('read_schedule.ejs', {result:result});
 		});		
@@ -244,7 +244,7 @@ app.post('/add_rundown', function(req, res) {
 app.get('/read_rundown', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
-		read_rundown(db, {}, function(result) {
+		read_rundown(db, {'userid': req.session.username}, function(result) {
 			db.close();
 			res.render('read_rundown.ejs', {result:result});
 		});		
@@ -276,7 +276,7 @@ app.post('/add_budget', function(req, res) {
 app.get('/read_budget', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
-		read_budget(db, {}, function(result) {
+		read_budget(db, {'userid': req.session.username}, function(result) {
 			db.close();
 			res.render('read_budget.ejs', {result:result});
 		});		
@@ -287,7 +287,7 @@ app.get('/add_seatingplan', function(req, res) {
 	res.render('add_seatingplan.ejs');
 });
 
-/*
+
 app.post('/add_seatingplan', function(req, res) {
 	var criteria = {};
 	criteria['table'] = req.body.table;
@@ -301,8 +301,9 @@ app.post('/add_seatingplan', function(req, res) {
 			res.writeHead(200, {'Content-Type': 'text/plain'});
 			res.end('\nNew guest was added into seating plan successfully!');
 		});	
+	});
 });
-*/
+
 
 
 app.get('/read', function(req, res) {
@@ -563,7 +564,7 @@ function add_helper(db, criteria, callback) {
 
 
 function read_helper(db, criteria, callback) {
-	db.collection('helpers').find(criteria).toArray(function(err, result) {
+	db.collection('helpers').find(criteria).sort({'post':1}).toArray(function(err, result) {
 		assert.equal(err, null);
 		callback(result);
 	});
@@ -580,7 +581,7 @@ function add_guest(db, criteria, callback) {
 
 
 function read_guest(db, criteria, callback) {
-	db.collection('guests').find(criteria).toArray(function(err, result) {
+	db.collection('guests').find(criteria).sort({'name': 1}).toArray(function(err, result) {
 		assert.equal(err, null);
 		callback(result);
 	});
@@ -595,7 +596,7 @@ function add_schedule(db, criteria, callback) {
 }
 
 function read_schedule(db, criteria, callback) {
-	db.collection('schedules').find(criteria).toArray(function(err, result) {
+	db.collection('schedules').find(criteria).sort({'date':1}).toArray(function(err, result) {
 		assert.equal(err, null);
 		callback(result);
 	});
@@ -610,7 +611,7 @@ function add_rundown(db, criteria, callback) {
 }
 
 function read_rundown(db, criteria, callback) {
-	db.collection('rundown').find(criteria).toArray(function(err, result) {
+	db.collection('rundown').find(criteria).sort({'time':1}).toArray(function(err, result) {
 		assert.equal(err, null);
 		callback(result);
 	});
