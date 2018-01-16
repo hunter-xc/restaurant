@@ -287,6 +287,7 @@ app.get('/add_seatingplan', function(req, res) {
 	res.render('add_seatingplan.ejs');
 });
 
+/*
 app.post('/add_seatingplan', function(req, res) {
 	var criteria = {};
 	criteria['table'] = req.body.table;
@@ -301,7 +302,7 @@ app.post('/add_seatingplan', function(req, res) {
 			res.end('\nNew guest was added into seating plan successfully!');
 		});	
 });
-
+*/
 
 
 app.get('/read', function(req, res) {
