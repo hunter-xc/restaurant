@@ -398,7 +398,7 @@ app.post('/add_vendor', function(req, res) {
 			res.send('new vendor has been added!');
 			res.end();
 		});
-	})	
+	});	
 });
 
 
