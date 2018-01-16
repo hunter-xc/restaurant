@@ -329,12 +329,9 @@ app.post('/add_photo', function(req, res) {
 	
 	if (req.files.photo) {
 		var mimetype = req.files.photo.mimetype;	
-		new_r['mimetype'] = mimetype;	
-		
-		//image file should put together with folder, or set path for fs.read()
- 
-		new_r['image'] = new Buffer(req.files.photo.data).toString('base64');
-				
+		new_r['mimetype'] = mimetype;			
+		//image file should put together with folder, or set path for fs.read() 
+		new_r['image'] = new Buffer(req.files.photo.data).toString('base64');				
 	}	
 
 	MongoClient.connect(mongourl, function(err, db) {
@@ -369,7 +366,40 @@ app.get('/add_vendor', function(req, res) {
 	res.render('add_vendor.ejs');
 });
 
+app.post('add_vendor', function(req, res) {
+	var criteria = {};
+	var image = {};
+	var exif = {};	
+	criteria['name'] = req.body.name;
+	criteria['address'] = req.body.address;
+	cirteria['phone'] = req.body.phone;
+	criteria['price'] = req.body.price;
+	cirteria['type'] = req.body.price;
+	criteria['table_number'] = req.body.table_number;
+	criteria['rating'] = req.body.rating;
 
+	if (req.files.photo) {
+		var mimetype = req.files.photo.mimetype;	
+		new_r['mimetype'] = mimetype;		
+		//image file should put together with folder, or set path for fs.read()
+		new_r['image'] = new Buffer(req.files.photo.data).toString('base64');				
+	}
+
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err,null);   
+		console.log('Connected to MongoDB\n');
+		
+		db.collection('vendors').insertOne(criteria, function(err, result) {
+			assert.equal(err, null);
+			console.log('add new vendor successfully');
+			console.log(JSON.stringify(result));
+			db.close();
+			res.status(200);
+			res.send('new vendor has been added!');
+			res.end();
+		});
+	})	
+});
 
 
 app.get('/read', function(req, res) {
