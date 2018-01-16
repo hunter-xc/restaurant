@@ -341,13 +341,7 @@ app.post('/add_photo', function(req, res) {
 		assert.equal(err,null);   
 		console.log('Connected to MongoDB\n');
 
-		add_photo(db, {'userid': req,session.username}, function(result) {
-			db.close();
-			res.writeHead(200, {'Content-Type': 'text/plain'});
-			res.end('\nNew photo was added successfully!');			
-		});
 		
-		/*
 		db.collection('photos').insertOne(new_r, function(err, result) {
 			assert.equal(err, null);
 			console.log('add new photo successfully');
@@ -357,7 +351,6 @@ app.post('/add_photo', function(req, res) {
 			res.send('new photo has been added!');
 			res.end();
 		});
-		*/
 	});
 
 });
@@ -705,10 +698,4 @@ function read_seatingplan(db, criteria, callback) {
 	});
 }
 
-function add_photo(db, criteria, callback) {
-	db.collection('photos').insertOne(criteria, function(err, result) {
-		assert.equal(err, null);
-		console.log('New photo was added!');
-		callback(result);
-	});
-}
+
