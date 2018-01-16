@@ -366,7 +366,7 @@ app.get('/add_vendor', function(req, res) {
 	res.render('add_vendor.ejs');
 });
 
-app.post('add_vendor', function(req, res) {
+app.post('/add_vendor', function(req, res) {
 	var criteria = {};
 	var image = {};
 	var exif = {};	
