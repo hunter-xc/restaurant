@@ -320,8 +320,8 @@ app.get('/add_photo', function(req, res) {
 
 app.post('/add_photo', function(req, res) {
 	var new_r = {};
-	//var image = {};
-	//var exif = {};
+	var image = {};
+	var exif = {};
 	new_r['name'] = req.body.name;
 	new_r['category'] = req.body.category;
 	new_r['date'] = req.body.date;
@@ -329,7 +329,7 @@ app.post('/add_photo', function(req, res) {
 	
 
 	if (req.files.photo) {
-		//var mimetype = req.files.photo.mimetype;	
+		var mimetype = req.files.photo.mimetype;	
 		//new_r['mimetype'] = mimetype;	
 		//image file should put together with folder, or set path for fs.read()
  
@@ -345,6 +345,17 @@ app.post('/add_photo', function(req, res) {
 			res.writeHead(200, {'Content-Type': 'text/plain'});
 			res.end('\nNew photo was added successfully!');
 		});	
+		
+		/*
+		db.collection('photos').insertOne(new_r, function(err, result) {
+			assert.equal(err, null);
+			console.log('inset new photo successfully');
+			db.close();
+			res.status(200);
+			res.send('New restaurant has been created! <a href="/">Back to Home</a>');
+			res.end();
+		});
+		*/
 	});	
 });
 
