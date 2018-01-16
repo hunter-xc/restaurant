@@ -329,7 +329,7 @@ app.post('/add_photo', function(req, res) {
 	
 	if (req.files.photo) {
 		var mimetype = req.files.photo.mimetype;	
-		//new_r['mimetype'] = mimetype;	
+		new_r['mimetype'] = mimetype;	
 		
 		//image file should put together with folder, or set path for fs.read()
  
@@ -340,7 +340,6 @@ app.post('/add_photo', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err,null);   
 		console.log('Connected to MongoDB\n');
-
 		
 		db.collection('photos').insertOne(new_r, function(err, result) {
 			assert.equal(err, null);
@@ -354,6 +353,17 @@ app.post('/add_photo', function(req, res) {
 	});
 
 });
+
+app.get('/read_photo', function(req, res) {
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err, null);
+		read_photo(db, {'userid': req.session.username}, function(result) {
+			db.close();
+			res.render('read_photo.ejs', {result:result});
+		});			
+	});	
+});
+
 
 
 
@@ -693,6 +703,13 @@ function add_seatingplan(db, criteria, callback) {
 
 function read_seatingplan(db, criteria, callback) {
 	db.collection('seatingplan').find(criteria).sort({'table': 1, 'seat': 1}).toArray(function(err, result) {
+		assert.equal(err, null);
+		callback(result);
+	});
+}
+
+function read_photo(db, criteria, callback) {
+	db.collection('photos').find(criteria).sort({'date': 1}).toArray(function(err, result) {
 		assert.equal(err, null);
 		callback(result);
 	});
