@@ -399,6 +399,16 @@ app.post('/add_vendor', function(req, res) {
 	});
 });
 
+app.get('/read_vendor', function(req, res) {
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err, null);
+		read_vendor(db, {}, function(result) {
+			db.close();
+			res.render('read_vendor.ejs', {result:result});
+		});			
+	});	
+});
+
 
 app.get('/read', function(req, res) {
 	if (!req.session.authenticated)
@@ -743,6 +753,13 @@ function read_seatingplan(db, criteria, callback) {
 
 function read_photo(db, criteria, callback) {
 	db.collection('photos').find(criteria).sort({'date': 1}).toArray(function(err, result) {
+		assert.equal(err, null);
+		callback(result);
+	});
+}
+
+function read_vendor(db, criteria, callback) {
+	db.collection('vendors').find(criteria).sort({'type': 1}).toArray(function(err, result) {
 		assert.equal(err, null);
 		callback(result);
 	});
