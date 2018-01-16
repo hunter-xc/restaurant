@@ -304,7 +304,7 @@ app.post('/add_seatingplan', function(req, res) {
 	});
 });
 
-app.get('read_seatingplan', function(req, res) {
+app.get('/read_seatingplan', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
 		read_seatingplan(db, {'userid': req.session.username}, function(result) {
