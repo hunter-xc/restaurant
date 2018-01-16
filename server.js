@@ -331,32 +331,29 @@ app.post('/add_photo', function(req, res) {
 	if (req.files.photo) {
 		var mimetype = req.files.photo.mimetype;	
 		//new_r['mimetype'] = mimetype;	
+
 		//image file should put together with folder, or set path for fs.read()
  
 		new_r['image'] = new Buffer(req.files.photo.data).toString('base64');
 				
 	}	
 	
+
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err,null);   
 		console.log('Connected to MongoDB\n');
-		add_photo(db, criteria, function(result) {
-			db.close();
-			res.writeHead(200, {'Content-Type': 'text/plain'});
-			res.end('\nNew photo was added successfully!');
-		});	
-		
-		/*
+
 		db.collection('photos').insertOne(new_r, function(err, result) {
 			assert.equal(err, null);
-			console.log('inset new photo successfully');
+			console.log('add new photo successfully');
+			console.log(JSON.stringify(result));
 			db.close();
 			res.status(200);
-			res.send('New restaurant has been created! <a href="/">Back to Home</a>');
+			res.send('new photo has been added!');
 			res.end();
 		});
-		*/
-	});	
+	});
+
 });
 
 
@@ -702,10 +699,4 @@ function read_seatingplan(db, criteria, callback) {
 	});
 }
 
-function add_photo(db, criteria, callback) {
-	db.collection('photos').insertOne(criteria, function(err, result) {
-		assert.equal(err, null);
-		console.log('New photo was added!');
-		callback(result);
-	});
-}
+
