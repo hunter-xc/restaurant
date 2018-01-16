@@ -304,6 +304,16 @@ app.post('/add_seatingplan', function(req, res) {
 	});
 });
 
+app.get('read_seatingplan', function(req, res) {
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err, null);
+		read_seatingplan(db, {'userid': req.session.username}, function(result) {
+			db.close();
+			res.render('read_seatingplan.ejs', {result:result});
+		});			
+	});
+});
+
 
 
 app.get('/read', function(req, res) {
@@ -636,6 +646,13 @@ function add_seatingplan(db, criteria, callback) {
 	db.collection('seatingplan').insertOne(criteria, function(err, result) {
 		assert.equal(err, null);
 		console.log('New guest was added into seating plan!');
+		callback(result);
+	});
+}
+
+function read_seatingplan(db, criteria, callback) {
+	db.collection('seatingplan').find(criteria).sort({'table': 1, 'seat': 1}).toArray(function(err, result) {
+		assert.equal(err, null);
 		callback(result);
 	});
 }
