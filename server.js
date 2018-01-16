@@ -314,6 +314,40 @@ app.get('/read_seatingplan', function(req, res) {
 	});
 });
 
+app.get('/add_photo', function(req, res) {
+	res.render('add_photo.ejs');
+});
+
+app.post('/add_photo', function(req, res) {
+	var new_r = {};
+	//var image = {};
+	//var exif = {};
+	new_r['name'] = req.body.name;
+	new_r['category'] = req.body.category;
+	new_r['date'] = req.body.date;
+	new_r['userid'] = req.session.username;
+	
+
+	if (req.files.photo) {
+		//var mimetype = req.files.photo.mimetype;	
+		//new_r['mimetype'] = mimetype;	
+		//image file should put together with folder, or set path for fs.read()
+ 
+		new_r['image'] = new Buffer(req.files.photo.data).toString('base64');
+				
+	}	
+	
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err,null);   
+		console.log('Connected to MongoDB\n');
+		add_photo(db, criteria, function(result) {
+			db.close();
+			res.writeHead(200, {'Content-Type': 'text/plain'});
+			res.end('\nNew photo was added successfully!');
+		});	
+	});	
+});
+
 
 
 app.get('/read', function(req, res) {
@@ -653,6 +687,14 @@ function add_seatingplan(db, criteria, callback) {
 function read_seatingplan(db, criteria, callback) {
 	db.collection('seatingplan').find(criteria).sort({'table': 1, 'seat': 1}).toArray(function(err, result) {
 		assert.equal(err, null);
+		callback(result);
+	});
+}
+
+function add_photo(db, criteria, callback) {
+	db.collection('photos').insertOne(criteria, function(err, result) {
+		assert.equal(err, null);
+		console.log('New photo was added!');
 		callback(result);
 	});
 }
