@@ -38,6 +38,10 @@ app.use(session({
 }));
 */
 
+app.get('/test', function(req, res) {
+	res.render('test.ejs');
+});
+
 app.get("/", function(req,res) {
 	res.status(200);
 	if (req.session.username)
