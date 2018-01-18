@@ -90,7 +90,7 @@ app.post("/login", function(req, res) {
 });
 
 app.get('/logout', function(req, res) {
-	req.session = null;
+	req.session.username = null;
 	res.redirect('/');
 });
 
