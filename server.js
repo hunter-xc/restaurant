@@ -38,17 +38,6 @@ app.use(session({
 }));
 */
 
-app.get('/test', function(req, res) {
-	MongoClient.connect(mongourl, function(err, db) {
-		assert.equal(err, null);
-		read_budget(db, {'userid': req.session.username}, function(result) {
-			read_userdata(db, {'username': req.session.username}, function(userdata) {
-				db.close();
-				res.render('test.ejs', {result:result, userdata: userdata});				
-			});
-		});		
-	});	
-});
 
 app.get("/", function(req,res) {
 	res.status(200);
@@ -292,12 +281,26 @@ app.post('/add_budget', function(req, res) {
 	});
 });
 
+/*
 app.get('/read_budget', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
 		read_budget(db, {'userid': req.session.username}, function(result) {
 			db.close();
 			res.render('read_budget.ejs', {result:result});							
+		});		
+	});	
+});
+*/
+
+app.get('/read_budget', function(req, res) {
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err, null);
+		read_budget(db, {'userid': req.session.username}, function(result) {
+			read_userdata(db, {'username': req.session.username}, function(userdata) {
+				db.close();
+				res.render('read_budget.ejs', {result:result, userdata: userdata});				
+			});
 		});		
 	});	
 });
