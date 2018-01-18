@@ -42,7 +42,7 @@ app.get('/test', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
 		//read_budget(db, {'userid': req.session.username}, function(result) {
-			read_userdata(db, {'userid': req.session.username}, function(result2) {
+			read_userdata(db, {'username': req.session.username}, function(result2) {
 				db.close();
 				res.render('test.ejs', {userdata: result2});				
 			});
