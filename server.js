@@ -32,12 +32,12 @@ var users = new Array(
 );
 
 
-
+/*
 app.use(session({
   name: 'session',
   keys: ['ouhk', 'comps381f']
 }));
-
+*/
 
 app.get("/", function(req,res) {
 	res.status(200);
