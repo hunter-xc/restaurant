@@ -40,6 +40,7 @@ app.use(session({
 */
 
 app.get("/", function(req,res) {
+	sess = req.session;
 	res.status(200);
 	if (sess.username)
 		res.redirect('/read_schedule');
