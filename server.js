@@ -6,7 +6,8 @@ var ObjectId = require('mongodb').ObjectID;
 var mongourl = 'mongodb://user2:password@ds137054.mlab.com:37054/my_database';
 var fileUpload = require('express-fileupload');
 var express = require('express');
-var session = require('cookie-session');
+//var session = require('cookie-session');
+var  session = require('express-session');
 var bodyParser = require('body-parser');
 var app = express();
 
@@ -20,26 +21,28 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname +  '/public'));
 app.use(fileUpload());
 
+app.use(session({secret: 'ssshhhhh'}));
+var sess;
 
-
-
+/*
 var users = new Array(
 	{name: 'demo', password: 'password'},
 	{name: 'user1', password: 'password'},
 	{name: 'user2', password: 'password'}
 );
+*/
 
-
-
+/*
 app.use(session({
   name: 'session',
   keys: ['ouhk', 'comps381f']
 }));
+*/
 
 
 app.get("/", function(req,res) {
 	res.status(200);
-	if (req.session.authenticated)
+	if (sess.username)
 		res.redirect('/read_schedule');
 	else 
 		res.render('login.ejs');
@@ -49,30 +52,39 @@ app.get("/", function(req,res) {
 app.post("/login", function(req, res) {  
 	// attribute name inside login.ejs should be the same as database, or it can not match
 	console.log(req.body);
+	sess = req.session;
 	
 	var criteria = {};
 	criteria['username'] = req.body.username;
 	criteria['password'] = req.body.password;
 	
-	/*
+	
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err,null);   
 		console.log('Connected to MongoDB\n');
 	
-		db.collection('users').find(criteria, function(err, result) {  
+		db.collection('users').find(criteria).toArray(function(err, result) {  
 			assert.equal(err,null); 
 			db.close();
+			if (result.length == 0)  
+				res.send("Invalid username or password");
+			else {
+				sess.username = req.body.username;
+				res.redirect('/schedule');
+			}
 			
+			/*
 			req.session.authenticated = true;
 			req.session.username = req.body.username;
 			res.send('login successfully');
+			*/
 			res.end();	
 		});
 	});	
-	*/
 	
 	
 	
+	/*
 	for (var i=0; i<users.length; i++) {
 		if (users[i].name == req.body.username &&
 		    users[i].password == req.body.password) {
@@ -80,14 +92,19 @@ app.post("/login", function(req, res) {
 			req.session.username = users[i].name;
 		}
 	}
+	*/
 	
-	res.redirect('/');
+	//res.redirect('/');
 
 });
 
 app.get('/logout', function(req, res) {
-	req.session = null;
-	res.redirect('/');
+	req.session.destroy(function(err) {
+		if (err)
+			console.log(err);
+		else 
+			res.redirect('/');
+	}
 });
 
 app.get('/register', function(req, res) {
@@ -124,6 +141,7 @@ app.get('/add_helper', function(req, res) {
 });
 
 app.post('/add_helper', function(req, res) {
+	sess =req.session;
 	var criteria = {};
 	criteria['name'] = req.body.name;
 	criteria['post'] = req.body.post;
