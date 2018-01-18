@@ -6,7 +6,8 @@ var ObjectId = require('mongodb').ObjectID;
 var mongourl = 'mongodb://user2:password@ds137054.mlab.com:37054/my_database';
 var fileUpload = require('express-fileupload');
 var express = require('express');
-var session = require('cookie-session');
+//var session = require('cookie-session');
+var  session = require('express-session');
 var bodyParser = require('body-parser');
 var app = express();
 
@@ -20,7 +21,8 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname +  '/public'));
 app.use(fileUpload());
 
-
+app.use(session({secret: 'ssshhhhh'}));
+var sess;
 
 
 var users = new Array(
@@ -39,7 +41,7 @@ app.use(session({
 
 app.get("/", function(req,res) {
 	res.status(200);
-	if (req.session.authenticated)
+	if (sess.username)
 		res.redirect('/read_schedule');
 	else 
 		res.render('login.ejs');
