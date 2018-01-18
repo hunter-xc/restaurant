@@ -52,30 +52,33 @@ app.get("/", function(req,res) {
 app.post("/login", function(req, res) {  
 	// attribute name inside login.ejs should be the same as database, or it can not match
 	console.log(req.body);
+	sess = req.session;
 	
 	var criteria = {};
 	criteria['username'] = req.body.username;
 	criteria['password'] = req.body.password;
+
 	
-	/*
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err,null);   
 		console.log('Connected to MongoDB\n');
 	
-		db.collection('users').find(criteria, function(err, result) {  
+		db.collection('users').find(criteria).toArray(function(err, result) {  
 			assert.equal(err,null); 
 			db.close();
-			
-			req.session.authenticated = true;
-			req.session.username = req.body.username;
-			res.send('login successfully');
+			if (result.length == 0)  
+				res.send("Invalid username or password");
+			else {
+				sess.username = req.body.username;
+				res.redirect('/read_schedule');
+			}
 			res.end();	
 		});
 	});	
-	*/
 	
 	
 	
+	/*
 	for (var i=0; i<users.length; i++) {
 		if (users[i].name == req.body.username &&
 		    users[i].password == req.body.password) {
@@ -83,8 +86,8 @@ app.post("/login", function(req, res) {
 			req.session.username = users[i].name;
 		}
 	}
-	
-	res.redirect('/');
+	*/
+	//res.redirect('/');
 
 });
 
