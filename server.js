@@ -92,9 +92,14 @@ app.post("/login", function(req, res) {
 });
 
 app.get('/logout', function(req, res) {
-	req.session = null;
-	res.redirect('/');
+	req.session.destroy(function(err) {
+		if (err)
+			console.log(err);
+		else 
+			res.redirect('/');
+	}
 });
+
 
 app.get('/register', function(req, res) {
 	res.render('register.ejs');
@@ -201,6 +206,7 @@ app.get('/add_schedule', function(req, res) {
 });
 
 app.post('/add_schedule', function(req, res) {
+	sess =req.session;
 	var criteria = {};
 	criteria['date'] = req.body.date;
 	criteria['event_name'] = req.body.event_name;
@@ -208,7 +214,7 @@ app.post('/add_schedule', function(req, res) {
 		criteria['done'] = req.body.done;
 	else 
 		criteria['done'] = "off";
-	criteria['userid'] = req.session.username;
+	criteria['userid'] = sess.username;
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
 		add_schedule(db, criteria, function(result) {
@@ -220,9 +226,10 @@ app.post('/add_schedule', function(req, res) {
 });
 
 app.get('/read_schedule', function(req, res) {
+	sess =req.session;
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
-		read_schedule(db, {'userid': req.session.username}, function(result) {
+		read_schedule(db, {'userid': sess.username}, function(result) {
 			db.close();
 			res.render('read_schedule.ejs', {result:result});
 		});		
