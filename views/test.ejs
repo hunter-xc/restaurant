@@ -174,7 +174,8 @@
 					}
 					count--;
 					subtotal_estimate += parseFloat(result[i].estimate_cost);
-					subtotal_actual += parseFloat(result[i].actual_cost);
+					if (result[i].actual_cost)
+						subtotal_actual += parseFloat(result[i].actual_cost);
 					
 			%>		
 						<td><%=result[i].item %></td>
