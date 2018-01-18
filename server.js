@@ -22,15 +22,14 @@ app.use(express.static(__dirname +  '/public'));
 app.use(fileUpload());
 
 app.use(session({secret: 'ssshhhhh'}));
-var sess;
 
-
+/*
 var users = new Array(
 	{name: 'demo', password: 'password'},
 	{name: 'user1', password: 'password'},
 	{name: 'user2', password: 'password'}
 );
-
+*/
 
 /*
 app.use(session({
@@ -40,9 +39,8 @@ app.use(session({
 */
 
 app.get("/", function(req,res) {
-	sess = req.session;
 	res.status(200);
-	if (sess.username)
+	if (req.session.username)
 		res.redirect('/read_schedule');
 	else 
 		res.render('login.ejs');
@@ -52,7 +50,7 @@ app.get("/", function(req,res) {
 app.post("/login", function(req, res) {  
 	// attribute name inside login.ejs should be the same as database, or it can not match
 	console.log(req.body);
-	sess = req.session;
+
 	
 	var criteria = {};
 	criteria['username'] = req.body.username;
@@ -69,7 +67,7 @@ app.post("/login", function(req, res) {
 			if (result.length == 0)  
 				res.send("Invalid username or password");
 			else {
-				sess.username = req.body.username;
+				req.session.username = req.body.username;
 				res.redirect('/read_schedule');
 			}
 			res.end();	
@@ -92,8 +90,12 @@ app.post("/login", function(req, res) {
 });
 
 app.get('/logout', function(req, res) {
-	req.session = null;
-	res.redirect('/');
+	req.session.destroy(function(err) {
+		if (err)
+			console.log(err);
+		else 
+			res.redirect('/');
+	}
 });
 
 app.get('/register', function(req, res) {
