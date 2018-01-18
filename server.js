@@ -288,8 +288,10 @@ app.get('/read_budget', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
 		read_budget(db, {'userid': req.session.username}, function(result) {
-			db.close();
-			res.render('read_budget.ejs', {result:result});
+			read_userdata(db, {'userid': req.session.username}, function(result2) {
+				db.close();
+				res.render('test.ejs', {result:result, userdata: result2});				
+			});
 		});		
 	});	
 });
@@ -776,4 +778,9 @@ function read_vendor(db, criteria, callback) {
 	});
 }
 
-
+function read_userdata(db, criteria, callback) {
+	db.collection('users').find(criteria).toArray(function(err, result) {
+		assert.equal(err, null);
+		callback(result);
+	});
+}
