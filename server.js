@@ -444,7 +444,7 @@ app.get('/read_profile', function(req, res) {
 });
 
 app.get('/read_checklist', function(req, res) {
-	res.render('read_checklist.edjs');
+	res.render('read_checklist.ejs');
 });
 
 
