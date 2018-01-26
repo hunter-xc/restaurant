@@ -270,16 +270,45 @@ app.post('/add_budget', function(req, res) {
 	criteria['item'] = req.body.item;
 	criteria['estimate_cost'] = req.body.estimate_cost;
 	criteria['actual_cost'] = req.body.actual_cost;
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err, null);
+		add_budget(db, criteria, function(result) {
+			db.close();
+		});		
+	});
+	res.redirect('/read_budget');
+});
+
+
+app.get('/read_budget', function(req, res) {
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err, null);
+		read_budget(db, {'userid': req.session.username}, function(result) {
+			read_userdata(db, {'username': req.session.username}, function(userdata) {
+				db.close();
+				res.render('read_budget.ejs', {result:result, userdata: userdata});				
+			});
+		});		
+	});	
+});
+
+app.get('/edit_budget' ,function(req, res) {
+	var criteria = {};
+	criteria['category'] = req.body.category;
+	criteria['item'] = req.body.item;
+	criteria['estimate_cost'] = req.body.estimate_cost;
+	criteria['actual_cost'] = req.body.actual_cost;
 	criteria['userid'] = req.session.username;
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
 		add_budget(db, criteria, function(result) {
 			db.close();
-			//res.writeHead(200, {'Content-Type': 'text/plain'});
-			//res.end('\nNew item was added into budget successfully!');
+			edit_budget(db, {'_id': ObjectId(req.query._id)}, criteria, function(result) {
+				db.close();
+			});
 		});		
 	});
-	res.redirect('/read_budget');
+	res.redirect('/read_budget');	
 });
 
 app.get('/delete_budget', function(req, res) {
@@ -294,31 +323,6 @@ app.get('/delete_budget', function(req, res) {
 		});
 	});
 	res.redirect('/read_budget');
-});
-
-
-/*
-app.get('/read_budget', function(req, res) {
-	MongoClient.connect(mongourl, function(err, db) {
-		assert.equal(err, null);
-		read_budget(db, {'userid': req.session.username}, function(result) {
-			db.close();
-			res.render('read_budget.ejs', {result:result});							
-		});		
-	});	
-});
-*/
-
-app.get('/read_budget', function(req, res) {
-	MongoClient.connect(mongourl, function(err, db) {
-		assert.equal(err, null);
-		read_budget(db, {'userid': req.session.username}, function(result) {
-			read_userdata(db, {'username': req.session.username}, function(userdata) {
-				db.close();
-				res.render('read_budget.ejs', {result:result, userdata: userdata});				
-			});
-		});		
-	});	
 });
 
 app.get('/add_seatingplan', function(req, res) {
@@ -774,6 +778,23 @@ function read_budget(db, criteria, callback) {
 	});
 }
 
+function edit_budget(db, r, criteria, callback) {
+	db.collection('budget').update(r, {$set: criteria}, function(err, result) {
+		assert.equal(err, null);
+		console.log('Update budget successfully');
+		console.log(JSON.stringify(result));
+		db.close();
+		callback(result);
+	});
+};
+
+function delete_budget(db, criteria, callback) {
+	db.collection('budget').remove(criteria, function(err, result) {
+		assert.equal(err, null);
+		callback(result);
+	});
+}
+
 function add_seatingplan(db, criteria, callback) {
 	db.collection('seatingplan').insertOne(criteria, function(err, result) {
 		assert.equal(err, null);
@@ -810,12 +831,7 @@ function read_userdata(db, criteria, callback) {
 	});
 }
 
-function delete_budget(db, criteria, callback) {
-	db.collection('budget').remove(criteria, function(err, result) {
-		assert.equal(err, null);
-		callback(result);
-	});
-}
+
 
 
 
