@@ -293,25 +293,20 @@ app.get('/read_budget', function(req, res) {
 });
 
 app.post('/edit_budget' ,function(req, res) {
-
-	
 	var criteria = {};
 	criteria['category'] = req.body.category;
 	criteria['item'] = req.body.item;
 	criteria['estimate_cost'] = req.body.estimate_cost;
 	criteria['actual_cost'] = req.body.actual_cost;
-	criteria['_id'] = req.body._id;
-	res.send(criteria);
-	
-	/*
+
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
-		edit_budget(db, {'_id': req.body._id}, criteria, function(result) {
+		edit_budget(db, {'_id': ObjectId(req.body._id)}, criteria, function(result) {
 			db.close();
 		});	
 	});
 	res.redirect('/read_budget');	
-	*/
+
 });
 
 app.get('/delete_budget', function(req, res) {
@@ -784,9 +779,6 @@ function read_budget(db, criteria, callback) {
 function edit_budget(db, r, criteria, callback) {
 	db.collection('budget').update(r, {$set: criteria}, function(err, result) {
 		assert.equal(err, null);
-		console.log('Update budget successfully');
-		console.log(JSON.stringify(result));
-		db.close();
 		callback(result);
 	});
 };
