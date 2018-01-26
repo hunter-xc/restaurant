@@ -270,8 +270,7 @@ app.post('/add_budget', function(req, res) {
 	criteria['item'] = req.body.item;
 	criteria['estimate_cost'] = req.body.estimate_cost;
 	criteria['actual_cost'] = req.body.actual_cost;
-	res.send(criteria);
-	/*
+	criteria['userid'] = req.session.username;
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
 		add_budget(db, criteria, function(result) {
@@ -279,7 +278,7 @@ app.post('/add_budget', function(req, res) {
 		});		
 	});
 	res.redirect('/read_budget');
-	*/
+	
 });
 
 
