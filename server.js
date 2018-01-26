@@ -282,6 +282,21 @@ app.post('/add_budget', function(req, res) {
 	res.redirect('/read_budget');
 });
 
+app.get('/delete_budget', function(req, res) {
+	var criteria = {};
+	criteria['_id'] = ObjectId(req.query._id);
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err,null);   
+		console.log('Connected to MongoDB\n');
+
+		delete_budget(db, criteria, function(result) {
+			db.close();
+		});
+	});
+	res.redirect('/read_budget');
+});
+
+
 /*
 app.get('/read_budget', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
@@ -794,3 +809,16 @@ function read_userdata(db, criteria, callback) {
 		callback(result);
 	});
 }
+
+function delete_budget(db, criteria, callback) {
+	db.collection('budget').remove(criteria, function(err, result) {
+		assert.equal(err, null);
+		callback(result);
+	});
+}
+
+
+
+
+
+
