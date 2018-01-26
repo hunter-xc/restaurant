@@ -293,12 +293,17 @@ app.get('/read_budget', function(req, res) {
 });
 
 app.post('/edit_budget' ,function(req, res) {
+
+	
 	var criteria = {};
 	criteria['category'] = req.body.category;
 	criteria['item'] = req.body.item;
 	criteria['estimate_cost'] = req.body.estimate_cost;
 	criteria['actual_cost'] = req.body.actual_cost;
-	criteria['userid'] = req.session.username;
+	criteria['_id'] = req.body._id;
+	res.send(criteria);
+	
+	/*
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
 		edit_budget(db, {'_id': req.body._id}, criteria, function(result) {
@@ -306,6 +311,7 @@ app.post('/edit_budget' ,function(req, res) {
 		});	
 	});
 	res.redirect('/read_budget');	
+	*/
 });
 
 app.get('/delete_budget', function(req, res) {
