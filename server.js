@@ -301,12 +301,9 @@ app.post('/edit_budget' ,function(req, res) {
 	criteria['userid'] = req.session.username;
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
-		add_budget(db, criteria, function(result) {
+		edit_budget(db, {'_id': req.body._id}, criteria, function(result) {
 			db.close();
-			edit_budget(db, {'_id': ObjectId(req.query._id)}, criteria, function(result) {
-				db.close();
-			});
-		});		
+		});	
 	});
 	res.redirect('/read_budget');	
 });
