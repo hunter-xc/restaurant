@@ -292,7 +292,7 @@ app.get('/read_budget', function(req, res) {
 	});	
 });
 
-app.get('/edit_budget' ,function(req, res) {
+app.post('/edit_budget' ,function(req, res) {
 	var criteria = {};
 	criteria['category'] = req.body.category;
 	criteria['item'] = req.body.item;
