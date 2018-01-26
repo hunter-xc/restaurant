@@ -1,35 +1,263 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Restaurants</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-<body>
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Wedding Banquet and Management</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<div class="container">
-  <h1>Restaurants</h1>
-  <h2>User: <%=username %></h2> <input type='button' value='Logout' onclick='window.location.href="logout"'>
-  <h2>Showing <%=restaurant.length %> document(s)</h2>
-  
-  <input type='button' value='Create New Document' onclick='window.location.href="new"'>
-  <table class="table table-bordered">
-	<% if (restaurant.length > 0) { %>
-		<thead><tr><th>Name</th><tr></thead>
-	<% } %>
-	
-	<tbody>
-  	<% for(var i=0; i<restaurant.length; i++) { %>
-		<tr><td><a href="/display?_id=<%=restaurant[i]._id %>"> <%=restaurant[i].name %></a></td></tr>
-	<% } %>
-	</tbody>
-  </table>
-  
-</div>
 
-</body>
+        <!-- Bootstrap Core CSS -->
+
+        <link rel='stylesheet' href='http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <!-- Custom CSS -->
+        <link href="css/style.css" rel='stylesheet' type='text/css' />
+        <style>
+            body, html {
+                height: 100%
+            }
+
+            .bgimg {
+                /* Background image */
+                background-image: url('Wedding_main.jpg');
+                /* Full-screen */
+                height: 100%;
+                /* Center the background image */
+                background-position: center;
+                /* Scale and zoom in the image */
+                background-size: cover;
+                /* Add position: relative to enable absolutely positioned elements inside the image (place text) */
+                position: relative;
+                /* Add a white text color to all elements inside the .bgimg container */
+                color: white;
+                /* Add a font */
+                font-family: "Courier New", Courier, monospace;
+                /* Set the font-size to 25 pixels */
+                font-size: 25px;
+            }
+
+            /* Position text in the top-left corner */
+            .topleft {
+                position: absolute;
+                top: 0;
+                left: 16px;
+            }
+
+            /* Position text in the bottom-left corner */
+            .bottomleft {
+                position: absolute;
+                bottom: 0;
+                left: 16px;
+            }
+
+            /* Position text in the middle */
+            .middle {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                color: indigo;
+                font-family: 'SnellRoundhand';
+                transform: translate(-50%, -50%);
+                text-align: center;
+            }
+
+            @font-face {
+                font-family: 'SnellRoundhand';
+                src: url("SnellRoundhand-Black.woff") format('woff');
+                font-weight: 900;
+                font-style: italic;
+            }
+
+            /* Style the <hr> element */
+            hr {
+                margin: auto;
+                width: 40%;
+            }
+        </style>
+        <!-- Graph CSS -->
+        <link href="css/font-awesome.css" rel="stylesheet"> 
+        <!-- jQuery -->
+        <script src="js/jquery-2.1.4.min.js"></script>
+        <script>
+            // Set the date we're counting down to
+            var countDownDate = new Date("Dec 10, 2020 15:37:25").getTime();
+
+            // Update the count down every 1 second
+            var x = setInterval(function () {
+
+                // Get todays date and time
+                var now = new Date().getTime();
+
+                // Find the distance between now an the count down date
+                var distance = countDownDate - now;
+
+                // Time calculations for days, hours, minutes and seconds
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Display the result in an element with id="demo"
+                document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+                        + minutes + "m " + seconds + "s ";
+
+                // If the count down is finished, write some text 
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("demo").innerHTML = "EXPIRED";
+                }
+            }, 1000);
+        </script>
+        <!-- //jQuery -->
+
+    </head> 
+    <body style="background: url('wedding.jpg'); background-repeat: no-repeat; background-size:cover;">
+        <div class="page-container">
+            <!--/content-inner-->
+            <div class="left-content">
+                <div class="mother-grid-inner">
+                    <!--header start here-->
+                    <div class="header-main">
+                        <div class="profile_details" style="float:right; margin-left:10px; width:25%; height:60px">		
+                            <ul>
+                                <li class="dropdown profile_details_drop">
+
+
+
+                                    <div class="user-name">
+                                        <p style="margin-bottom:1%;">Tom&Mary </p>
+                                        <p style="margin-bottom:1%;">Wedding Date:</p>
+                                        <p style="margin-bottom:1%;">2020/12/10</p>
+                                    </div>
+
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        <i style="margin-top:5%;" class="fa fa-angle-down"></i>
+                                        <i style="margin-top:5%;" class="fa fa-angle-up"></i>
+                                        <div class="clearfix"></div>	
+                                    </a>
+
+                                    <ul class="dropdown-menu drp-mnu">
+                                        <li> <a href="#"><i class="fa fa-download"></i>Download app</a> </li> 
+                                        <li> <a href="/read_profile"><i class="fa fa-user"></i>Profile</a> </li>
+                                        <li> <a href="/logout"><i class="fa fa-sign-out"></i>Logout</a> </li>
+                                    </ul>
+
+                                </li>
+                            </ul>
+
+                        </div>
+
+                        <div class="w3layouts-right">
+                            <!--search-box-->
+                            <div class="w3-search-box">
+                                <form action="#" method="post">
+                                    <input type="text" placeholder="Search..." required="">	
+                                    <input type="submit" value="">					
+                                </form>
+                            </div><!--//end-search-box-->
+                            <div class="clearfix"> </div>
+                        </div>
+
+
+
+                        <div class="clearfix"> </div>	
+                    </div>
+                    <!--heder end here-->
+                    <div class="task-header-info">
+                        <div style="width:30% ;margin-right:5%; float: left;">
+                            <div class="task-info">
+                                <span class="task-desc">task done</span><span class="percentage">33%</span>
+                                <div class="clearfix"></div>	
+                            </div>
+                            <div class="progress progress-striped active">
+                                <div class="bar red" style="width: 33%;"></div>
+                            </div>
+                        </div>
+                        <div style="width:30% ;margin-right:5%; float: left;">
+                            <div class="task-info">
+                                <span class="task-desc">Guest Attending</span><span class="percentage">40%</span>
+                                <div class="clearfix"></div>	
+                            </div>
+                            <div class="progress progress-striped active">
+                                <div class="bar yellow" style="width:40%;"></div>
+                            </div>
+                        </div>
+                        <div style="width:30%; float:left;">
+
+                            <div class="task-info">
+                                <span class="task-desc">Budget used</span><span class="percentage">90%</span>
+                                <div class="clearfix"></div>	
+                            </div>
+                            <div class="progress progress-striped active">
+                                <div class="bar green" style="width:90%;"></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="home-header-main">
+                        <div style="padding-left: 20px; padding-right: 20px;">	
+
+
+                            <!---//counter\\ -->
+                            <div class="bgimg">
+                                <div class="middle">
+                                    <h1 style=" font-size: 100px; font-family: 'SnellRoundhand'">Tom & Mary's Wedding</h1>
+                                    <hr>
+                                    <p id="demo"></p>
+                                </div>
+                                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+            <!--//content-inner-->
+            <!--/sidebar-menu-->
+            <div class="sidebar-menu">
+                <header class="logo1">
+                    <a href="index.html"><img class="imgclass" src="Wedding-heart.png" alt="Wedding"></a>
+                </header>
+
+                <div>
+                    <ul id="menu">
+                        <li><a href="/read_budget">Budget list<div class="clearfix"></div></a></li>
+                        <li><a href="/read_checklist">Checklist<div class="clearfix"></div></a></li>
+                        <li><a href="/read_guest">Guest list<div class="clearfix"></div></a></li>
+                        <li><a href="/read_helper">Helper list<div class="clearfix"></div></a></li>
+                        <li><a href="/read_rundown">Run Down<div class="clearfix"></div></a></li>
+                        <li><a href="/read_schedule">Schedule<div class="clearfix"></div></a></li>
+                        <li><a href="/read_seatingplan">Seating plan<div class="clearfix"></div></a></li>
+                        <li><a href="/read_photo">View photo<div class="clearfix"></div></a></li>
+                        <li><a href="/read_vendor">Vendor list<div class="clearfix"></div></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="clearfix"></div>		
+        </div>
+
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
+        <!-- /Bootstrap Core JavaScript -->	   
+
+
+        <script  src="js/index.js"></script>
+
+        <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+
+    </body>
+
 </html>
-
