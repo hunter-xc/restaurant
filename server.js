@@ -275,10 +275,11 @@ app.post('/add_budget', function(req, res) {
 		assert.equal(err, null);
 		add_budget(db, criteria, function(result) {
 			db.close();
-			res.writeHead(200, {'Content-Type': 'text/plain'});
-			res.end('\nNew item was added into budget successfully!');
+			//res.writeHead(200, {'Content-Type': 'text/plain'});
+			//res.end('\nNew item was added into budget successfully!');
 		});		
 	});
+	res.redirect('/read_budget');
 });
 
 /*
