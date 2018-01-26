@@ -764,7 +764,6 @@ function read_rundown(db, criteria, callback) {
 function add_budget(db, criteria, callback) {
 	db.collection('budget').insertOne(criteria, function(err, result) {
 		assert.equal(err, null);
-		console.log('New item was added into budget!');
 		callback(result);
 	});
 }
