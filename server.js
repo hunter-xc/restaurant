@@ -439,6 +439,10 @@ app.get('/read_vendor', function(req, res) {
 	});	
 });
 
+app.get('/read_profile', function(req, res) {
+	res.render('read_profile.ejs');
+});
+
 
 app.get('/read', function(req, res) {
 	if (!req.session.authenticated)
