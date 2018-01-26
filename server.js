@@ -443,6 +443,10 @@ app.get('/read_profile', function(req, res) {
 	res.render('read_profile.ejs');
 });
 
+app.get('/read_checklist', function(req, res) {
+	res.render('read_checklist.edjs');
+});
+
 
 app.get('/read', function(req, res) {
 	if (!req.session.authenticated)
