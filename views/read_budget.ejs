@@ -22,7 +22,7 @@
 
 </head> 
 <body>
-   <div class="page-container" style="background-image: url('wedding.jpg');">
+   <div class="page-container" style="background-image: url('wedding.jpg'); background-repeat: no-repeat; background-size:cover;">
 		<!--/content-inner-->
 		<div class="left-content">
 		    <div class="mother-grid-inner">
@@ -46,6 +46,7 @@
 							
 								<ul class="dropdown-menu drp-mnu">
 									<li> <a href="#"><i class="fa fa-download"></i>Download app</a> </li> 
+									<li><a href="#"><i class="fa fa-user"></i>Profile</a></li>		
 									<li> <a href="/logout"><i class="fa fa-sign-out"></i>Logout</a> </li>
 								</ul>
 								
@@ -123,7 +124,7 @@
 	<div class="home-header-main">
 		<div style="padding-left: 15px; padding-right: 20px;">	
 			<a href="/">Home</a>  <i class="fa fa-angle-right"></i> <a href="/read_budget">Budget list</a>
-	<HR>
+	<HR/>
 	<h1>Budget list</h1>
 	 <p style="width:50%; float:left;">Total Budget: <%=userdata[0].budget %></p>
 	  
@@ -327,22 +328,7 @@
 	  %>
 	  
 
-	<!-- script-for sticky-nav -->
-			<script>
-			$(document).ready(function() {
-				 var navoffeset=$(".header-main").offset().top;
-				 $(window).scroll(function(){
-					var scrollpos=$(window).scrollTop(); 
-					if(scrollpos >=navoffeset){
-						$(".header-main").addClass("fixed");
-					}else{
-						$(".header-main").removeClass("fixed");
-					}
-				 });
-				 
-			});
-			</script>
-			<!-- /script-for sticky-nav -->
+
 	<!--inner block start here-->
 	<div class="inner-block">
 
@@ -359,17 +345,18 @@
 					</header>
 						
                            <div>
-									<ul id="menu">
-										<li><a href="#">Budget list<div class="clearfix"></div></a></li>
-										 <li><a href="#">Checklist<div class="clearfix"></div></a></li>
-									<li><a href="#">Guest list<div class="clearfix"></div></a></li>
-								    <li><a href="#">Helper list<div class="clearfix"></div></a></li>
-									 <li><a href="#">Run Down<div class="clearfix"></div></a></li>
-									 <li><a href="#">Schedule<div class="clearfix"></div></a></li>
-									<li><a href="#">Seating plan<div class="clearfix"></div></a></li>
+								<ul id="menu">
+										<li><a href="budget.html">Budget list<div class="clearfix"></div></a></li>
+										 <li><a href="checklist.html">Checklist<div class="clearfix"></div></a></li>
+									<li><a href="guestlist.html">Guest list<div class="clearfix"></div></a></li>
+								    <li><a href="helper.html">Helper list<div class="clearfix"></div></a></li>
+									 <li><a href="rundown.html">Run Down<div class="clearfix"></div></a></li>
+									 <li><a href="Schedule.html">Schedule<div class="clearfix"></div></a></li>
+									<li><a href="seating.html">Seating plan<div class="clearfix"></div></a></li>
 									  <li><a href="#">View photo<div class="clearfix"></div></a></li>
-									 <li><a href="#">Vendor list<div class="clearfix"></div></a></li>
+									 <li><a href="vendor.html">Vendor list<div class="clearfix"></div></a></li>
 								  </ul>
+								</div>
 								</div>
 							  </div>
 							  <div class="clearfix"></div>		
