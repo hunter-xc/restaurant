@@ -42,7 +42,7 @@ app.use(session({
 app.get("/", function(req,res) {
 	res.status(200);
 	if (req.session.username)
-		res.redirect('/read_schedule');
+		res.render('index.ejs');
 	else 
 		res.render('login.ejs');
 });
@@ -69,24 +69,12 @@ app.post("/login", function(req, res) {
 				res.send("Invalid username or password");
 			else {
 				req.session.username = req.body.username;
-				res.redirect('/read_schedule');
+				res.redirect('/');
 			}
 			res.end();	
 		});
 	});	
 	
-	
-	
-	/*
-	for (var i=0; i<users.length; i++) {
-		if (users[i].name == req.body.username &&
-		    users[i].password == req.body.password) {
-			req.session.authenticated = true;
-			req.session.username = users[i].name;
-		}
-	}
-	*/
-	//res.redirect('/');
 
 });
 
