@@ -1,44 +1,372 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title></title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-   <style>
-      img {
-         width: 50%;
-         height: auto;
-      }
-   </style>
-</head>
-<body>
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Wedding Banquet and Management - Vendor List</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<div class="container">
 
-	<% 
-		if (result.length > 0) { 
-			for(var i=0; i<result.length; i++) {
-				if (result[i].image) {
-	%>
-					<img src="data:<%= result[i].mimetype %>;base64, <%= result[i].image %>"> <br/>
-					Name: <%=result[i].name %> <br/>
-					Address: <%=result[i].address %> <br/>
-					Phone: <%=result[i].phone %><br/>
-					Price: <%=result[i].price %> <br/>
-					Type: <%=result[i].type %> <br/>
-					Table Number: <%=result[i].table_number %><br/>		
-					Rating: <%=result[i].rating %><br/>		
-	<% 
-				}
-			}
-		} 
-	%>
+        <!-- Bootstrap Core CSS -->
 
-</div>
+        <link rel='stylesheet' href='http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+        <!-- Custom CSS -->
+        <link href="css/style.css" rel='stylesheet' type='text/css' />
+        <style>
+            * {
+                box-sizing: border-box;
+            }
 
-</body>
+            /* Create three columns of equal width */
+            .columns {
+                width: 100%;
+                padding: 8px;
+            }
+
+            /* Style the list */
+            .price {
+                list-style-type: none;
+                border: 1px solid #eee;
+                margin: 0;
+                padding: 0;
+                -webkit-transition: 0.3s;
+                transition: 0.3s;
+            }
+
+            /* Add shadows on hover */
+            .price:hover {
+                box-shadow: 0 8px 12px 0 rgba(0,0,0,0.2)
+            }
+
+            /* Pricing header */
+            .price .header {
+                float: left;
+                background-color: #ffffff;
+                color: white;
+                font-size: 25px;
+            }
+
+            /* List items */
+            .price li {
+                border-bottom: 1px solid #eee;
+                padding: 20px;
+                text-align: center;
+            }
+
+            /* Grey list item */
+            .price .grey {
+                background-color: #eee;
+                font-size: 20px;
+            }
+
+            .price .green {
+                background-color: #32CD32;
+                font-size: 20px;
+            }
+
+            /* The "Sign Up" button */
+            .button {
+                background-color: #4CAF50;
+                border: none;
+                color: white;
+                padding: 10px 25px;
+                text-align: center;
+                text-decoration: none;
+                font-size: 18px;
+            }
+
+            /* Change the width of the three columns to 100% 
+            (to stack horizontally on small screens) */
+            @media only screen and (max-width: 600px) {
+                .columns {
+                    width: 100%;
+                }
+            }
+
+            .checked {
+                color: orange;
+            }
+        </style>
+
+        <!-- Graph CSS -->
+        <link href="css/font-awesome.css" rel="stylesheet"> 
+        <!-- jQuery -->
+        <script src="js/jquery-2.1.4.min.js"></script>
+        <!-- //jQuery -->
+
+
+    </head> 
+    <body>
+        <div class="page-container" style="background-image: url('wedding.jpg'); background-repeat: no-repeat; background-size:cover;">
+            <!--/content-inner-->
+            <div class="left-content">
+                <div class="mother-grid-inner">
+                    <!--header start here-->
+                    <div class="header-main">
+                        <div class="profile_details" style="float:right; margin-left:10px; width:25%; height:60px">		
+
+
+                            <div class="user-name">
+                                <p style="margin-bottom:1%;">Tom&Mary </p>
+                                <p style="margin-bottom:1%;">Wedding Date:</p>
+                                <p style="margin-bottom:1%;">2020/12/10</p>
+                            </div>
+
+                            <ul>
+                                <li class="dropdown profile_details_drop">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        <i style="margin-top:5%;" class="fa fa-angle-down"></i>
+                                        <i style="margin-top:5%;" class="fa fa-angle-up"></i>
+                                        <div class="clearfix"></div>	
+                                    </a>
+
+
+                                    <ul class="dropdown-menu drp-mnu">
+                                        <li> <a href="#"><i class="fa fa-download"></i>Download app</a> </li> 
+                                    <li> <a href="/read_profile"><i class="fa fa-user"></i>Profile</a> </li>
+                                    <li> <a href="/logout"><i class="fa fa-sign-out"></i>Logout</a> </li>
+                                    </ul>
+
+
+                                </li>
+                            </ul>
+
+                            <ul>
+                                <li class="dropdown profile_details_drop">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i style="right:60px; width:10%; color:white; margin-top:-5%;" class="fa fa-tasks"></i></a>
+                                    <ul class="dropdown-menu drp-mnu task">
+
+                                        <li>
+                                            <div class="task-info">
+                                                <span class="task-desc">Task done</span><span class="percentage">40%</span>
+                                                <div class="clearfix"></div>	
+                                            </div>
+                                            <div class="progress progress-striped active">
+                                                <div class="bar yellow" style="width:40%;"></div>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <div class="task-info">
+                                                <span class="task-desc">Guest attending</span><span class="percentage">90%</span>
+                                                <div class="clearfix"></div>	
+                                            </div>
+                                            <div class="progress progress-striped active">
+                                                <div class="bar green" style="width:90%;"></div>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <div class="task-info">
+                                                <span class="task-desc">Budget used</span><span class="percentage">33%</span>
+                                                <div class="clearfix"></div>	
+                                            </div>
+                                            <div class="progress progress-striped active">
+                                                <div class="bar red" style="width: 33%;"></div>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </li>										
+                            </ul> 	
+                            <div class="clearfix"> </div>
+
+
+                            <div class="clearfix"> </div>
+
+                            <!--notification menu end -->
+
+
+
+                        </div>
+
+                        <div class="w3layouts-right">
+                            <!--search-box-->
+                            <div class="w3-search-box">
+                                <form action="#" method="post">
+                                    <input type="text" placeholder="Search..." required="">	
+                                    <input type="submit" value="">					
+                                </form>
+                            </div><!--//end-search-box-->
+                            <div class="clearfix"> </div>
+                        </div>
+
+
+
+                        <div class="clearfix"> </div>	
+                    </div>
+                    <!--heder end here-->
+
+
+                    <div class="home-header-main" style="height:auto; min-height: 100vh;">
+                        <div style="padding-left: 15px; padding-right: 20px;">	
+                            <a href="/">Home</a>  <i class="fa fa-angle-right"></i> <a href="/read_vendor">Vendor List</a>
+                            <hr/>
+                            <h1>Vendor List</h1>
+                            <div class="columns">
+                                <ul class="price">
+                                    <li class="header"><img src="./images/JOMAN.jpg"></li>
+                                    <li class="grey">JOMAN WEDDING</li>
+                                    <li>
+                                        Rating:
+                                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star"></span>
+                                    </li>
+                                    <li>WEBSITE: http://www.joman.co</li>
+                                    <li>MOBILE: +852 9438 9938</li>
+                                    <li>ADDRESS: 2B, Galuxe Building, 8-10 On Lan Street, Central, Hong Kong</li>
+                                    <li class="green"><a href="#" class="button">Booking</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="columns">
+                                <ul class="price">
+                                    <li class="header"><img src="./images/IMA_MAKEUP.jpg"></li>
+                                    <li class="grey">IMA MAKEUP</li>
+                                    <li>
+                                        Rating:
+                                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star"></span>
+                                    </li>
+                                    <li>WEBSITE: http://www.imamakeup.com</li>
+                                    <li>MOBILE: +852 6681 0578</li>
+                                    <li>ADDRESS: N/A</li>
+                                    <li class="green"><a href="#" class="button">Booking</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="columns">
+                                <ul class="price">
+                                    <li class="header"><img src="./images/JOEY_MAKEUP_ATELIER.jpg"></li>
+                                    <li class="grey">JOEY MAKEUP ATELIER</li>
+                                    <li>
+                                        Rating:
+                                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star"></span>
+                                    </li>
+                                    <li>WEBSITE: N/A</li>
+                                    <li>MOBILE: +852 5128 6878</li>
+                                    <li>ADDRESS: N/A</li>
+                                    <li class="green"><a href="#" class="button">Booking</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="columns">
+                                <ul class="price">
+                                    <li class="header"><img src="./images/MAKEUP_FEVER.jpg"></li>
+                                    <li class="grey">MAKEUP FEVER</li>
+                                    <li>
+                                        Rating:
+                                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star"></span>
+                                    </li>
+                                    <li>WEBSITE: http://www.makeup-fever.com/</li>
+                                    <li>MOBILE: +852 8201 8218</li>
+                                    <li>ADDRESS: Room C, 8/F, 88 Commercial Building, 28-34 Wing Lok Street, Sheung Wan, Hong Kong</li>
+                                    <li class="green"><a href="#" class="button">Booking</a></li>
+                                </ul>
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+
+
+
+
+                    <!-- script-for sticky-nav -->
+                    <script>
+                        $(document).ready(function () {
+                            var navoffeset = $(".header-main").offset().top;
+                            $(window).scroll(function () {
+                                var scrollpos = $(window).scrollTop();
+                                if (scrollpos >= navoffeset) {
+                                    $(".header-main").addClass("fixed");
+                                } else {
+                                    $(".header-main").removeClass("fixed");
+                                }
+                            });
+
+                        });
+                    </script>
+                    <!-- /script-for sticky-nav -->
+                    <!--inner block start here-->
+                    <div class="inner-block">
+
+                    </div>
+                    <!--inner block end here-->
+
+                </div>
+            </div>
+            <!--//content-inner-->
+            <!--/sidebar-menu-->
+            <div class="sidebar-menu">
+                <header class="logo1">
+                    <a href="/"><img class="imgclass" src="Wedding-heart.png" alt="Wedding"></a>
+                </header>
+
+                <div>
+                    <ul id="menu">
+                        <li><a href="/read_budget">Budget list<div class="clearfix"></div></a></li>
+                        <li><a href="/read_checklist">Checklist<div class="clearfix"></div></a></li>
+                        <li><a href="/read_guest">Guest list<div class="clearfix"></div></a></li>
+                        <li><a href="/read_helper">Helper list<div class="clearfix"></div></a></li>
+                        <li><a href="/read_rundown">Run Down<div class="clearfix"></div></a></li>
+                        <li><a href="/read_schedule">Schedule<div class="clearfix"></div></a></li>
+                        <li><a href="/read_seatingplan">Seating plan<div class="clearfix"></div></a></li>
+                        <li><a href="/read_photo">View photo<div class="clearfix"></div></a></li>
+                        <li><a href="/read_vendor">Vendor list<div class="clearfix"></div></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="clearfix"></div>		
+        </div>
+
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
+        <!-- /Bootstrap Core JavaScript -->	   
+        <!-- morris JavaScript -->	
+
+
+
+
+        <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript"  src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+
+        <script>
+
+                        $(document).ready(function () {
+                            $('#tblSample').DataTable({
+                                "order": [[0, "desc"]]
+                            });
+                        });
+
+        </script>
+
+
+    </body>
 </html>
-
