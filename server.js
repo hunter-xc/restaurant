@@ -445,7 +445,13 @@ app.get('/read_profile', function(req, res) {
 });
 
 app.get('/read_checklist', function(req, res) {
-	res.render('read_checklist.ejs');
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err, null);
+		read_checklist(db, {'userid': req.session.username}, function(result) {
+			db.close();
+			res.render('read_checklist.ejs', {result:result});				
+		});		
+	});	
 });
 
 app.post('/add_checklist', function(req, res) {
@@ -845,7 +851,12 @@ function add_checklist(db, criteria, callback) {
 	});
 }
 
-
+function read_checklist(db, criteria, callback) {
+	db.collection('checklist').find(criteria).sort({'item': 1}).toArray(function(err, result) {
+		assert.equal(err, null);
+		callback(result);
+	});
+}
 
 
 
