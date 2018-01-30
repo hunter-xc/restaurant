@@ -129,8 +129,17 @@
                         <a href="/">Home</a>  <i class="fa fa-angle-right"></i> <a href="/read_checklist">Checklist</a>
                         <HR/>
                         <h1>Checklist</h1>
-                        <p>Total item:14</p>
-                        <p>Item completed:0</p>
+                        <p>Total item: <%=result.length %></p>
+                        <p>Item completed: 
+						<%
+							var count=0;
+							for (var i=0; i<result.length; i++) { 
+								if (result[i].done == "on")
+									count++;
+							} 
+						%>
+						<%=count %>
+						</p>
                         <label><input type="checkbox">Show only incomplete item</label>
                         <button style="float:right;" class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#add_checklist">Add</button>
 
