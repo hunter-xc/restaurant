@@ -129,7 +129,7 @@
                             <HR/>
                             <h1>Helper list</h1>
 
-                            <button style="float:right;" class="glyphicon glyphicon-plus">Add</button> 
+                            <button style="float:right;" class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#add_helper">Add</button> 
 
                             <table class="table table-striped table-bordered table-hover" cellspacing="0" width="100%" id="tblSample" border="1px">
 							<% if (result.length > 0) { %>
@@ -137,9 +137,12 @@
                                     <tr>
                                         <th>Name</th>
 										<th>Duty</th>
-                                        <th>Phone</th>                                   
+                                        <th>Phone</th>   
+										<th>Email</th> 
                                         <th>Arriving time</th>
                                         <th>Remark</th>
+										<th></th>
+										<th></th>
                                     </tr>
                                 </thead>
 							<% } %>
@@ -147,10 +150,13 @@
                                 <tbody>
                                     <tr>
                                         <td><%=result[i].name %></td>
-                                        <td><%=result[i].post %></td>
+                                        <td><%=result[i].duty %></td>
                                         <td><%=result[i].phone %></td>
-                                        <td>10:00</td>
-                                        <td></td>
+										<td><%=result[i].email %></td>
+                                        <td><%=result[i].time %></td>
+                                        <td><%=result[i].remark %></td>
+										<td><a class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#edit_helper_<%=result[i]._id %>"></a></td>
+										<td><a href="/delete_helper?_id=<%=result[i]._id %>"  class="glyphicon glyphicon-trash"></a></td>
                                     </tr>
                                 </tbody>
 							<% } %>
@@ -160,6 +166,143 @@
                     </div>
 
 
+	  <!-- Modal -->
+	  <div class="modal fade" id="add_helper" role="dialog">
+		<div class="modal-dialog">
+		
+		  <!-- Modal content-->
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			  <h4 class="modal-title">New Helper</h4>
+			</div>
+			<div class="modal-body">	
+			<form class="form-horizontal" action="add_helper" method="post" enctype="multipart/form-data">
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="name">Name:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="name" name="name" required />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="duty">Duty:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="duty" name="duty" required />
+					</div>
+				</div>				
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="phone">Phone:</label>
+					<div class="col-sm-10">
+						<input type="tel" class="form-control" id="phone" name="phone" />
+					</div>
+				</div>	
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="email">Email:</label>
+					<div class="col-sm-10">
+						<input type="tel" class="form-control" id="email" name="email" />
+					</div>
+				</div>					
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="time">Arriving time:</label>
+					<div class="col-sm-10">          
+						<input type="text" class="form-control" id="time" name="time" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="remark">Remark:</label>
+					<div class="col-sm-10">          
+						<input type="text" class="form-control" id="remark" name="remark" />
+					</div>
+				</div>
+				<div class="form-group">        
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit"  class="btn btn-default">Add</button>
+					</div>
+				</div>
+				</form>			  
+			</div>
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		  </div>
+		  
+		</div>
+	  </div>					
+					
+		
+	  <%
+			if (result.length > 0) {
+				for (var i=0; i<result.length; i++) {
+	  %>
+	  <!-- Modal -->
+	  <div class="modal fade" id="edit_helper_<%=result[i]._id %>" role="dialog">
+		<div class="modal-dialog">
+		
+		  <!-- Modal content-->
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			  <h4 class="modal-title">Edit Helper Information</h4>
+			</div>
+			<div class="modal-body">	
+			  <form class="form-horizontal" action="edit_helper" method="post" enctype="multipart/form-data">
+				  <input type="hidden" id="_id" name="_id" value="<%=result[i]._id %>" />
+				  <div class="form-group">
+				  <label class="control-label col-sm-2" for="name">Name:</label>
+				  <div class="col-sm-10">
+					<input type="text" class="form-control" id="name" name="name" value="<%=result[i].name %>" required />
+				  </div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="duty">Duty:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="duty" name="duty" value="<%=result[i].duty %>" required />
+					</div>
+				</div>				
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="phone">Phone:</label>
+					<div class="col-sm-10">
+						<input type="tel" class="form-control" id="phone" name="phone" value="<%=result[i].phone %>"  />
+					</div>
+				</div>	
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="email">Email:</label>
+					<div class="col-sm-10">
+						<input type="tel" class="form-control" id="email" name="email" value="<%=result[i].email %>" />
+					</div>
+				</div>					
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="time">Arriving time:</label>
+					<div class="col-sm-10">          
+						<input type="text" class="form-control" id="time" name="time" value="<%=result[i].time %>" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="remark">Remark:</label>
+					<div class="col-sm-10">          
+						<input type="text" class="form-control" id="remark" name="remark" value="<%=result[i].remark %>" />
+					</div>
+				</div>
+				<div class="form-group">        
+				  <div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-default">Update</button>
+				  </div>
+				</div>
+			  </form>			  
+			</div>
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		  </div>
+		  
+		</div>
+	  </div>	
+
+	  <%
+				}
+			}
+	  %>
+		
 
 
                     <!--inner block start here-->
