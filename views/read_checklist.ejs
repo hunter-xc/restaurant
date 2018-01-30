@@ -136,7 +136,9 @@
 
                     </div>
                     <table class="table table-striped table-bordered table-hover" cellspacing="0" width="100%" id="tblSample" border="1px">
-
+						<%
+							if (result.length > 0) {
+						%>
                         <thead style="background-color:lightpink;">
                             <tr>
                                 <th>Item</th>
@@ -145,104 +147,34 @@
                                 <th></th>
                             </tr>
                         </thead>
-							
+						<% } %>	
 
                         <tbody>
 						
-
+						<%
+							for (var i=0; i<result.length; i++) {
+						%>		
+                            <tr>
+                                <td><%=result[i].item %></td>
+								<td>
+									<% 
+										if (result[i].done == "on") {
+									%>
+											<input type="checkbox" id="done" name="done" checked>
+									<% 
+										}	else {
+									%>
+											<input type="checkbox" id="done" name="done">
+									<%
+										}
+									%>
+								</td>								
+                                <td><span class="glyphicon glyphicon-pencil"></span></td>
+                                <td><span class="glyphicon glyphicon-trash"></span></td>
+                            </tr>						
 						
-						
-                            <tr>
-                                <td contenteditable="true">Wedding Flower Bouquet</td>		
-                                <td><input type="checkbox" name="done" class="done" value="done"></td>
-                                <td><span class="glyphicon glyphicon-pencil"></span></td>
-                                <td><span class="glyphicon glyphicon-trash"></span></td>
-                            </tr>
+						<% } %>
 
-                            <tr>
-                                <td contenteditable="true">Silk flower</td>
-                                <td><input type="checkbox" name="done" class="done" value="done"></td>
-                                <td><span class="glyphicon glyphicon-pencil"></span></td>
-                                <td><span class="glyphicon glyphicon-trash"></span></td>
-                            </tr>
-
-
-                            <tr>
-                                <td contenteditable="true">Wedding ring with box</td>
-                                <td><input type="checkbox" name="done" class="done" value="done"></td>
-                                <td><span class="glyphicon glyphicon-pencil"></span></td>
-                                <td><span class="glyphicon glyphicon-trash"></span></td>
-                            </tr>
-
-                            <tr>
-                                <td contenteditable="true">HKID card</td>
-                                <td><input type="checkbox" name="done" class="done" value="done"></td>
-                                <td><span class="glyphicon glyphicon-pencil"></span></td>
-                                <td><span class="glyphicon glyphicon-trash"></span></td>
-                            </tr>
-
-                            <tr>
-                                <td contenteditable="true">Cash</td>
-                                <td><input type="checkbox" name="done" class="done" value="done"></td>
-                                <td><span class="glyphicon glyphicon-pencil"></span></td>
-                                <td><span class="glyphicon glyphicon-trash"></span></td>
-                            </tr>
-
-                            <tr>
-                                <td contenteditable="true">guest list/table list</td>
-                                <td><input type="checkbox" name="done" class="done" value="done"></td>
-                                <td><span class="glyphicon glyphicon-pencil"></span></td>
-                                <td><span class="glyphicon glyphicon-trash"></span></td>
-                            </tr>
-
-                            <tr>
-                                <td contenteditable="true">Promissory note</td>
-                                <td><input type="checkbox" name="done" class="done" value="done"></td>
-                                <td><span class="glyphicon glyphicon-pencil"></span></td>
-                                <td><span class="glyphicon glyphicon-trash"></span></td>
-                            </tr>
-
-                            <tr>
-                                <td contenteditable="true">Corsages </td>
-                                <td><input type="checkbox" name="done" class="done" value="done"></td>
-                                <td><span class="glyphicon glyphicon-pencil"></span></td>
-                                <td><span class="glyphicon glyphicon-trash"></span></td>
-                            </tr>
-
-                            <tr>
-                                <td contenteditable="true">Wedding dolls</td>
-                                <td><input type="checkbox" name="done" class="done" value="done"></td>
-                                <td><span class="glyphicon glyphicon-pencil"></span></td>
-                                <td><span class="glyphicon glyphicon-trash"></span></td>
-                            </tr>
-
-                            <tr>
-                                <td contenteditable="true">Gold accessories</td>
-                                <td><input type="checkbox" name="done" class="done" value="done"></td>
-                                <td><span class="glyphicon glyphicon-pencil"></span></td>
-                                <td><span class="glyphicon glyphicon-trash"></span></td>
-                            </tr>
-
-                            <tr>
-                                <td contenteditable="true">Groom's tuxedo</td>
-                                <td><input type="checkbox" name="done" class="done" value="done"></td>
-                                <td><span class="glyphicon glyphicon-pencil"></span></td>
-                                <td><span class="glyphicon glyphicon-trash"></span></td>
-                            </tr>
-
-                            <tr>
-                                <td contenteditable="true">Bride's wedding gown</td>
-                                <td><input type="checkbox" name="done" class="done" value="done"></td>
-                                <td><span class="glyphicon glyphicon-pencil"></span></td>
-                                <td><span class="glyphicon glyphicon-trash"></span></td>
-                            </tr>
-
-                            <tr>
-                                <td contenteditable="true">bridal shoes</td>
-                                <td><input type="checkbox" name="done" class="done" value="done"></td>
-                                <td><span class="glyphicon glyphicon-pencil"></span></td>
-                                <td><span class="glyphicon glyphicon-trash"></span></td>
-                            </tr>
                         </tbody>
 
                     </table>
