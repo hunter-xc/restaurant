@@ -145,13 +145,17 @@ app.get('/read_helper', function(req, res) {
 	});
 });
 
+
 app.get('/add_guest', function(req, res) {
 	res.render('add_guest.ejs');
 });
 
+
 app.post('/add_guest', function(req, res) {
 	var criteria = {};
 	criteria['name'] = req.body.name;
+	criteria['phone'] = req.body.phone;
+	criteria['email'] = req.body.email;
 	criteria['relation'] = req.body.relation;
 	if (req.body.invited) 
 		criteria['invited'] = req.body.invited;
@@ -167,8 +171,7 @@ app.post('/add_guest', function(req, res) {
 		assert.equal(err, null);
 		add_guest(db, criteria, function(result) {
 			db.close();
-			res.writeHead(200, {'Content-Type': 'text/plain'});
-			res.end('\nNew guest was added successfully!');
+			res.redirect('/read_guest');
 		});
 	});
 });
@@ -182,6 +185,45 @@ app.get('/read_guest', function(req, res) {
 		});
 	});
 });
+
+app.post('/edit_guest' ,function(req, res) {
+	var criteria = {};
+	criteria['name'] = req.body.name;
+	criteria['phone'] = req.body.phone;
+	criteria['email'] = req.body.email;
+	criteria['relation'] = req.body.relation;
+	if (req.body.invited) 
+		criteria['invited'] = req.body.invited;
+	else 
+		criteria['invited'] = "off";
+	if (req.body.attend) 
+		criteria['attend'] = req.body.attend;
+	else 
+		criteria['attend'] = "off";	
+
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err, null);
+		edit_guest(db, {'_id': ObjectId(req.body._id)}, criteria, function(result) {
+			db.close();
+		});	
+	});
+	res.redirect('/read_guest');	
+
+});
+
+app.get('/delete_guest', function(req, res) {
+	var criteria = {};
+	criteria['_id'] = ObjectId(req.query._id);
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err,null);   
+		console.log('Connected to MongoDB\n');
+		delete_guest(db, criteria, function(result) {
+			db.close();
+		});
+	});
+	res.redirect('/read_guest');
+});
+
 
 app.get('/add_schedule', function(req, res) {
 	res.render('add_schedule.ejs');
@@ -782,6 +824,20 @@ function read_guest(db, criteria, callback) {
 	});
 }
 
+function edit_guest(db, r, criteria, callback) {
+	db.collection('guests').update(r, {$set: criteria}, function(err, result) {
+		assert.equal(err, null);
+		callback(result);
+	});
+};
+
+function delete_guest(db, criteria, callback) {
+	db.collection('guests').remove(criteria, function(err, result) {
+		assert.equal(err, null);
+		callback(result);
+	});
+}
+
 function add_schedule(db, criteria, callback) {
 	db.collection('schedules').insertOne(criteria, function(err, result) {
 		assert.equal(err, null);
@@ -903,6 +959,8 @@ function delete_checklist(db, criteria, callback) {
 		callback(result);
 	});
 }
+
+
 
 
 
