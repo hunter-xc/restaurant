@@ -243,8 +243,18 @@
 				</div>
 				<div class="form-group">
 				  <label class="control-label col-sm-2" for="done">Done:</label>
-				  <div class="col-sm-1">          
-					<input type="checkbox" class="form-control" id="done" name="done">
+				  <div class="col-sm-1">     
+					<% if (result[i].done == "on") {
+					%>
+						<input type="checkbox" class="form-control" id="done" name="done" checked>
+					<%
+					}	else {
+					%>
+						<input type="checkbox" class="form-control" id="done" name="done">
+					<%
+					}
+					%>
+					
 				  </div>
 				</div>
 				<div class="form-group">        
