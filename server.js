@@ -112,16 +112,20 @@ app.post('/register', function(req, res) {
 	});	
 })
 
+/*
 app.get('/add_helper', function(req, res) {
 	res.render('add_helper.ejs');
 });
+*/
 
 app.post('/add_helper', function(req, res) {
 	var criteria = {};
 	criteria['name'] = req.body.name;
-	criteria['post'] = req.body.post;
+	criteria['duty'] = req.body.duty;
 	criteria['phone'] = req.body.phone;
 	criteria['email'] = req.body.email;
+	criteria['time'] = req.body.time;
+	criteria['remark'] = req.body.remark;
 	criteria['userid'] = req.session.username;
 	
 	MongoClient.connect(mongourl, function(err, db) {
@@ -129,8 +133,7 @@ app.post('/add_helper', function(req, res) {
 		console.log('Connecte db successfully');
 		add_helper(db, criteria, function(result) {
 			db.close();
-			res.writeHead(200, {'Content-Type': 'text/plain'});
-			res.end('\nNew helper was added successfully!');
+			res.redirect('/read_helper');
 		});
 	});
 });
@@ -143,6 +146,39 @@ app.get('/read_helper', function(req, res) {
 			res.render('read_helper.ejs', {result:result});
 		});
 	});
+});
+
+app.post('/edit_helper' ,function(req, res) {
+	var criteria = {};
+	criteria['name'] = req.body.name;
+	criteria['duty'] = req.body.duty;
+	criteria['phone'] = req.body.phone;
+	criteria['email'] = req.body.email;
+	criteria['relation'] = req.body.relation;
+	criteria['time'] = req.body.time;
+	criteria['remark'] = req.body.remark;
+
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err, null);
+		edit_helper(db, {'_id': ObjectId(req.body._id)}, criteria, function(result) {
+			db.close();
+		});	
+	});
+	res.redirect('/read_helper');	
+
+});
+
+app.get('/delete_helper', function(req, res) {
+	var criteria = {};
+	criteria['_id'] = ObjectId(req.query._id);
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err,null);   
+		console.log('Connected to MongoDB\n');
+		delete_helper(db, criteria, function(result) {
+			db.close();
+		});
+	});
+	res.redirect('/read_helper');
 });
 
 
@@ -801,7 +837,21 @@ function add_helper(db, criteria, callback) {
 
 
 function read_helper(db, criteria, callback) {
-	db.collection('helpers').find(criteria).sort({'post':1}).toArray(function(err, result) {
+	db.collection('helpers').find(criteria).sort({'duty':1}).toArray(function(err, result) {
+		assert.equal(err, null);
+		callback(result);
+	});
+}
+
+function edit_helper(db, r, criteria, callback) {
+	db.collection('helpers').update(r, {$set: criteria}, function(err, result) {
+		assert.equal(err, null);
+		callback(result);
+	});
+};
+
+function delete_helper(db, criteria, callback) {
+	db.collection('helpers').remove(criteria, function(err, result) {
 		assert.equal(err, null);
 		callback(result);
 	});
