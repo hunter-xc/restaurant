@@ -313,6 +313,7 @@ app.get('/delete_budget', function(req, res) {
 	res.redirect('/read_budget');
 });
 
+
 app.get('/add_seatingplan', function(req, res) {
 	res.render('add_seatingplan.ejs');
 });
@@ -445,6 +446,20 @@ app.get('/read_profile', function(req, res) {
 
 app.get('/read_checklist', function(req, res) {
 	res.render('read_checklist.ejs');
+});
+
+app.post('/add_checklist', function(req, res) {
+	var criteria = {};
+	criteria['item'] = req.body.item;
+	criteria['done'] = "off";
+	criteria['userid'] = req.session.username;
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err, null);
+		add_budget(db, criteria, function(result) {
+			db.close();
+		});		
+	});
+	res.redirect('/read_checklist');	
 });
 
 
@@ -823,6 +838,12 @@ function read_userdata(db, criteria, callback) {
 	});
 }
 
+function add_checklist(db, criteria, callback) {
+	db.collection('checklist').insertOne(criteria, function(err, result) {
+		assert.equal(err, null);
+		callback(result);
+	});
+}
 
 
 
