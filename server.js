@@ -455,7 +455,7 @@ app.post('/add_checklist', function(req, res) {
 	criteria['userid'] = req.session.username;
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
-		add_budget(db, criteria, function(result) {
+		add_checklist(db, criteria, function(result) {
 			db.close();
 		});		
 	});
