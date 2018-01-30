@@ -468,6 +468,38 @@ app.post('/add_checklist', function(req, res) {
 	res.redirect('/read_checklist');	
 });
 
+app.post('/edit_checklist' ,function(req, res) {
+	var criteria = {};
+	criteria['item'] = req.body.item;
+	if (req.body.done) 
+		criteria['done'] = req.body.done;
+	else 
+		criteria['done'] = "off";
+
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err, null);
+		edit_checklist(db, {'_id': ObjectId(req.body._id)}, criteria, function(result) {
+			db.close();
+		});	
+	});
+	res.redirect('/read_checklist');	
+
+});
+
+app.get('/delete_checklist', function(req, res) {
+	var criteria = {};
+	criteria['_id'] = ObjectId(req.query._id);
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err,null);   
+		console.log('Connected to MongoDB\n');
+
+		delete_checklist(db, criteria, function(result) {
+			db.close();
+		});
+	});
+	res.redirect('/read_checklist');
+});
+
 
 app.get('/read', function(req, res) {
 	if (!req.session.authenticated)
@@ -858,7 +890,19 @@ function read_checklist(db, criteria, callback) {
 	});
 }
 
+function edit_checklist(db, r, criteria, callback) {
+	db.collection('checklist').update(r, {$set: criteria}, function(err, result) {
+		assert.equal(err, null);
+		callback(result);
+	});
+};
 
+function delete_checklist(db, criteria, callback) {
+	db.collection('checklist').remove(criteria, function(err, result) {
+		assert.equal(err, null);
+		callback(result);
+	});
+}
 
 
 
