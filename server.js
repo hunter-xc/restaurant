@@ -181,11 +181,11 @@ app.get('/delete_helper', function(req, res) {
 	res.redirect('/read_helper');
 });
 
-
+/*
 app.get('/add_guest', function(req, res) {
 	res.render('add_guest.ejs');
 });
-
+*/
 
 app.post('/add_guest', function(req, res) {
 	var criteria = {};
@@ -260,10 +260,11 @@ app.get('/delete_guest', function(req, res) {
 	res.redirect('/read_guest');
 });
 
-
+/*
 app.get('/add_schedule', function(req, res) {
 	res.render('add_schedule.ejs');
 });
+*/
 
 app.post('/add_schedule', function(req, res) {
 	var criteria = {};
@@ -278,8 +279,7 @@ app.post('/add_schedule', function(req, res) {
 		assert.equal(err, null);
 		add_schedule(db, criteria, function(result) {
 			db.close();
-			res.writeHead(200, {'Content-Type': 'text/plain'});
-			res.end('\nNew event was added into schedule successfully!');
+			res.redirect('/read_schedule');
 		});
 	});
 });
@@ -313,6 +313,19 @@ app.post('/add_rundown', function(req, res) {
 			res.redirect('/read_rundown');
 		});
 	});
+});
+
+app.get('/delete_schedule', function(req, res) {
+	var criteria = {};
+	criteria['_id'] = ObjectId(req.query._id);
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err,null);   
+		console.log('Connected to MongoDB\n');
+		delete_schedule(db, criteria, function(result) {
+			db.close();
+		});
+	});
+	res.redirect('/read_schedule');
 });
 
 
@@ -357,10 +370,11 @@ app.get('/read_rundown', function(req, res) {
 	});
 });
 
-
+/*
 app.get('/add_budget', function(req, res) {
 	res.render('add_budget.ejs');
 });
+*/
 
 app.post('/add_budget', function(req, res) {
 	var criteria = {};
@@ -924,6 +938,13 @@ function add_schedule(db, criteria, callback) {
 	db.collection('schedules').insertOne(criteria, function(err, result) {
 		assert.equal(err, null);
 		console.log('New event was added into schedule!');
+		callback(result);
+	});
+}
+
+function delete_schedule(db, criteria, callback) {
+	db.collection('schedules').remove(criteria, function(err, result) {
+		assert.equal(err, null);
 		callback(result);
 	});
 }
