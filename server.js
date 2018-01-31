@@ -284,6 +284,25 @@ app.post('/add_schedule', function(req, res) {
 	});
 });
 
+app.post('/edit_schedule' ,function(req, res) {
+	var criteria = {};
+	criteria['date'] = req.body.date;
+	criteria['event_name'] = req.body.event_name;
+	if (req.body.done) 
+		criteria['done'] = req.body.done;
+	else 
+		criteria['done'] = "off";
+
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err, null);
+		edit_schedule(db, {'_id': ObjectId(req.body._id)}, criteria, function(result) {
+			db.close();
+		});	
+	});
+	res.redirect('/read_schedule');	
+
+});
+
 app.get('/read_schedule', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
@@ -948,6 +967,13 @@ function delete_schedule(db, criteria, callback) {
 		callback(result);
 	});
 }
+
+function edit_schedule(db, r, criteria, callback) {
+	db.collection('schedules').update(r, {$set: criteria}, function(err, result) {
+		assert.equal(err, null);
+		callback(result);
+	});
+};
 
 function read_schedule(db, criteria, callback) {
 	db.collection('schedules').find(criteria).sort({'date':1}).toArray(function(err, result) {
