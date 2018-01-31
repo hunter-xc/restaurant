@@ -456,26 +456,72 @@ app.get('/delete_budget', function(req, res) {
 	res.redirect('/read_budget');
 });
 
-
+/*
 app.get('/add_seatingplan', function(req, res) {
 	res.render('add_seatingplan.ejs');
 });
-
+*/
 
 app.post('/add_seatingplan', function(req, res) {
 	var criteria = {};
 	criteria['table'] = req.body.table;
 	criteria['seat'] = req.body.seat;
 	criteria['guest'] = req.body.guest;
+	if (req.body.groom_guest) 
+		criteria['groom_guest'] = req.body.groom_guest;
+	else 
+		criteria['groom_guest'] = "off";	
+	if (req.body.bride_guest) 
+		criteria['bride_guest'] = req.body.bride_guest;
+	else 
+		criteria['bride_guest'] = "off";	
+	criteria['remark'] = req.body.remark;	
 	criteria['userid'] = req.session.username;
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
 		add_seatingplan(db, criteria, function(result) {
 			db.close();
-			res.writeHead(200, {'Content-Type': 'text/plain'});
-			res.end('\nNew guest was added into seating plan successfully!');
+			res.redirect('/read_seatingplan');
 		});	
 	});
+});
+
+app.post('/edit_seatingplan' ,function(req, res) {
+	var criteria = {};
+	criteria['table'] = req.body.table;
+	criteria['seat'] = req.body.seat;
+	criteria['guest'] = req.body.guest;
+	if (req.body.groom_guest) 
+		criteria['groom_guest'] = req.body.groom_guest;
+	else 
+		criteria['groom_guest'] = "off";	
+	if (req.body.bride_guest) 
+		criteria['bride_guest'] = req.body.bride_guest;
+	else 
+		criteria['bride_guest'] = "off";	
+	criteria['remark'] = req.body.remark;
+
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err, null);
+		edit_seatingplan(db, {'_id': ObjectId(req.body._id)}, criteria, function(result) {
+			db.close();
+		});	
+	});
+	res.redirect('/read_seatingplan');	
+});
+
+app.get('/delete_seatingplan', function(req, res) {
+	var criteria = {};
+	criteria['_id'] = ObjectId(req.query._id);
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err,null);   
+		console.log('Connected to MongoDB\n');
+
+		delete_seatingplan(db, criteria, function(result) {
+			db.close();
+		});
+	});
+	res.redirect('/read_seatingplan');
 });
 
 app.get('/read_seatingplan', function(req, res) {
@@ -1049,6 +1095,20 @@ function add_seatingplan(db, criteria, callback) {
 
 function read_seatingplan(db, criteria, callback) {
 	db.collection('seatingplan').find(criteria).sort({'table': 1, 'seat': 1}).toArray(function(err, result) {
+		assert.equal(err, null);
+		callback(result);
+	});
+}
+
+function edit_seatingplan(db, r, criteria, callback) {
+	db.collection('seatingplan').update(r, {$set: criteria}, function(err, result) {
+		assert.equal(err, null);
+		callback(result);
+	});
+};
+
+function delete_seatingplan(db, criteria, callback) {
+	db.collection('seatingplan').remove(criteria, function(err, result) {
 		assert.equal(err, null);
 		callback(result);
 	});
