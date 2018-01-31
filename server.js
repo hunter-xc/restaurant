@@ -294,9 +294,11 @@ app.get('/read_schedule', function(req, res) {
 	});
 });
 
+/*
 app.get('/add_rundown', function(req, res) {
 	res.render('add_rundown.ejs');
 });
+*/
 
 app.post('/add_rundown', function(req, res) {
 	var criteria = {};
@@ -308,10 +310,40 @@ app.post('/add_rundown', function(req, res) {
 		assert.equal(err, null);
 		add_rundown(db, criteria, function(result) {
 			db.close();
-			res.writeHead(200, {'Content-Type': 'text/plain'});
-			res.end('\nNew event was added into rundown successfully!');
+			res.redirect('/read_rundown');
 		});
 	});
+});
+
+
+
+app.get('/delete_rundown', function(req, res) {
+	var criteria = {};
+	criteria['_id'] = ObjectId(req.query._id);
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err,null);   
+		console.log('Connected to MongoDB\n');
+		delete_rundown(db, criteria, function(result) {
+			db.close();
+		});
+	});
+	res.redirect('/read_rundown');
+});
+
+app.post('/edit_rundown' ,function(req, res) {
+	var criteria = {};
+	criteria['time'] = req.body.time;
+	criteria['event_name'] = req.body.event_name;
+	criteria['remark'] = req.body.remark;
+
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err, null);
+		edit_rundown(db, {'_id': ObjectId(req.body._id)}, criteria, function(result) {
+			db.close();
+		});	
+	});
+	res.redirect('/read_rundown');	
+
 });
 
 
@@ -913,6 +945,20 @@ function add_rundown(db, criteria, callback) {
 
 function read_rundown(db, criteria, callback) {
 	db.collection('rundown').find(criteria).sort({'time':1}).toArray(function(err, result) {
+		assert.equal(err, null);
+		callback(result);
+	});
+}
+
+function edit_rundown(db, r, criteria, callback) {
+	db.collection('rundown').update(r, {$set: criteria}, function(err, result) {
+		assert.equal(err, null);
+		callback(result);
+	});
+};
+
+function delete_rundown(db, criteria, callback) {
+	db.collection('rundown').remove(criteria, function(err, result) {
 		assert.equal(err, null);
 		callback(result);
 	});
