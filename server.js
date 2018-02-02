@@ -1203,7 +1203,7 @@ function delete_checklist(db, criteria, callback) {
 }
 
 function read_profile(db, criteria, callback) {
-	db.collection('users').find(criteria).toArray(function(err, result) {
+	db.collection('users').find(criteria, function(err, result) {
 		assert.equal(err, null);
 		callback(result);
 	});
