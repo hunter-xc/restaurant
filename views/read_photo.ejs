@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
     <head>
         <title>Wedding Banquet and Management - Album</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -257,9 +257,10 @@
 
                         <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Upload Photo</button>
                         <div id="demo" class="collapse">
-                            <form action="#" method="post" enctype="multipart/form-data">
+                            <form action="add_photo" method="post" enctype="multipart/form-data">
                                 Select image to upload:
-                                <input type="file" name="fileToUpload" id="fileToUpload">
+								<input type="text" class="form-control" id="name" name="name" required>
+                                <input type="file" name="photo" id="photo">
                                 <input type="submit" value="Upload Image" name="submit">
                             </form>
                         </div>
