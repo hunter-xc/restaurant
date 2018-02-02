@@ -143,22 +143,20 @@
                             <h1 style="text-align:center">Album</h1>
 
                             <div class="row">
+								<% 
+									if (result.length > 0) { 
+										for(var i=0; i<result.length; i++) {
+											if (result[i].image) {
+								%>
                                 <div class="column">
-                                    <img src="./images/1.jpg" style="width:100%" onclick="openModal();
-                                            currentSlide(1)" class="hover-shadow cursor">
-                                </div>
-                                <div class="column">
-                                    <img src="./images/2.jpg" style="width:100%" onclick="openModal();
-                                            currentSlide(2)" class="hover-shadow cursor">
-                                </div>
-                                <div class="column">
-                                    <img src="./images/3.jpg" style="width:100%" onclick="openModal();
-                                            currentSlide(3)" class="hover-shadow cursor">
-                                </div>
-                                <div class="column">
-                                    <img src="./images/4.jpg" style="width:100%" onclick="openModal();
-                                            currentSlide(4)" class="hover-shadow cursor">
-                                </div>
+									<img src="data:<%= result[i].mimetype %>;base64, <%= result[i].image %>" style="width:100%" onclick="openModal();currentSlide(1)" class="hover-shadow cursor" >
+                                </div>										
+								<% 
+											}
+										}
+									} 
+								%>								
+
                             </div>
 
                             <div id="myModal" class="modal">
