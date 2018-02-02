@@ -1,40 +1,322 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title></title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-   <style>
-      img {
-         width: 50%;
-         height: auto;
-      }
-   </style>
-</head>
-<body>
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Wedding Banquet and Management - Album</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<div class="container">
 
-	<% 
-		if (result.length > 0) { 
-			for(var i=0; i<result.length; i++) {
-				if (result[i].image) {
-	%>
-					<img src="data:<%= result[i].mimetype %>;base64, <%= result[i].image %>"> <br/>
-					Name: <%=result[i].name %> <br/>
-					Category: <%=result[i].category %> <br/>
-					Date: <%=result[i].date %><br/>
-	<% 
-				}
-			}
-		} 
-	%>
+        <!-- Bootstrap Core CSS -->
 
-</div>
+        <link rel='stylesheet' href='http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+        <!-- Custom CSS -->
+        <link href="css/style.css" rel='stylesheet' type='text/css' />
+        <link href="css/Album.css" rel='stylesheet' type='text/css' />
+        <!-- Graph CSS -->
+        <link href="css/font-awesome.css" rel="stylesheet"> 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <style>
+            .close {
+                color: white;
+                position: absolute;
+                top: 10px;
+                right: 25px;
+                font-size: 70px;
+                font-weight: bold;
+            }
+        </style>
+        <!-- jQuery -->
+        <script src="js/jquery-2.1.4.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!-- //jQuery -->
 
-</body>
+
+    </head> 
+    <body style="background: url('wedding.jpg'); background-repeat: no-repeat; background-size:cover;">
+        <div class="page-container">
+            <!--/content-inner-->
+            <div class="left-content">
+                <div class="mother-grid-inner">
+                    <!--header start here-->
+                    <div class="header-main">
+                        <div class="profile_details" style="float:right; margin-left:10px; width:25%; height:60px">		
+
+
+                            <div class="user-name">
+                                <p style="margin-bottom:1%;">Tom&Mary </p>
+                                <p style="margin-bottom:1%;">Wedding Date:</p>
+                                <p style="margin-bottom:1%;">2020/12/10</p>
+                            </div>
+
+                            <ul>
+                                <li class="dropdown profile_details_drop">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        <i style="margin-top:5%;" class="fa fa-angle-down"></i>
+                                        <i style="margin-top:5%;" class="fa fa-angle-up"></i>
+                                        <div class="clearfix"></div>	
+                                    </a>
+
+
+                                    <ul class="dropdown-menu drp-mnu">
+                                        <li> <a href="#"><i class="fa fa-download"></i>Download app</a> </li> 
+                                        <li><a href="/read_profile"><i class="fa fa-user"></i>Profile</a></li>											
+                                        <li><a href="/logout"><i class="fa fa-sign-out"></i>Logout</a></li>
+                                    </ul>
+
+
+                                </li>
+                            </ul>
+
+                            <ul>
+                                <li class="dropdown profile_details_drop">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i style="right:60px; width:10%; color:white; margin-top:-5%;" class="fa fa-tasks"></i></a>
+                                    <ul class="dropdown-menu drp-mnu task">
+
+                                        <li>
+                                            <div class="task-info">
+                                                <span class="task-desc">Task done</span><span class="percentage">40%</span>
+                                                <div class="clearfix"></div>	
+                                            </div>
+                                            <div class="progress progress-striped active">
+                                                <div class="bar yellow" style="width:40%;"></div>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <div class="task-info">
+                                                <span class="task-desc">Guest attending</span><span class="percentage">90%</span>
+                                                <div class="clearfix"></div>	
+                                            </div>
+                                            <div class="progress progress-striped active">
+                                                <div class="bar green" style="width:90%;"></div>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <div class="task-info">
+                                                <span class="task-desc">Budget used</span><span class="percentage">33%</span>
+                                                <div class="clearfix"></div>	
+                                            </div>
+                                            <div class="progress progress-striped active">
+                                                <div class="bar red" style="width: 33%;"></div>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </li>										
+                            </ul> 	
+                            <div class="clearfix"> </div>
+
+
+                            <div class="clearfix"> </div>
+
+                            <!--notification menu end -->
+
+
+
+                        </div>
+
+                        <div class="w3layouts-right">
+                            <!--search-box-->
+                            <div class="w3-search-box">
+                                <form action="#" method="post">
+                                    <input type="text" placeholder="Search..." required="">	
+                                    <input type="submit" value="">					
+                                </form>
+                            </div><!--//end-search-box-->
+                            <div class="clearfix"> </div>
+                        </div>
+
+
+
+                        <div class="clearfix"> </div>	
+                    </div>
+                    <!--heder end here-->
+
+
+                    <div class="home-header-main">
+                        <div style="padding-left: 15px; padding-right: 20px;">			
+                            <a href="/">Home</a>  <i class="fa fa-angle-right"></i> <a href="/read_photo">Album</a>
+                            <HR/>
+                            <h1 style="text-align:center">Album</h1>
+
+                            <div class="row">
+                                <div class="column">
+                                    <img src="./images/1.jpg" style="width:100%" onclick="openModal();
+                                            currentSlide(1)" class="hover-shadow cursor">
+                                </div>
+                                <div class="column">
+                                    <img src="./images/2.jpg" style="width:100%" onclick="openModal();
+                                            currentSlide(2)" class="hover-shadow cursor">
+                                </div>
+                                <div class="column">
+                                    <img src="./images/3.jpg" style="width:100%" onclick="openModal();
+                                            currentSlide(3)" class="hover-shadow cursor">
+                                </div>
+                                <div class="column">
+                                    <img src="./images/4.jpg" style="width:100%" onclick="openModal();
+                                            currentSlide(4)" class="hover-shadow cursor">
+                                </div>
+                            </div>
+
+                            <div id="myModal" class="modal">
+                                <span class="close cursor" onclick="closeModal()">&times;</span>
+                                <div class="modal-content">
+
+                                    <div class="mySlides">
+                                        <div class="numbertext">1 / 4</div>
+                                        <img src="./images/1.jpg" style="width:100%">
+                                    </div>
+
+                                    <div class="mySlides">
+                                        <div class="numbertext">2 / 4</div>
+                                        <img src="./images/2.jpg" style="width:100%">
+                                    </div>
+
+                                    <div class="mySlides">
+                                        <div class="numbertext">3 / 4</div>
+                                        <img src="./images/3.jpg" style="width:100%">
+                                    </div>
+
+                                    <div class="mySlides">
+                                        <div class="numbertext">4 / 4</div>
+                                        <img src="./images/4.jpg" style="width:100%">
+                                    </div>
+
+                                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+                                    <div class="caption-container">
+                                        <p id="caption"></p>
+                                    </div>
+
+
+                                    <div class="column">
+                                        <img class="demo cursor" src="./images/1.jpg" style="width:100%" onclick="currentSlide(1)" alt="Nature and sunrise">
+                                    </div>
+                                    <div class="column">
+                                        <img class="demo cursor" src="./images/2.jpg" style="width:100%" onclick="currentSlide(2)" alt="Trolltunga, Norway">
+                                    </div>
+                                    <div class="column">
+                                        <img class="demo cursor" src="./images/3.jpg" style="width:100%" onclick="currentSlide(3)" alt="Mountains and fjords">
+                                    </div>
+                                    <div class="column">
+                                        <img class="demo cursor" src="./images/4.jpg" style="width:100%" onclick="currentSlide(4)" alt="Northern Lights">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <script>
+                                function openModal() {
+                                    document.getElementById('myModal').style.display = "block";
+                                }
+
+                                function closeModal() {
+                                    document.getElementById('myModal').style.display = "none";
+                                }
+
+                                var slideIndex = 1;
+                                showSlides(slideIndex);
+
+                                function plusSlides(n) {
+                                    showSlides(slideIndex += n);
+                                }
+
+                                function currentSlide(n) {
+                                    showSlides(slideIndex = n);
+                                }
+
+                                function showSlides(n) {
+                                    var i;
+                                    var slides = document.getElementsByClassName("mySlides");
+                                    var dots = document.getElementsByClassName("demo");
+                                    var captionText = document.getElementById("caption");
+                                    if (n > slides.length) {
+                                        slideIndex = 1
+                                    }
+                                    if (n < 1) {
+                                        slideIndex = slides.length
+                                    }
+                                    for (i = 0; i < slides.length; i++) {
+                                        slides[i].style.display = "none";
+                                    }
+                                    for (i = 0; i < dots.length; i++) {
+                                        dots[i].className = dots[i].className.replace(" active", "");
+                                    }
+                                    slides[slideIndex - 1].style.display = "block";
+                                    dots[slideIndex - 1].className += " active";
+                                    captionText.innerHTML = dots[slideIndex - 1].alt;
+                                }
+                            </script>
+                        </div>
+
+                        <br><br><br><br><br><br><br><br>
+                        <!--Upload start here-->
+
+                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Upload Photo</button>
+                        <div id="demo" class="collapse">
+                            <form action="#" method="post" enctype="multipart/form-data">
+                                Select image to upload:
+                                <input type="file" name="fileToUpload" id="fileToUpload">
+                                <input type="submit" value="Upload Image" name="submit">
+                            </form>
+                        </div>
+
+
+
+                        <footer style="margin-top:20px;">
+                            <div class="copyrights">
+                                <p>Contact us:</p>	 
+                                <p><i class="fa fa-envelope"></i>   <a href="mailto:mywedding@gmail.com">mywedding@gmail.com</a></p>
+                            </div>			
+                        </footer>
+
+                    </div>
+                </div>
+                <!--//content-inner-->
+                <!--/sidebar-menu-->
+                <div class="sidebar-menu">
+                    <header class="logo1">
+                        <a href="/"><img class="imgclass" src="Wedding-heart.png" alt="Wedding"></a>
+                    </header>
+
+					<div>
+						<ul id="menu">
+							<li><a href="/read_budget">Budget list<div class="clearfix"></div></a></li>
+							<li><a href="/read_checklist">Checklist<div class="clearfix"></div></a></li>
+							<li><a href="/read_guest">Guest list<div class="clearfix"></div></a></li>
+							<li><a href="/read_helper">Helper list<div class="clearfix"></div></a></li>
+							<li><a href="/read_rundown">Run Down<div class="clearfix"></div></a></li>
+							<li><a href="/read_schedule">Schedule<div class="clearfix"></div></a></li>
+							<li><a href="/read_seatingplan">Seating plan<div class="clearfix"></div></a></li>
+							<li><a href="/read_photo">View photo<div class="clearfix"></div></a></li>
+							<li><a href="/read_vendor">Vendor list<div class="clearfix"></div></a></li>
+						</ul>
+					</div>
+                </div>
+                <div class="clearfix"></div>		
+            </div>
+
+            <!-- Bootstrap Core JavaScript -->
+            <script src="js/bootstrap.min.js"></script>
+            <!-- /Bootstrap Core JavaScript -->	   
+
+            <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+            <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+            <script type="text/javascript"  src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+
+            <script>
+
+                                $(document).ready(function () {
+                                    $('#tblSample').DataTable({
+                                        "order": [[0, "desc"]]
+                                    });
+                                });
+
+            </script>
+
+
+    </body>
 </html>
-
