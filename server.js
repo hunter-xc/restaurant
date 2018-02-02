@@ -112,6 +112,47 @@ app.post('/register', function(req, res) {
 	});	
 })
 
+app.get('/read_profile', function(req, res) {
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err, null);
+		read_profile(db, {'userid': req.session.username}, function(result) {
+			db.close();
+			res.render('read_profile.ejs', {result:result});
+		});
+	});
+});
+
+app.post('/edit_profile' ,function(req, res) {
+	var criteria = {};
+	criteria['bridegroom'] = req.body.bridegroom;
+	criteria['bride'] = req.body.bride;
+	criteria['budget'] = req.body.budget;
+	criteria['big_day'] = req.body.big_day;
+
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err, null);
+		edit_profile(db, {'_id': ObjectId(req.body._id)}, criteria, function(result) {
+			db.close();
+		});	
+	});
+	res.redirect('/read_profile');	
+
+});
+
+app.post('/edit_password' ,function(req, res) {
+	var criteria = {};
+	criteria['password'] = req.body.new_password;
+
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err, null);
+		edit_profile(db, {'_id': ObjectId(req.body._id)}, criteria, function(result) {
+			db.close();
+		});	
+	});
+	res.redirect('/read_profile');	
+
+});
+
 /*
 app.get('/add_helper', function(req, res) {
 	res.render('add_helper.ejs');
@@ -629,9 +670,7 @@ app.get('/read_vendor', function(req, res) {
 	});	
 });
 
-app.get('/read_profile', function(req, res) {
-	res.render('read_profile.ejs');
-});
+
 
 app.get('/read_checklist', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
@@ -1163,7 +1202,19 @@ function delete_checklist(db, criteria, callback) {
 	});
 }
 
+function read_profile(db, criteria, callback) {
+	db.collection('users').find(criteria).toArray(function(err, result) {
+		assert.equal(err, null);
+		callback(result);
+	});
+}
 
+function edit_profile(db, r, criteria, callback) {
+	db.collection('users').update(r, {$set: criteria}, function(err, result) {
+		assert.equal(err, null);
+		callback(result);
+	});
+};
 
 
 
