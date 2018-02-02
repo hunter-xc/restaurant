@@ -551,7 +551,7 @@ app.post('/add_photo', function(req, res) {
 	
 	if (req.files.photo) {
 		var mimetype = req.files.photo.mimetype;	
-		//new_r['mimetype'] = mimetype;			
+		new_r['mimetype'] = mimetype;			
 		//image file should put together with folder, or set path for fs.read() 
 		new_r['image'] = new Buffer(req.files.photo.data).toString('base64');				
 	}	
@@ -1115,7 +1115,7 @@ function delete_seatingplan(db, criteria, callback) {
 }
 
 function read_photo(db, criteria, callback) {
-	db.collection('photos').find(criteria).sort({'date': 1}).toArray(function(err, result) {
+	db.collection('photos').find(criteria).toArray(function(err, result) {
 		assert.equal(err, null);
 		callback(result);
 	});
