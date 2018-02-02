@@ -534,22 +534,24 @@ app.get('/read_seatingplan', function(req, res) {
 	});
 });
 
+/*
 app.get('/add_photo', function(req, res) {
 	res.render('add_photo.ejs');
 });
+*/
 
 app.post('/add_photo', function(req, res) {
 	var new_r = {};
 	var image = {};
 	var exif = {};
 	new_r['name'] = req.body.name;
-	new_r['category'] = req.body.category;
-	new_r['date'] = req.body.date;
+	//new_r['category'] = req.body.category;
+	//new_r['date'] = req.body.date;
 	new_r['userid'] = req.session.username;
 	
 	if (req.files.photo) {
 		var mimetype = req.files.photo.mimetype;	
-		new_r['mimetype'] = mimetype;			
+		//new_r['mimetype'] = mimetype;			
 		//image file should put together with folder, or set path for fs.read() 
 		new_r['image'] = new Buffer(req.files.photo.data).toString('base64');				
 	}	
@@ -563,9 +565,7 @@ app.post('/add_photo', function(req, res) {
 			console.log('add new photo successfully');
 			console.log(JSON.stringify(result));
 			db.close();
-			res.status(200);
-			res.send('new photo has been added!');
-			res.end();
+			res.redirect('/read_photo');
 		});
 	});
 });
