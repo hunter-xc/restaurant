@@ -113,7 +113,7 @@ app.post('/register', function(req, res) {
 })
 
 
-app.post('/read_profile', function(req, res) {
+app.get('/read_profile', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err,null);   
 	
