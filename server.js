@@ -115,12 +115,14 @@ app.post('/register', function(req, res) {
 app.get('/read_profile', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
-		read_profile(db, {'userid': req.session.username}, function(result) {
+		db.collection('users').find({'userid': req.session.username}).toArray(function(err, result) {
+			assert.equal(err, null);
 			db.close();
 			res.render('read_profile.ejs', {result:result});
 		});
 	});
 });
+
 
 app.post('/edit_profile' ,function(req, res) {
 	var criteria = {};
@@ -1202,12 +1204,7 @@ function delete_checklist(db, criteria, callback) {
 	});
 }
 
-function read_profile(db, criteria, callback) {
-	db.collection('users').find(criteria).toArray(function(err, result) {
-		assert.equal(err, null);
-		callback(result);
-	});
-}
+
 
 function edit_profile(db, r, criteria, callback) {
 	db.collection('users').update(r, {$set: criteria}, function(err, result) {
