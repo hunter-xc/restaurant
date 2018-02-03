@@ -91,15 +91,17 @@ app.get('/logout', function(req, res) {
 	res.redirect('/');
 });
 
+/*
 app.get('/register', function(req, res) {
 	res.render('register.ejs');
 })
-
+*/
 
 app.post('/register', function(req, res) {
 	var criteria = {};
 	criteria['username'] = req.body.username;
 	criteria['password'] = req.body.password;
+	criteria['email'] = req.body.email;
 	criteria['bridegroom'] = req.body.bridegroom;
 	criteria['bride'] = req.body.bride;
 	criteria['budget'] = req.body.budget;
@@ -113,8 +115,7 @@ app.post('/register', function(req, res) {
 			assert.equal(err,null); 
 			db.close();
 		
-			res.send('register successfully!');
-			res.end();	
+			res.redirect('/');
 
 		});
 	});	
