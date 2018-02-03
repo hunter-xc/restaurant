@@ -41,8 +41,16 @@ app.use(session({
 
 app.get("/", function(req,res) {
 	res.status(200);
-	if (req.session.username)
-		res.render('index.ejs');
+	if (req.session.username) {
+		MongoClient.connect(mongourl, function(err, db) {
+			assert.equal(err,null); 
+			read_userdata(db, {'username': req.session.username}, function(result) {
+				db.close();
+				res.render('index.ejs', {result: result});
+			});
+		});
+	}
+		
 	else 
 		res.render('login.ejs');
 });
