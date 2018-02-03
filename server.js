@@ -190,8 +190,10 @@ app.get('/read_helper', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
 		read_helper(db, {'userid': req.session.username}, function(result) {
-			db.close();
-			res.render('read_helper.ejs', {result:result});
+			read_userdata(db, {'username': req.session.username}, function(userdata) {
+				db.close();
+				res.render('read_helper.ejs', {result:result, userdata: userdata});
+			});
 		});
 	});
 });
@@ -264,8 +266,10 @@ app.get('/read_guest', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
 		read_guest(db, {'userid': req.session.username}, function(result) {
-			db.close();
-			res.render('read_guest.ejs', {result:result});
+			read_userdata(db, {'username': req.session.username}, function(userdata) {
+				db.close();
+				res.render('read_guest.ejs', {result:result, userdata: userdata});
+			});
 		});
 	});
 });
@@ -355,8 +359,10 @@ app.get('/read_schedule', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
 		read_schedule(db, {'userid': req.session.username}, function(result) {
-			db.close();
-			res.render('read_schedule.ejs', {result:result});
+			read_userdata(db, {'username': req.session.username}, function(userdata) {
+				db.close();
+				res.render('read_schedule.ejs', {result:result, userdata: userdata});
+			});
 		});		
 	});
 });
@@ -431,8 +437,10 @@ app.get('/read_rundown', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
 		read_rundown(db, {'userid': req.session.username}, function(result) {
-			db.close();
-			res.render('read_rundown.ejs', {result:result});
+			read_userdata(db, {'username': req.session.username}, function(userdata) {
+				db.close();
+				res.render('read_rundown.ejs', {result:result, userdata: userdata});
+			});
 		});		
 	});
 });
@@ -576,8 +584,10 @@ app.get('/read_seatingplan', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
 		read_seatingplan(db, {'userid': req.session.username}, function(result) {
-			db.close();
-			res.render('read_seatingplan.ejs', {result:result});
+			read_userdata(db, {'username': req.session.username}, function(userdata) {
+				db.close();
+				res.render('read_seatingplan.ejs', {result:result, userdata: userdata});
+			});
 		});			
 	});
 });
@@ -622,8 +632,10 @@ app.get('/read_photo', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
 		read_photo(db, {'userid': req.session.username}, function(result) {
-			db.close();
-			res.render('read_photo.ejs', {result:result});
+			read_userdata(db, {'username': req.session.username}, function(userdata) {
+				db.close();
+				res.render('read_photo.ejs', {result:result, userdata: userdata});
+			});
 		});			
 	});	
 });
@@ -683,8 +695,10 @@ app.get('/read_checklist', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
 		read_checklist(db, {'userid': req.session.username}, function(result) {
-			db.close();
-			res.render('read_checklist.ejs', {result:result});				
+			read_userdata(db, {'username': req.session.username}, function(userdata) {
+				db.close();
+				res.render('read_checklist.ejs', {result:result, userdata: userdata});	
+			});
 		});		
 	});	
 });
