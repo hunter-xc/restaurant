@@ -115,15 +115,13 @@ app.post('/register', function(req, res) {
 
 app.get('/read_profile', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
-		assert.equal(err,null);   
-	
-		db.collection('users').find({'userid': req.session.username}, function(err, result) {  
-			assert.equal(err,null); 
+		assert.equal(err, null);
+		read_userdata(db, {'username': req.session.username}, function(result) {
 			db.close();
-			res.render('test.ejs', {result: result});
-		});
+			res.render('test.ejs', {result:result});				
+		});	
 	});	
-})
+});
 
 /*
 function read_profile(db, criteria, callback) {
