@@ -123,31 +123,9 @@ app.get('/read_profile', function(req, res) {
 	});	
 });
 
-/*
-function read_profile(db, criteria, callback) {
-	db.collection('users').find(criteria, function(err, result) {
-		assert.equal(err, null);
-		callback(result);
-	});
-}
-*/
-
-/*
-app.get('/read_profile', function(req, res) {
-	MongoClient.connect(mongourl, function(err, db) {
-		assert.equal(err, null);
-		read_profile(db, {'userid': req.session.username}, function(result) {
-			db.close();
-			//res.render('read_profile.ejs', {result:result});
-			res.render('test.ejs', {result:result});
-		});
-	});
-});
-*/
 
 
 
-/*
 app.post('/edit_profile' ,function(req, res) {
 	var criteria = {};
 	criteria['bridegroom'] = req.body.bridegroom;
@@ -178,7 +156,7 @@ app.post('/edit_password' ,function(req, res) {
 	res.redirect('/read_profile');	
 
 });
-*/
+
 
 
 
