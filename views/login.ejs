@@ -1,38 +1,261 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title></title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-<body>
+<!DOCTYPE HTML>
+<html lang="zxx">
 
-<div class="container">
-  <h2>Login Page</h2>
-  <form class="form-horizontal" action="/login" method="POST">
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="username">Name:</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="username" name="username" required>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="password">Password:</label>
-      <div class="col-sm-10">          
-        <input type="password" class="form-control" id="password" name="password">
-      </div>
-    </div>
-    <div class="form-group">        
-      <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-default">Log in</button>
+<head>
+	<title>Wedding is Coming!!!</title>
+	<!-- Meta tag Keywords -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="Wedding"/>
+	<script>
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	</script>
+	<!-- Meta tag Keywords -->
+	<!-- css files -->
+	<link rel="stylesheet" href="css/WeddingComing.css" type="text/css" media="all" />
+	<!-- Style-CSS -->
+	<link rel="stylesheet" href="css/font-awesome-again.css">
+	<!-- Font-Awesome-Icons-CSS -->
+	<!-- //css files -->
+	<style>
+body {font-family: Arial;}
+* {box-sizing: border-box}
+/* Full-width input fields */
+input[type=text], input[type=password], input[type=email], input[type=number] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+/* Add a background color when the inputs get focus */
+input[type=text]:focus, input[type=password]:focus input[type=email]:focus, input[type=number]:focus{
+    background-color: #ddd;
+    outline: none;
+}
+
+/* Set a style for all buttons */
+button {
+    color: #fff;
+    background: #FF5722;
+    border: none;
+    padding: 12px 58px;
+    margin-top: 30px;
+    outline: none;
+    text-transform: uppercase;
+    font-size: .9em;
+    cursor: pointer;
+    letter-spacing: 1px;
+    font-family: 'Open Sans', sans-serif;
+    -webkit-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+    transition: 0.5s all;
+}
+
+button:hover {
+    opacity:1;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+    background-color: #f44336;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .signupbtn, .resetbtn {
+  float: left;
+  width: 32%;
+  margin-right:1%;
+}
+
+/* Add padding to container elements */
+.container {
+    padding: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: absolute; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: #474e5d;
+    padding-top: 50px;
+    color: white;
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* Style the horizontal ruler */
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+ 
+/* The Close Button (x) */
+.close {
+    position: absolute;
+    right: 35px;
+    top: 15px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+    color: #f44336;
+    cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+    .cancelbtn, .signupbtn, .resetbtn{
+       width: 100%;
+    }
+}
+</style>
+
+</head>
+
+<body>
+	<div class="video-w3l" data-vide-bg="video/1">
+		<!--header-->
+		<div class="header-w3l">
+			<h1>
+				<span>Wedding Is Coming!</span>
+			</h1>
+		</div>
+		<!--//header-->
+		<div class="main-content-agile">
+			<div class="sub-main-w3">
+				<h2>Login Here
+					<i class="fa fa-hand-o-down" aria-hidden="true"></i>
+				</h2>
+				<form action="#" method="post">
+					<div class="pom-agile">
+						<span class="fa fa-user-o" aria-hidden="true"></span>
+						<input placeholder="Username" name="username" class="user" type="text" required="">
+					</div>
+					<div class="pom-agile">
+						<span class="fa fa-key" aria-hidden="true"></span>
+						<input placeholder="Password" name="password" class="pass" type="password" required="">
+					</div>
+					<div class="sub-w3l">
+						<div class="sub-agile">
+							<input type="checkbox" id="brand1" value="">
+							<label for="brand1">
+								<span></span>Remember me</label>
+						</div>
+						<a href="#">Forgot Password?</a>
+						<div class="clear"></div>
+					</div>
+					<div class="right-w3l">
+						<input type="submit" value="Login">
+					</div>
+
+<div class="right-w3l">
+<button onclick="document.getElementById('id01').style.display='block'">Sign Up</button>
+</div>
+
+<div id="id01" class="modal">
+  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+  <form class="modal-content" action="#">
+    <div class="container">
+      <h1>Sign Up</h1>
+      <p>Please fill in this form to create an account.</p>
+      <hr>
+      <label><b>Account Name</b></label>
+      <input type="text" placeholder="Enter Account Name" name="account" required>
+	   <label><b>Bride Name</b></label>
+      <input type="text" placeholder="Enter Bride Name" name="bride" required>
+	   <label><b>Groom Name</b></label>
+      <input type="text" placeholder="Enter Groom Name" name="groom" required>
+	  <label><b>Total Budget</b></label>
+      <input type="number" placeholder="Enter Total Budget" name="budget" required>
+      <label><b>Email</b></label>
+      <input type="email" placeholder="Enter Email" name="email" required>
+
+      <label><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" required>
+
+      <label><b>Repeat Password</b></label>
+      <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+      
+      <label>
+        <input type="checkbox" checked="checked" style="margin-bottom:15px"> Remember me
+      </label>
+
+      <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+
+      <div class="clearfix">
+	   <button type="submit" class="signupbtn">Sign Up</button>
+	    <button type="reset" class="resetbtn">Reset</button>
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+       
       </div>
     </div>
   </form>
 </div>
 
-</body>
-</html>
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
 
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+				</form>
+			</div>
+		</div>
+		<!--//main-->
+		<!--footer
+		<div class="footer">
+			<p>&copy; 2018 Effective Login Form. All rights reserved | Design by
+				<a href="http://w3layouts.com">W3layouts</a>
+			</p>
+		</div>
+		footer-->
+	</div>
+
+	<!-- js -->
+	<script src="js/WeddingComingJquery-2.1.4.min.js"></script>
+	<script src="js/WeddingComingJquery.vide.min.js"></script>
+	<!-- //js -->
+
+</body>
+
+</html>
