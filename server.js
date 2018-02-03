@@ -112,6 +112,29 @@ app.post('/register', function(req, res) {
 	});	
 })
 
+
+app.post('/read_profile', function(req, res) {
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err,null);   
+	
+		db.collection('users').find({'userid': req.session.username}, function(err, result) {  
+			assert.equal(err,null); 
+			db.close();
+			res.render('test.ejs', {result: result});
+		});
+	});	
+})
+
+/*
+function read_profile(db, criteria, callback) {
+	db.collection('users').find(criteria, function(err, result) {
+		assert.equal(err, null);
+		callback(result);
+	});
+}
+*/
+
+/*
 app.get('/read_profile', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
@@ -122,6 +145,9 @@ app.get('/read_profile', function(req, res) {
 		});
 	});
 });
+*/
+
+
 
 /*
 app.post('/edit_profile' ,function(req, res) {
