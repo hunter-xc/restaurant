@@ -118,7 +118,7 @@ app.get('/read_profile', function(req, res) {
 		assert.equal(err, null);
 		read_userdata(db, {'username': req.session.username}, function(result) {
 			db.close();
-			res.render('test.ejs', {result:result});				
+			res.render('read_profile.ejs', {result:result});				
 		});	
 	});	
 });
