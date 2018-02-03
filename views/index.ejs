@@ -81,7 +81,8 @@
         <script src="js/jquery-2.1.4.min.js"></script>
         <script>
             // Set the date we're counting down to
-            var countDownDate = new Date("Dec 10, 2020 15:37:25").getTime();
+			  var countDownDate = new Date("<%=result[0].big_day %> 15:37:25").getTime();
+            //var countDownDate = new Date("Dec 10, 2020 15:37:25").getTime();
 
             // Update the count down every 1 second
             var x = setInterval(function () {
@@ -126,9 +127,9 @@
 
 
                                     <div class="user-name">
-                                        <p style="margin-bottom:1%;">Tom&Mary </p>
+                                        <p style="margin-bottom:1%;"><%=result[0].bridegroom %>&<%=result[0].bride %> </p>
                                         <p style="margin-bottom:1%;">Wedding Date:</p>
-                                        <p style="margin-bottom:1%;">2020/12/10</p>
+                                        <p style="margin-bottom:1%;"><%=result[0].big_day %></p>
                                     </div>
 
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -203,7 +204,7 @@
                             <!---//counter\\ -->
                             <div class="bgimg">
                                 <div class="middle">
-                                    <h1 style=" font-size: 100px; font-family: 'SnellRoundhand'">Tom & Mary's Wedding</h1>
+                                    <h1 style=" font-size: 100px; font-family: 'SnellRoundhand'"><%=result[0].bridegroom %>&<%=result[0].bride %>'s Wedding</h1>
                                     <hr>
                                     <p id="demo"></p>
                                 </div>
