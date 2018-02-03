@@ -683,8 +683,10 @@ app.get('/read_vendor', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
 		read_vendor(db, {}, function(result) {
-			db.close();
-			res.render('read_vendor.ejs', {result:result});
+			read_userdata(db, {'username': req.session.username}, function(userdata) {
+				db.close();
+				res.render('read_vendor.ejs', {result:result, userdata: userdata});
+			});
 		});			
 	});	
 });
