@@ -127,9 +127,19 @@
                         <div style="padding-left: 15px; padding-right: 20px;">	
                             <a href="/">Home</a>  <i class="fa fa-angle-right"></i> <a href="/read_schedule">Schedule</a>
                             <HR/>
+			    
+			    <%
+			    	var count = 0;
+			    	for(var i=0; i<result.length; i++) { 
+					if (result[i].done == "one")
+						count++;
+				}
+			    %>
+			    
+			    
                             <h1>Schedule</h1>
-                            <p>Total item:4</p>
-                            <p>Item completed:2</p>
+                            <p>Total item: <%=result.length %></p>
+                            <p>Item completed: <%=count %></p>
                             <label><input type="checkbox">Show only incomplete task</label>
                             <button style="float:right;" class="addbtncheck glyphicon glyphicon-plus" data-toggle="modal" data-target="#add_schedule">Add</button>
 
