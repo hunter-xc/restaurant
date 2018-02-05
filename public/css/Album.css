@@ -99,10 +99,10 @@
 /* The Close Button */
 .close {
   color: white;
-  position: absolute;
-  top: 10px;
+  position: fixed;
+  top: 15px;
   right: 25px;
-  font-size: 35px;
+  font-size: 95px;
   font-weight: bold;
 }
 
