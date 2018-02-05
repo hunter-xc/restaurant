@@ -73,7 +73,7 @@ a:hover { transition: all 200ms ease-in-out; }
     top: 0;
     left: 0;
     bottom: 0;
-    background-color:#EE82EE;
+    background-color:#FFB6C1;
     color: #aaabae;
     box-shadow: 0px 0px 10px 0px rgb(58, 41, 31);
 	-o-box-shadow: 0px 0px 10px 0px rgb(58, 41, 31);
@@ -111,7 +111,7 @@ label.col-sm-2.control-label {
     color: #fff;
     white-space: nowrap;
     z-index: 2;
-    background-color: #EE82EE;
+    background-color: #FFB6C1;
     font-size:1.5em;
     font-family: 'Roboto', sans-serif;
 	border:none;
@@ -128,7 +128,7 @@ label.col-sm-2.control-label {
   color: #ffffff;
 }
 #menu ul li {
-    background-color: #EE82EE;
+    background-color: #FFB6C1;
 }
 #menu ul {
   list-style-type: none;
@@ -211,7 +211,7 @@ li#menu-academico{
 .w3layouts-right {
     float: right;
     width: 30%;
-    background: #EE82EE;
+    background: #FFB6C1;
     text-align: center;
     padding: 0.8em 0.5em 0.8em;
 }
@@ -531,7 +531,7 @@ i.fa.fa-angle-down{
     top: 53px;
 }
 .dropdown-menu.drp-mnu a:hover{
-   background-color: #EE82EE;
+   background-color: #FFB6C1;
    z-index: 999;
 
 }
@@ -2607,14 +2607,14 @@ background-color: white;
   color: #f00;
 }
 .tablethead {
-	background-color:#EE82EE;
+	background-color:#FFB6C1;
 }
 .addbtn {
 	margin-bottom:1%; 
 	margin-top:-4%;
 	float:right;
 	border-radius: 6px;
-	background-color: #EE82EE;
+	background-color: #FFB6C1;
 	color: white;
 }
 .addbtn:hover {
@@ -2624,7 +2624,7 @@ background-color: white;
 	margin-top:-1%;
 	float:right;
 	border-radius: 6px;
-	background-color: #EE82EE;
+	background-color: #FFB6C1;
 	color: white;
 }
 .addbtncheck:hover {
@@ -2633,7 +2633,7 @@ background-color: white;
 
 .profilebtn {
 	border-radius: 6px;
-	background-color: #EE82EE;
+	background-color: #FFB6C1;
 	color: white;
 }
 .profilebtn:hover {
