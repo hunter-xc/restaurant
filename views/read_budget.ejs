@@ -250,13 +250,13 @@
 				<div class="form-group">
 				  <label class="control-label col-sm-3" for="estimate_cost">Estimate Cost:</label>
 				  <div class="col-sm-9">
-					<input type="text" class="form-control" id="estimate_cost" name="estimate_cost">
+					<input type="text" class="form-control" id="estimate_cost" name="estimate_cost" pattern="[0-9]+" title="value must be greater than 0 only">
 				  </div>
 				</div>
 				<div class="form-group">
 				  <label class="control-label col-sm-3" for="actual_cost">Actual Cost:</label>
 				  <div class="col-sm-9">
-					<input type="text" class="form-control" id="actual_cost" name="actual_cost">
+					<input type="text" class="form-control" id="actual_cost" name="actual_cost" pattern="[0-9]+" title="value must be greater than 0 only">
 				  </div>
 				</div>
 				<div class="form-group">        
@@ -307,13 +307,13 @@
 				<div class="form-group">
 				  <label class="control-label col-sm-3" for="estimate_cost">Estimate Cost:</label>
 				  <div class="col-sm-9">
-					<input type="text" class="form-control" id="estimate_cost" name="estimate_cost" value="<%=result[i].estimate_cost %>" >
+					<input type="text" class="form-control" id="estimate_cost" name="estimate_cost" value="<%=result[i].estimate_cost %>" pattern="[0-9]+" title="value must be greater than 0 only" >
 				  </div>
 				</div>
 				<div class="form-group">
 				  <label class="control-label col-sm-3" for="actual_cost">Actual Cost:</label>
 				  <div class="col-sm-9">
-					<input type="text" class="form-control" id="actual_cost" name="actual_cost" value="<%=result[i].actual_cost %>" >
+					<input type="text" class="form-control" id="actual_cost" name="actual_cost" value="<%=result[i].actual_cost %>" pattern="[0-9]+" title="value must be greater than 0 only" >
 				  </div>
 				</div>
 				<div class="form-group">        
