@@ -19,7 +19,6 @@
             a {
                 text-decoration: none !important;
             }
-
         </style>
         <!-- jQuery -->
         <script src="js/jquery-2.1.4.min.js"></script>
@@ -158,6 +157,25 @@
                                 <span class="close cursor" onclick="closeModal()">&times;</span>
                                 <div class="modal-content">
 
+								<%
+									if (result.length > 0) { 
+										for(var i=0; i<result.length; i++) {
+											if (result[i].image) {
+								%>
+												 <div class="mySlides">
+													<img src="data:<%= result[i].mimetype %>;base64, <%= result[i].image %>" style="width:100%">
+												 </div>
+								<%
+											}
+										}
+									}
+								%>
+								
+								
+								
+								
+								
+								<!--
                                     <div class="mySlides">
                                         <div class="numbertext">1 / 4</div>
                                         <img src="./images/1.jpg" style="width:100%">
@@ -177,7 +195,8 @@
                                         <div class="numbertext">4 / 4</div>
                                         <img src="./images/4.jpg" style="width:100%">
                                     </div>
-
+								-->
+								
                                     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                                     <a class="next" onclick="plusSlides(1)">&#10095;</a>
 
@@ -185,7 +204,21 @@
                                         <p id="caption"></p>
                                     </div>
 
-
+									<%
+										if (result.length > 0) { 
+											for(var i=0; i<result.length; i++) {
+												if (result[i].image) {
+									%>
+													<div class="column">
+														<img class="demo cursor" src="data:<%= result[i].mimetype %>;base64, <%= result[i].image %>" style="width:100%" onclick="currentSlide(1)" alt="Photo 1">
+													</div>
+									<%
+												}
+											}
+										}
+									%>									
+									
+									<!--
                                     <div class="column">
                                         <img class="demo cursor" src="./images/1.jpg" style="width:100%" onclick="currentSlide(1)" alt="Photo 1">
                                     </div>
@@ -198,6 +231,7 @@
                                     <div class="column">
                                         <img class="demo cursor" src="./images/4.jpg" style="width:100%" onclick="currentSlide(4)" alt="Photo 4">
                                     </div>
+									-->
                                 </div>
                             </div>
 
@@ -205,22 +239,17 @@
                                 function openModal() {
                                     document.getElementById('myModal').style.display = "block";
                                 }
-
                                 function closeModal() {
                                     document.getElementById('myModal').style.display = "none";
                                 }
-
                                 var slideIndex = 1;
                                 showSlides(slideIndex);
-
                                 function plusSlides(n) {
                                     showSlides(slideIndex += n);
                                 }
-
                                 function currentSlide(n) {
                                     showSlides(slideIndex = n);
                                 }
-
                                 function showSlides(n) {
                                     var i;
                                     var slides = document.getElementsByClassName("mySlides");
@@ -251,7 +280,7 @@
                         <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Upload Photo</button>
                         <div id="demo" class="collapse">
                             <form action="add_photo" method="post" enctype="multipart/form-data">
-                                Select image to upload:
+                                Image Description:
 								<input type="text" id="name" name="name" required>
                                 <input type="file" name="photo" id="photo" multiple>
                                 <input type="submit" value="Upload Image" name="submit">
