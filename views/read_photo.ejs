@@ -210,7 +210,7 @@
 												if (result[i].image) {
 									%>
 													<div class="column">
-														<img class="demo cursor" src="data:<%= result[i].mimetype %>;base64, <%= result[i].image %>" style="width:100%" onclick="currentSlide(1)" alt="Photo 1">
+														<img class="demo cursor" src="data:<%= result[i].mimetype %>;base64, <%= result[i].image %>" style="width:100%" onclick="currentSlide(<%=i %>)" alt="<%=result[i].name %>">
 													</div>
 									<%
 												}
