@@ -127,8 +127,18 @@
                         <div style="padding-left: 15px; padding-right: 20px;">	
                             <a href="/">Home</a>  <i class="fa fa-angle-right"></i> <a href="/read_seatingplan">Seating Plan</a>
                             <HR/>
+			    
+			    <%
+			    	var tables = [];
+			    	for(var i=0; i<result.length; i++) {
+					if (tables.indexOf(result[i].table) < 0) 
+						tables.push(result[i].table);
+				}
+			    %>
+			    
+			    
                             <h1>Seating Plan</h1>
-                            <p>Total table: 2</p>
+                            <p>Total table: <%=tables.length %></p>
 
                             <button style="float:right;" class="addbtn fa fa-plus" data-toggle="modal" data-target="#add_seatingplan">Add</button> 
 			 </div>
