@@ -236,31 +236,31 @@
 			<div class="modal-body">	
 			  <form class="form-horizontal" action="add_budget" method="post" enctype="multipart/form-data">
 				  <div class="form-group">
-				  <label class="control-label col-sm-2" for="category">Category:</label>
-				  <div class="col-sm-10">
+				  <label class="control-label col-sm-3" for="category">Category:</label>
+				  <div class="col-sm-9">
 					<input type="text" class="form-control" id="category" name="category" required>
 				  </div>
 				</div>
 				<div class="form-group">
-				  <label class="control-label col-sm-2" for="item">Item:</label>
-				  <div class="col-sm-10">
+				  <label class="control-label col-sm-3" for="item">Item:</label>
+				  <div class="col-sm-9">
 					<input type="text" class="form-control" id="item" name="item" required>
 				  </div>
 				</div>
 				<div class="form-group">
-				  <label class="control-label col-sm-2" for="estimate_cost">Estimate Cost:</label>
-				  <div class="col-sm-10">
+				  <label class="control-label col-sm-3" for="estimate_cost">Estimate Cost:</label>
+				  <div class="col-sm-9">
 					<input type="text" class="form-control" id="estimate_cost" name="estimate_cost">
 				  </div>
 				</div>
 				<div class="form-group">
-				  <label class="control-label col-sm-2" for="actual_cost">Actual Cost:</label>
-				  <div class="col-sm-10">
+				  <label class="control-label col-sm-3" for="actual_cost">Actual Cost:</label>
+				  <div class="col-sm-9">
 					<input type="text" class="form-control" id="actual_cost" name="actual_cost">
 				  </div>
 				</div>
 				<div class="form-group">        
-				  <div class="col-sm-offset-2 col-sm-10">
+				  <div class="col-sm-offset-3 col-sm-9">
 					<button type="submit"  class="btn btn-default">Add</button>
 				  </div>
 				</div>
@@ -293,31 +293,31 @@
 			  <form class="form-horizontal" action="edit_budget" method="post" enctype="multipart/form-data">
 				  <input type="hidden" id="_id" name="_id" value="<%=result[i]._id %>" />
 				  <div class="form-group">
-				  <label class="control-label col-sm-2" for="category">Category:</label>
-				  <div class="col-sm-10">
+				  <label class="control-label col-sm-3" for="category">Category:</label>
+				  <div class="col-sm-9">
 					<input type="text" class="form-control" id="category" name="category" value="<%=result[i].category %>" required>
 				  </div>
 				</div>
 				<div class="form-group">
-				  <label class="control-label col-sm-2" for="item">Item:</label>
-				  <div class="col-sm-10">
+				  <label class="control-label col-sm-3" for="item">Item:</label>
+				  <div class="col-sm-9">
 					<input type="text" class="form-control" id="item" name="item" value="<%=result[i].item %>" required>
 				  </div>
 				</div>
 				<div class="form-group">
-				  <label class="control-label col-sm-2" for="estimate_cost">Estimate Cost:</label>
-				  <div class="col-sm-10">
+				  <label class="control-label col-sm-3" for="estimate_cost">Estimate Cost:</label>
+				  <div class="col-sm-9">
 					<input type="text" class="form-control" id="estimate_cost" name="estimate_cost" value="<%=result[i].estimate_cost %>" >
 				  </div>
 				</div>
 				<div class="form-group">
-				  <label class="control-label col-sm-2" for="actual_cost">Actual Cost:</label>
-				  <div class="col-sm-10">
+				  <label class="control-label col-sm-3" for="actual_cost">Actual Cost:</label>
+				  <div class="col-sm-9">
 					<input type="text" class="form-control" id="actual_cost" name="actual_cost" value="<%=result[i].actual_cost %>" >
 				  </div>
 				</div>
 				<div class="form-group">        
-				  <div class="col-sm-offset-2 col-sm-10">
+				  <div class="col-sm-offset-3 col-sm-9">
 					<button type="submit" class="btn btn-default">Update</button>
 				  </div>
 				</div>
