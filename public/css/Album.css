@@ -78,10 +78,11 @@ body {
   display: none;
   position: fixed;
   z-index: 1;
-  padding-top: 100px;
-  left: 0;
+  padding-top: 5%;
+  left: 13%;
+  right: 5%;
   top: 0;
-  width: 100%;
+  width: 90%;
   height: 100%;
   overflow: auto;
   background-color: black;
@@ -90,11 +91,13 @@ body {
 /* Modal Content */
 .modal-content {
   position: relative;
+  float: center;
+  margin-left: 30px;
   background-color: #fefefe;
   margin: auto;
   padding: 0;
   width: 90%;
-  max-width: 1000px;
+  max-width: 80%;
 }
 
 /* The Close Button */
