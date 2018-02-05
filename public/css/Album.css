@@ -49,10 +49,6 @@
   }
 }
 
-body {
-  font-family: Verdana, sans-serif;
-  margin: 0;
-}
 
 * {
   box-sizing: border-box;
@@ -82,7 +78,7 @@ body {
   left: 13%;
   right: 5%;
   top: 0;
-  width: 100%;
+  width: 90%;
   height: 100%;
   overflow: auto;
   background-color: black;
