@@ -18,7 +18,22 @@
         <!-- jQuery -->
         <script src="js/jquery-2.1.4.min.js"></script>
         <!-- //jQuery -->
-
+		
+		<!--  new -->
+	  <link rel="stylesheet" href="js/datepicker-jquery.css">
+	  <link rel="stylesheet" href="css/datepicker.css">
+	  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	  <script>
+	  $( function() {
+		var pickerOpts = {
+			dateFormat: "yy-mm-dd",
+			numberOfMonths: 1
+		};  
+		$( "#date" ).datepicker(pickerOpts);
+	  } );
+	  </script>
+		<!-- new end -->
 
     </head> 
     <body style="background: url('wedding.jpg'); background-repeat: no-repeat; background-size:cover;">
