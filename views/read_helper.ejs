@@ -146,8 +146,9 @@
                                     </tr>
                                 </thead>
 							<% } %>
+								<tbody>
 							<% for(var i=0; i<result.length; i++) { %>
-                                <tbody>
+                                
                                     <tr>
                                         <td><%=result[i].name %></td>
                                         <td><%=result[i].duty %></td>
@@ -158,8 +159,9 @@
 										<td><a class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#edit_helper_<%=result[i]._id %>"></a></td>
 										<td><a href="/delete_helper?_id=<%=result[i]._id %>"  class="glyphicon glyphicon-trash"></a></td>
                                     </tr>
-                                </tbody>
+                                
 							<% } %>
+								</tbody>
                             </table>
 
                        
