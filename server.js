@@ -468,6 +468,8 @@ app.post('/add_budget', function(req, res) {
 	criteria['item'] = req.body.item;
 	criteria['estimate_cost'] = req.body.estimate_cost;
 	criteria['actual_cost'] = req.body.actual_cost;
+	criteria['paid'] = req.body.paid;
+	criteria['unpaid'] = req.body.unpaid;
 	criteria['userid'] = req.session.username;
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
@@ -498,7 +500,9 @@ app.post('/edit_budget' ,function(req, res) {
 	criteria['item'] = req.body.item;
 	criteria['estimate_cost'] = req.body.estimate_cost;
 	criteria['actual_cost'] = req.body.actual_cost;
-
+	criteria['paid'] = req.body.paid;
+	criteria['unpaid'] = req.body.unpaid;
+	
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
 		edit_budget(db, {'_id': ObjectId(req.body._id)}, criteria, function(result) {
