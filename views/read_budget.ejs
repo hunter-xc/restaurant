@@ -130,14 +130,18 @@
 	  
 		<button style="float:right;" class="addbtn glyphicon glyphicon-plus" data-toggle="modal" data-target="#add_budget">Add</button> 
 
-		<table class="table table-striped table-bordered table-hover" cellspacing="0" width="100%" id="tblSample" border="1px">
+		<table class="table table-bordered table-hover" cellspacing="0" width="100%" id="tblSample" border="1px">
 			<% 
 				if (result.length > 0) {
 					var category_now = "";
 					var total_estimate = 0.0;
 					var total_actual = 0.0;
+					var total_paid = 0.0;
+					var total_unpaid = 0.0;
 					var subtotal_estimate = 0.0;
 					var subtotal_actual = 0.0;
+					var subtotal_paid = 0.0;
+					var subtotal_unpaid = 0.0;
 					var count = 0;
 			%>
 				<thead style="background-color:lightpink;">
@@ -146,6 +150,8 @@
 						<th>Item</th>
 						<th>Estimated cost($HKD)</th>
 						<th>Actual cost($HKD)</th>
+						<th>Paid($HKD)</th>
+						<th>Unpaid($HKD)</th>
 						<th></th>
 						<th></th>
 					</tr>
@@ -177,18 +183,24 @@
 					subtotal_estimate += parseFloat(result[i].estimate_cost);
 					if (result[i].actual_cost)
 						subtotal_actual += parseFloat(result[i].actual_cost);
+					if (result[i].paid)
+						subtotal_paid += parseFloat(result[i].paid);
+					if (result[i].unpaid)
+						subtotal_unpaid += parseFloat(result[i].unpaid);						
 					
 			%>		
 						<td><%=result[i].item %></td>
 						<td><%=result[i].estimate_cost %></td>
 						<td><%=result[i].actual_cost %></td>
+						<td><%=result[i].paid %></td>
+						<td><%=result[i].unpaid %></td>
 						<td><a class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#edit_budget_<%=result[i]._id %>"></a></td>
 						<td><a href="/delete_budget?_id=<%=result[i]._id %>"  class="glyphicon glyphicon-trash"></a></td>
 					</tr>			
 			<%
 					if (count == 0) {					
 			%>
-					<tr>
+					<tr style="background-color: darkgray">
 						<td>Subtotal</td>
 						<td><%=subtotal_estimate %></td>
 						<td><%=subtotal_actual %></td>
@@ -198,12 +210,16 @@
 			<%
 						total_estimate += subtotal_estimate;
 						total_actual += subtotal_actual;
+						total_paid += subtotal_paid;
+						total_unpaid += subtotal_unpaid;
 						subtotal_estimate = 0.0;
 						subtotal_actual = 0.0;	
+						subtotal_paid = 0.0;	
+						subtotal_unpaid = 0.0;	
 					}
 				}
 			%>	
-					<tr><td></td><td>Total</td><td><%=total_estimate %></td><td><%=total_actual %></td><td></td><td></td></tr>
+					<tr><td></td><td>Total</td><td><%=total_estimate %></td><td><%=total_actual %></td><td><%=total_paid %></td><td><%=total_unpaid %></td><td></td><td></td></tr>
 				
 
 			  </tbody>
@@ -259,6 +275,18 @@
 					<input type="text" class="form-control" id="actual_cost" name="actual_cost" pattern="[0-9]+" title="Value must be number which is greater than or equal to 0 only">
 				  </div>
 				</div>
+				<div class="form-group">
+				  <label class="control-label col-sm-3" for="paid">Paid:</label>
+				  <div class="col-sm-9">
+					<input type="text" class="form-control" id="paid" name="paid" pattern="[0-9]+" title="Value must be number which is greater than or equal to 0 only">
+				  </div>
+				</div>		
+				<div class="form-group">
+				  <label class="control-label col-sm-3" for="unpaid">Unpaid:</label>
+				  <div class="col-sm-9">
+					<input type="text" class="form-control" id="unpaid" name="unpaid" pattern="[0-9]+" title="Value must be number which is greater than or equal to 0 only">
+				  </div>
+				</div>					
 				<div class="form-group">        
 				  <div class="col-sm-offset-3 col-sm-9">
 					<button type="submit"  class="btn btn-default">Add</button>
@@ -316,6 +344,18 @@
 					<input type="text" class="form-control" id="actual_cost" name="actual_cost" value="<%=result[i].actual_cost %>" pattern="[0-9]+" title="Value must be number which is greater than or equal to 0 only" >
 				  </div>
 				</div>
+				<div class="form-group">
+				  <label class="control-label col-sm-3" for="paid">Paid:</label>
+				  <div class="col-sm-9">
+					<input type="text" class="form-control" id="paid" name="paid" value="<%=result[i].paid %>" pattern="[0-9]+" title="Value must be number which is greater than or equal to 0 only" >
+				  </div>
+				</div>	
+				<div class="form-group">
+				  <label class="control-label col-sm-3" for="unpaid">Unpaid:</label>
+				  <div class="col-sm-9">
+					<input type="text" class="form-control" id="unpaid" name="unpaid" value="<%=result[i].unpaid %>" pattern="[0-9]+" title="Value must be number which is greater than or equal to 0 only" >
+				  </div>
+				</div>					
 				<div class="form-group">        
 				  <div class="col-sm-offset-3 col-sm-9">
 					<button type="submit" class="btn btn-default">Update</button>
