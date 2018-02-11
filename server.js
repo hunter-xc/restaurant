@@ -386,6 +386,7 @@ app.post('/add_rundown', function(req, res) {
 	var criteria = {};
 	criteria['time'] = req.body.time;
 	criteria['event_name'] = req.body.event_name;
+	criteria['handler'] = req.body.handler;
 	criteria['remark'] = req.body.remark;
 	criteria['userid'] = req.session.username;
 	MongoClient.connect(mongourl, function(err, db) {
@@ -429,6 +430,7 @@ app.post('/edit_rundown' ,function(req, res) {
 	var criteria = {};
 	criteria['time'] = req.body.time;
 	criteria['event_name'] = req.body.event_name;
+	criteria['handler'] = req.body.handler;
 	criteria['remark'] = req.body.remark;
 
 	MongoClient.connect(mongourl, function(err, db) {
@@ -717,6 +719,7 @@ app.get('/read_checklist', function(req, res) {
 app.post('/add_checklist', function(req, res) {
 	var criteria = {};
 	criteria['item'] = req.body.item;
+	criteria['handler'] = req.body.handler;
 	criteria['done'] = "off";
 	criteria['userid'] = req.session.username;
 	MongoClient.connect(mongourl, function(err, db) {
@@ -731,6 +734,7 @@ app.post('/add_checklist', function(req, res) {
 app.post('/edit_checklist' ,function(req, res) {
 	var criteria = {};
 	criteria['item'] = req.body.item;
+	criteria['handler'] = req.body.handler;
 	if (req.body.done) 
 		criteria['done'] = req.body.done;
 	else 
