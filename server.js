@@ -106,6 +106,7 @@ app.post('/register', function(req, res) {
 	criteria['bride'] = req.body.bride;
 	criteria['budget'] = req.body.budget;
 	criteria['big_day'] = req.body.big_day;
+	criteria['table_person_count'] = 10;
 	
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err,null);   
@@ -607,11 +608,21 @@ app.get('/read_seatingplan', function(req, res) {
 	});
 });
 
-/*
-app.get('/add_photo', function(req, res) {
-	res.render('add_photo.ejs');
+
+app.post('/edit_people_count' ,function(req, res) {
+	var criteria = {};
+	criteria['table_person_count'] = req.body.table_person_count;
+
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err, null);
+		edit_profile(db, {'_id': ObjectId(req.body._id)}, criteria, function(result) {
+			db.close();
+		});	
+	});
+	res.redirect('/read_seatingplan');	
+
 });
-*/
+
 
 app.post('/add_photo', function(req, res) {
 	var new_r = {};
