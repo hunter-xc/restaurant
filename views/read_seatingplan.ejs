@@ -138,7 +138,11 @@
 			    
 			    
                             <h1>Seating Plan</h1>
-                            <p>Total table: <%=tables.length %></p>
+                            <p>Total table: <%=tables.length %> 	
+							<div style="margin-left:50px;">Number of people in each table: 
+								<input type="number" name="table_person_count" min="6" max="30" value="10" />
+							</div>	
+							</p>
 
                             <button style="float:right;" class="addbtn fa fa-plus" data-toggle="modal" data-target="#add_seatingplan">Add</button> 
 			 </div>
