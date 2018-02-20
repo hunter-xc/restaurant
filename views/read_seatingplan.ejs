@@ -130,10 +130,25 @@
 			    
 			    <%
 			    	var tables = [];
+					var each_table_people_count = [];
 			    	for(var i=0; i<result.length; i++) {
-					if (tables.indexOf(result[i].table) < 0) 
-						tables.push(result[i].table);
-				}
+						if (tables.indexOf(result[i].table) < 0) {
+							tables.push(result[i].table);
+						}	
+					}
+					
+					for (var j=0;j<tables.length; j++) {
+						each_table_people_count[j] = 0;
+					}
+					
+			    	for(var i=0; i<result.length; i++) {
+						for (var j=0;j<tables.length; j++) {
+							if (tables[j] == result[i].table) {
+								each_table_people_count[j]++;
+								break;
+							}
+						}
+					}					
 			    %>
 			    
 			    
@@ -203,6 +218,25 @@
                             </table>
 
 						<div style="margin-top: 20px;">
+							
+							<%
+								for (var i=1; i<=tables.length; i++) {
+							%>
+							<div style="width:47%;float:left;margin-left:3%;">
+								<div class="task-info">
+									<span class="task-desc">Table <%=i %></span><span class="percentage"><%=each_table_people_count[i-1] %> / <%=userdata[0].table_person_count %></span>
+									<div class="clearfix"></div>	
+								</div>
+								<div class="progress progress-striped active">
+									<div class="bar green" style="width:<%=parseInt(each_table_people_count[i-1])/parseInt(userdata[0].table_person_count) %>%;"></div>
+								</div>								
+							</div>							
+							<%
+								}
+							%>
+						
+						
+						
 							<div style="width:47%;float:left;margin-left:3%;">
 								<div class="task-info">
 									<span class="task-desc">Table 1</span><span class="percentage">90%</span>
