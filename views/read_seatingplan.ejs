@@ -291,7 +291,8 @@
 			</div>
 			<div class="modal-body">	
 			<form class="form-horizontal" action="edit_people_count" method="post" enctype="multipart/form-data">
-				  <div class="form-group">
+				<input type="hidden" id="_id" name="_id" value="<%=userdata[i]._id %>" />
+				<div class="form-group">
 				  <label class="control-label col-sm-6" for="table_person_count">Number of people in each table:</label>
 				  <div class="col-sm-6">
 					<input type="number" class="form-control" id="table_person_count" name="table_person_count" min="6" max="30" value="<%=userdata[0].table_person_count %>" required />
