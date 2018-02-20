@@ -140,8 +140,7 @@
                             <h1>Seating Plan</h1>
                             <p>Total table: <%=tables.length %> 						
 							<div>Number of people in each table: 10
-								<a class="glyphicon glyphicon-pencil" data-toggle="modal" data-target=""></a>
-								 <!-- <input type="number" name="table_person_count" min="6" max="30" value="10" /> -->
+								<a class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="edit_people_count"></a>
 							</div>								
 							</p>
                             <button style="float:right;" class="addbtn fa fa-plus" data-toggle="modal" data-target="#add_seatingplan">Add</button> 
@@ -281,6 +280,38 @@
 
 
 	  <!-- Modal -->
+	  <div class="modal fade" id="edit_people_count" role="dialog">
+		<div class="modal-dialog">
+		
+		  <!-- Modal content-->
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			  <h4 class="modal-title"></h4>
+			</div>
+			<div class="modal-body">	
+			<form class="form-horizontal" action="edit_people_count" method="post" enctype="multipart/form-data">
+				  <div class="form-group">
+				  <label class="control-label col-sm-3" for="table_person_count">Number of people in each table:</label>
+				  <div class="col-sm-9">
+					<input type="number" class="form-control" id="table_person_count" name="table_person_count" min="6" max="30" value="10" required />
+				  </div>
+				</div>							
+				<div class="form-group">        
+					<div class="col-sm-offset-3 col-sm-9">
+						<button type="submit"  class="btn btn-default">Update</button>
+					</div>
+				</div>
+				</form>			  
+			</div>
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		  </div>
+		  
+		</div>
+	  </div>
+	  
 	  <div class="modal fade" id="add_seatingplan" role="dialog">
 		<div class="modal-dialog">
 		
