@@ -1,0 +1,198 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Wedding Banquet and Management - Schedule</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+        <!-- Bootstrap Core CSS -->
+
+        <link rel='stylesheet' href='http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+        <!-- Custom CSS -->
+        <link href="css/style.css" rel='stylesheet' type='text/css' />
+
+        <!-- Graph CSS -->
+        <link href="css/font-awesome.css" rel="stylesheet"> 
+        <!-- jQuery -->
+        <script src="js/jquery-2.1.4.min.js"></script>
+        <!-- //jQuery -->
+
+
+    </head> 
+    <body style="background: url('wedding.jpg'); background-repeat: no-repeat; background-size:cover;">
+        <div class="page-container">
+            <!--/content-inner-->
+            <div class="left-content">
+                <div class="mother-grid-inner">
+                    <!--header start here-->
+                    <div class="header-main">
+                        <div class="profile_details" style="float:right; margin-left:10px; width:25%; height:60px">		
+
+
+                            <div class="user-name">
+                                <p style="margin-bottom:1%;"><%=userdata[0].bridegroom %>&<%=userdata[0].bride %> </p>
+                                <p style="margin-bottom:1%;">Wedding Date:</p>
+                                <p style="margin-bottom:1%;"><%=userdata[0].big_day %></p>
+                            </div>
+
+                            <ul>
+                                <li class="dropdown profile_details_drop">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        <i style="margin-top:5%;" class="fa fa-angle-down"></i>
+                                        <i style="margin-top:5%;" class="fa fa-angle-up"></i>
+                                        <div class="clearfix"></div>	
+                                    </a>
+
+
+                                    <ul class="dropdown-menu drp-mnu">
+                                        <li> <a href="#"><i class="fa fa-download"></i>Download app</a> </li> 
+                                        <li> <a href="/read_profile"><i class="fa fa-user"></i>Profile</a> </li>
+                                        <li> <a href="/logout"><i class="fa fa-sign-out"></i>Logout</a> </li>
+                                    </ul>
+
+
+                                </li>
+                            </ul>
+
+                            <ul>
+                                <li class="dropdown profile_details_drop">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i style="right:60px; width:10%; color:white; margin-top:-5%;" class="fa fa-tasks"></i></a>
+                                    <ul class="dropdown-menu drp-mnu task">
+
+                                        <li>
+                                            <div class="task-info">
+                                                <span class="task-desc">Task done</span><span class="percentage">40%</span>
+                                                <div class="clearfix"></div>	
+                                            </div>
+                                            <div class="progress progress-striped active">
+                                                <div class="bar yellow" style="width:40%;"></div>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <div class="task-info">
+                                                <span class="task-desc">Guest attending</span><span class="percentage">90%</span>
+                                                <div class="clearfix"></div>	
+                                            </div>
+                                            <div class="progress progress-striped active">
+                                                <div class="bar green" style="width:90%;"></div>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <div class="task-info">
+                                                <span class="task-desc">Budget used</span><span class="percentage">33%</span>
+                                                <div class="clearfix"></div>	
+                                            </div>
+                                            <div class="progress progress-striped active">
+                                                <div class="bar red" style="width: 33%;"></div>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </li>										
+                            </ul> 	
+                            <div class="clearfix"> </div>
+
+
+                            <div class="clearfix"> </div>
+
+                            <!--notification menu end -->
+
+
+
+                        </div>
+
+                        <div class="w3layouts-right">
+                            <!--search-box-->
+                            <div class="w3-search-box">
+                                <form action="#" method="post">
+                                    <input type="text" placeholder="Search..." required="">	
+                                    <input type="submit" value="">					
+                                </form>
+                            </div><!--//end-search-box-->
+                            <div class="clearfix"> </div>
+                        </div>
+
+
+
+                        <div class="clearfix"> </div>	
+                    </div>
+                    <!--heder end here-->
+
+
+                    <div class="home-header-main">
+                        <div style="padding-left: 15px; padding-right: 20px;">	
+                            <a href="/">Home</a>  <i class="fa fa-angle-right"></i> <a href="/read_schedule">Schedule</a>
+                            <HR/>
+			    
+
+
+                    </div>
+					
+				
+	<footer style="margin-top:10px;">
+	<div class="copyrights">
+		 <p>Contact us:</p>
+
+		<p><i class="fa fa-envelope"></i>   <a href="mailto:mywedding@gmail.com">mywedding@gmail.com</a></p>
+	</div>			
+	</footer>
+
+	
+                    <!--inner block start here-->
+                    <div class="inner-block">
+
+                    </div>
+                    <!--inner block end here-->
+
+                </div>
+            </div>
+            <!--//content-inner-->
+            <!--/sidebar-menu-->
+            <div class="sidebar-menu">
+                <header class="logo1">
+                    <a href="/"><img class="imgclass" src="Wedding-heart.png" alt="Wedding"></a>
+                </header>
+
+                <div>
+                    <ul id="menu">
+                        <li><a href="/read_budget">Budget list<div class="clearfix"></div></a></li>
+                        <li><a href="/read_checklist">Checklist<div class="clearfix"></div></a></li>
+                        <li><a href="/read_guest">Guest list<div class="clearfix"></div></a></li>
+                        <li><a href="/read_helper">Helper list<div class="clearfix"></div></a></li>
+                        <li><a href="/read_rundown">Run Down<div class="clearfix"></div></a></li>
+                        <li><a href="/read_schedule">Schedule<div class="clearfix"></div></a></li>
+                        <li><a href="/read_seatingplan">Seating plan<div class="clearfix"></div></a></li>
+                        <li><a href="/read_photo">View photo<div class="clearfix"></div></a></li>
+                        <li><a href="/read_vendor">Vendor list<div class="clearfix"></div></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="clearfix"></div>		
+        </div>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
+        <!-- /Bootstrap Core JavaScript -->	   
+
+
+        <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript"  src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+
+        <script>
+
+            $(document).ready(function () {
+                $('#tblSample').DataTable({
+                    "order": [[0, "desc"]]
+                });
+            });
+
+        </script>
+
+
+    </body>
+</html>
