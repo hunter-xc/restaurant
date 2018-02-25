@@ -385,7 +385,7 @@ app.get('/read_schedule2', function(req, res) {
 		read_schedule(db, {'userid': req.session.username}, function(result) {
 			read_userdata(db, {'username': req.session.username}, function(userdata) {
 				db.close();
-				res.render('read_schedule.ejs', {result:result, userdata: userdata});
+				res.render('read_schedule2.ejs', {result:result, userdata: userdata});
 			});
 		});		
 	});
