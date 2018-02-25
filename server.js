@@ -379,8 +379,6 @@ app.get('/read_schedule', function(req, res) {
 
 
 app.get('/read_schedule2', function(req, res) {
-	res.render('read_schedule2.ejs');
-	/*
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
 		read_schedule(db, {'userid': req.session.username}, function(result) {
@@ -390,7 +388,6 @@ app.get('/read_schedule2', function(req, res) {
 			});
 		});		
 	});
-	*/
 });
 
 /*
