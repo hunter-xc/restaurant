@@ -45,7 +45,7 @@
       },
       defaultDate: '2018-03-18',
       navLinks: true, // can click day/week names to navigate views
-      selectable: false,
+      selectable: true,
       selectHelper: true,
       select: function(start, end) {
         var title = prompt('Event Title:');
@@ -60,7 +60,7 @@
         }
         $('#calendar').fullCalendar('unselect');
       },
-      editable: false,
+      editable: true,
       eventLimit: true, // allow "more" link when too many events
       events: [
 	  
