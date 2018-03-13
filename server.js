@@ -330,12 +330,17 @@ app.get('/add_schedule', function(req, res) {
 
 app.post('/add_schedule', function(req, res) {
 	var criteria = {};
-	criteria['date'] = req.body.date;
+	criteria['start_date'] = req.body.start_date;
+	criteria['start_time'] = req.body.start_time;
+	criteria['end_date'] = req.body.end_date;
+	criteria['end_time'] = req.body.end_time;	
 	criteria['event_name'] = req.body.event_name;
+	/*
 	if (req.body.done) 
 		criteria['done'] = req.body.done;
 	else 
 		criteria['done'] = "off";
+	*/
 	criteria['userid'] = req.session.username;
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
@@ -365,6 +370,7 @@ app.post('/edit_schedule' ,function(req, res) {
 
 });
 
+/*
 app.get('/read_schedule', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
@@ -376,20 +382,33 @@ app.get('/read_schedule', function(req, res) {
 		});		
 	});
 });
+*/
 
-
-app.get('/read_schedule2', function(req, res) {
+app.get('/read_schedule', function(req, res) {
 	
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
 		read_schedule(db, {'userid': req.session.username}, function(result) {
 			read_userdata(db, {'username': req.session.username}, function(userdata) {
 				db.close();
-				res.render('read_schedule2.ejs', {result:result, userdata: userdata});
+				res.render('read_schedule.ejs', {result:result, userdata: userdata});
 			});
 		});		
 	});
 	
+});
+
+app.get('/delete_schedule', function(req, res) {
+	var criteria = {};
+	criteria['_id'] = ObjectId(req.query._id);
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err,null);   
+		console.log('Connected to MongoDB\n');
+		delete_schedule(db, criteria, function(result) {
+			db.close();
+		});
+	});
+	res.redirect('/read_schedule');
 });
 
 /*
@@ -412,19 +431,6 @@ app.post('/add_rundown', function(req, res) {
 			res.redirect('/read_rundown');
 		});
 	});
-});
-
-app.get('/delete_schedule', function(req, res) {
-	var criteria = {};
-	criteria['_id'] = ObjectId(req.query._id);
-	MongoClient.connect(mongourl, function(err, db) {
-		assert.equal(err,null);   
-		console.log('Connected to MongoDB\n');
-		delete_schedule(db, criteria, function(result) {
-			db.close();
-		});
-	});
-	res.redirect('/read_schedule');
 });
 
 
