@@ -38,7 +38,7 @@
         center: 'title',
         right: 'month,agendaWeek,agendaDay'
       },
-      defaultDate: '2018-02-12',
+      defaultDate: '2018-03-18',
       navLinks: true, // can click day/week names to navigate views
       selectable: true,
       selectHelper: true,
@@ -58,6 +58,19 @@
       editable: true,
       eventLimit: true, // allow "more" link when too many events
       events: [
+	  
+		<%
+			for(var i=0; i<result.length; i++) { 
+		%>
+		{
+			title: result[i].event_name,
+			start: result[i].date
+		},
+		<%
+			}
+		%>
+	  
+	  
         {
           title: 'All Day Event',
           start: '2018-02-01'
@@ -112,6 +125,7 @@
           url: 'http://google.com/',
           start: '2018-02-28'
         }
+	
       ]
     });
 
