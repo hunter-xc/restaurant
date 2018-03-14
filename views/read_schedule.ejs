@@ -277,45 +277,22 @@
 			<div class="modal-body">	
 			<form class="form-horizontal" action="add_schedule" method="post" enctype="multipart/form-data">
 				<div class="form-group">
-				  <label class="control-label col-sm-3" for="date">Start Date:</label>
-				  <div class="col-sm-9">
-					<input type="text" class="form-control" id="date" name="date" required>
-				  </div>
-				</div>
-				<div class="form-group">
-				  <label class="control-label col-sm-3" for="start_time">Start Time:</label>
-				  <div class="col-sm-9">
-					<input type="text" class="form-control" id="start_time" name="start_time" >
-				  </div>
-				</div>				
-				<div class="form-group">
 				  <label class="control-label col-sm-3" for="event_name">Event Name:</label>
 				  <div class="col-sm-9">
 					<input type="text" class="form-control" id="event_name" name="event_name" required>
 				  </div>
-				</div>
+				</div>			
 				<div class="form-group">
-				  <label class="control-label col-sm-3" for="end_date">End Date:</label>
-				  <div class="col-sm-9">
-					<input type="text" class="form-control" id="end_date" name="end_date" >
+				  <label class="control-label col-sm-3" for="dtp_input1">Start Date:</label>
+				  <div class="col-sm-6 input-group date form_datetime" data-date="" data-date-format="yyyy-mm-ddThh:ii:ss" data-link-field="dtp_input1">
+					<input type="text" class="form-control" id="date" name="date" size="16" value="" readonly required>
+					<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
 				  </div>
+				  <input type="hidden" id="dtp_input1" value="" />
 				</div>
-				<div class="form-group">
-				  <label class="control-label col-sm-3" for="end_time">End Time:</label>
-				  <div class="col-sm-9">
-					<input type="text" class="form-control" id="end_time" name="end_time" >
-				  </div>
-				</div>					
-				<!--
-				<div class="form-group">
-				  <label class="control-label col-sm-3" for="done">Done:</label>
-				  <div class="col-sm-1">          
-					<input type="checkbox" id="done" name="done">
-				  </div>
-				</div>
-				-->
 				<div class="form-group">        
-					<div class="col-sm-offset-3 col-sm-9">
+					<div class="col-sm-offset-3 col-sm-6">
 						<button type="submit"  class="btn btn-default">Add</button>
 					</div>
 				</div>
@@ -376,6 +353,20 @@
             <div class="clearfix"></div>		
         </div>
 
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        //language:  'fr',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0
+        //showMeridian: 1
+    });
+</script>		
+		
+		
 		
     </body>
 </html>
