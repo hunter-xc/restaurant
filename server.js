@@ -331,9 +331,7 @@ app.get('/add_schedule', function(req, res) {
 app.post('/add_schedule', function(req, res) {
 	var criteria = {};
 	criteria['start_date'] = req.body.start_date;
-	criteria['start_time'] = req.body.start_time;
 	criteria['end_date'] = req.body.end_date;
-	criteria['end_time'] = req.body.end_time;	
 	criteria['event_name'] = req.body.event_name;
 	/*
 	if (req.body.done) 
