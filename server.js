@@ -351,9 +351,9 @@ app.post('/add_schedule', function(req, res) {
 
 app.post('/edit_schedule' ,function(req, res) {
 	var criteria = {};
-	criteria['start_date'] = req.body.start_date;
-	criteria['end_date'] = req.body.end_date;
-	criteria['event_name'] = req.body.event_name;
+	criteria['start_date'] = req.body.start_date_edit;
+	criteria['end_date'] = req.body.end_date_edit;
+	criteria['event_name'] = req.body.event_name_edit;
 	criteria['userid'] = req.session.username;
 
 	MongoClient.connect(mongourl, function(err, db) {
