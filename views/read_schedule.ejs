@@ -371,11 +371,12 @@
 			</div>
 			<div class="modal-body">	
 			<form class="form-horizontal" action="edit_schedule" method="post" enctype="multipart/form-data">
-				 <input type="hidden" id="_id" name="_id" value="<%=result[0]._id %>" />
+				 <input type="hidden" id="_id" name="_id" value="" />
 				<div class="form-group">
 				  <label class="control-label col-sm-3" for="event_name_edit">Event Name:</label>
 				  <div class="col-sm-9">
 					  <select style="margin-left:-3.5%" class="form-control" id="event_name_edit" name="event_name_edit">
+							  <option value=""></option>
 						<%
 							for(var i=0; i<result.length; i++) { 
 						%>
@@ -432,11 +433,12 @@
 			</div>
 			<div class="modal-body">	
 			<form class="form-horizontal" action="delete_schedule" method="post" enctype="multipart/form-data">
-				 <input type="hidden" id="_id" name="_id" value="<%=result[0]._id %>" />
+				 <input type="hidden" id="_id" name="_id" value="" />
 				<div class="form-group">
 				  <label class="control-label col-sm-3" for="event_name_delete">Event Name:</label>
 				  <div class="col-sm-9">
 					  <select style="margin-left:-3.5%" class="form-control" id="event_name_delete" name="event_name_delete">
+							 <option value=""></option>
 						<%
 							for(var i=0; i<result.length; i++) { 
 						%>
