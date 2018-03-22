@@ -145,7 +145,25 @@
 
   });
 
-</script>		
+</script>	
+
+<script>	
+  $(document).ready(function() {
+		$('#event_name_edit').change(function(){
+			var event = $('#event_name_edit').val();
+			<%
+				for(var i=0; i<result.length; i++) {  
+			%>
+					if (event == <%=result[i].event_name %>) {
+						$('#start_date').val(<%=result[i].start_date %>);
+						$('#end_date').val(<%=result[i].end_date %>);
+					}
+			<%
+				}
+			%>
+		});
+  });
+</script>
 
     </head> 
     <body style="background: url('wedding.jpg'); background-repeat: no-repeat; background-size:cover;">
@@ -332,13 +350,13 @@
 			<div class="modal-body">	
 			<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
 				<div class="form-group">
-				  <label class="control-label col-sm-3" for="event_name">Event Name:</label>
+				  <label class="control-label col-sm-3" for="event_name_edit">Event Name:</label>
 				  <div class="col-sm-9">
-					  <select class="form-control" id="event_name">
+					  <select class="form-control" id="event_name_edit">
 						<%
 							for(var i=0; i<result.length; i++) { 
 						%>
-							  <option><%=result[i].event_name %></option>
+							  <option value="<%=result[i].event_name %>"><%=result[i].event_name %></option>
 						<%
 							}
 						%>					  
