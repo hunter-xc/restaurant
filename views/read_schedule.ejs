@@ -348,7 +348,7 @@
 				<div class="form-group">
 				  <label class="control-label col-sm-3" for="dtp_input1">Start Date:</label>
 				  <div class="col-sm-9 input-group date form_datetime" data-date="" data-date-format="yyyy-mm-ddThh:ii:ss" data-link-field="dtp_input1">
-					<input type="text" class="form-control" id="start_date" name="start_date" size="16" value="" readonly required>
+					<input type="text" class="form-control" id="start_date" name="start_date" size="16" value="<%=result[0].start_date %>" readonly required>
 					<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
 					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
 				  </div>
@@ -357,7 +357,7 @@
 				<div class="form-group">
 				  <label class="control-label col-sm-3" for="dtp_input1">End Date:</label>
 				  <div class="col-sm-9 input-group date form_datetime" data-date="" data-date-format="yyyy-mm-ddThh:ii:ss" data-link-field="dtp_input1">
-					<input type="text" class="form-control" id="end_date" name="end_date" size="16" value="" readonly >
+					<input type="text" class="form-control" id="end_date" name="end_date" size="16" value="<%=result[0].end_date %>" readonly >
 					<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
 					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
 				  </div>
