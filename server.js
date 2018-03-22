@@ -1131,7 +1131,7 @@ function edit_schedule(db, r, criteria, callback) {
 };
 
 function read_schedule(db, criteria, callback) {
-	db.collection('schedules').find(criteria).sort({'date':1}).toArray(function(err, result) {
+	db.collection('schedules').find(criteria).sort({'event_name':1}).toArray(function(err, result) {
 		assert.equal(err, null);
 		callback(result);
 	});
