@@ -158,7 +158,8 @@
 						$('#start_date_edit').val('<%=result[i].start_date %>');
 						$('#end_date_edit').val('<%=result[i].end_date %>');
 						$('#_id').val('<%=result[i]._id %>');
-						$('#test').html('<a href="/delete_schedule?_id=<%=result[i]._id %>" >delete</a>');
+						//$('#test').html('<a href="/delete_schedule?_id=<%=result[i]._id %>" >delete</a>');
+						$('#test').html('<a href="/delete_schedule?_id=<%=result[i]._id %>"><button value="Delete" class="btn btn-default">Delete</button></a>');
 					}
 			<%
 				}
