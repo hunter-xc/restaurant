@@ -351,12 +351,10 @@ app.post('/add_schedule', function(req, res) {
 
 app.post('/edit_schedule' ,function(req, res) {
 	var criteria = {};
-	criteria['date'] = req.body.date;
+	criteria['start_date'] = req.body.start_date;
+	criteria['end_date'] = req.body.end_date;
 	criteria['event_name'] = req.body.event_name;
-	if (req.body.done) 
-		criteria['done'] = req.body.done;
-	else 
-		criteria['done'] = "off";
+	criteria['userid'] = req.session.username;
 
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
