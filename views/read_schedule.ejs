@@ -166,6 +166,26 @@
   });
 </script>
 
+
+<script>	
+  $(document).ready(function() {
+		$('#event_name_delete').change(function(){
+			var event = $('#event_name_delete').val();
+			<%
+				for(var i=0; i<result.length; i++) {  
+			%>
+					if (event == '<%=result[i].event_name %>') {
+						$('#start_date_delete').val('<%=result[i].start_date %>');
+						$('#end_date_delete').val('<%=result[i].end_date %>');
+						$('#_id').val('<%=result[i]._id %>');
+					}
+			<%
+				}
+			%>
+		});
+  });
+</script>
+
     </head> 
     <body style="background: url('wedding.jpg'); background-repeat: no-repeat; background-size:cover;">
         <div class="page-container">
@@ -414,9 +434,9 @@
 			<form class="form-horizontal" action="delete_schedule" method="post" enctype="multipart/form-data">
 				 <input type="hidden" id="_id" name="_id" value="<%=result[0]._id %>" />
 				<div class="form-group">
-				  <label class="control-label col-sm-3" for="event_name_edit">Event Name:</label>
+				  <label class="control-label col-sm-3" for="event_name_delete">Event Name:</label>
 				  <div class="col-sm-9">
-					  <select style="margin-left:-3.5%" class="form-control" id="event_name_edit" name="event_name_edit">
+					  <select style="margin-left:-3.5%" class="form-control" id="event_name_delete" name="event_name_delete">
 						<%
 							for(var i=0; i<result.length; i++) { 
 						%>
@@ -430,7 +450,7 @@
 				<div class="form-group">
 				  <label class="control-label col-sm-3" for="dtp_input1">Start Date:</label>
 				  <div class="col-sm-9 input-group date form_datetime" data-date="" data-date-format="yyyy-mm-ddThh:ii:ss" data-link-field="dtp_input1">
-					<input type="text" class="form-control" id="start_date_edit" name="start_date_edit" value="" readonly required>
+					<input type="text" class="form-control" id="start_date_delete" name="start_date_delete" value="" readonly required>
 					<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
 					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
 				  </div>
@@ -439,7 +459,7 @@
 				<div class="form-group">
 				  <label class="control-label col-sm-3" for="dtp_input1">End Date:</label>
 				  <div class="col-sm-9 input-group date form_datetime" data-date="" data-date-format="yyyy-mm-ddThh:ii:ss" data-link-field="dtp_input1">
-					<input type="text" class="form-control" id="end_date_edit" name="end_date_edit" value="" readonly >
+					<input type="text" class="form-control" id="end_date_delete" name="end_date_delete" value="" readonly >
 					<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
 					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
 				  </div>
