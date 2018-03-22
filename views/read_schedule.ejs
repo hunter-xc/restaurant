@@ -158,6 +158,7 @@
 						$('#start_date_edit').val('<%=result[i].start_date %>');
 						$('#end_date_edit').val('<%=result[i].end_date %>');
 						$('#_id').val('<%=result[i]._id %>');
+						$('#for_delete_button').html('<a href="/delete_schedule?_id=<%=result[i]._id %>"><button value="Delete" class="btn btn-default">Delete</button></a>');
 					}
 			<%
 				}
@@ -368,7 +369,7 @@
 				<div class="form-group">
 				  <label class="control-label col-sm-3" for="dtp_input1">Start Date:</label>
 				  <div class="col-sm-9 input-group date form_datetime" data-date="" data-date-format="yyyy-mm-ddThh:ii:ss" data-link-field="dtp_input1">
-					<input type="text" class="form-control" id="start_date_edit" name="start_date_edit" value="<%=result[0].start_date %>" readonly required>
+					<input type="text" class="form-control" id="start_date_edit" name="start_date_edit" value="" readonly required>
 					<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
 					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
 				  </div>
@@ -377,7 +378,7 @@
 				<div class="form-group">
 				  <label class="control-label col-sm-3" for="dtp_input1">End Date:</label>
 				  <div class="col-sm-9 input-group date form_datetime" data-date="" data-date-format="yyyy-mm-ddThh:ii:ss" data-link-field="dtp_input1">
-					<input type="text" class="form-control" id="end_date_edit" name="end_date_edit" value="<%=result[0].end_date %>" readonly >
+					<input type="text" class="form-control" id="end_date_edit" name="end_date_edit" value="" readonly >
 					<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
 					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
 				  </div>
@@ -386,7 +387,7 @@
 				<div class="form-group">        
 					<div class="col-sm-offset-3 col-sm-9">
 						<button type="submit"  class="btn btn-default">Update</button>
-						<button type="submit"  class="btn btn-default">Delete</button>
+						<div id="for_delete_button"></div>
 					</div>
 				</div>
 				</form>			  
