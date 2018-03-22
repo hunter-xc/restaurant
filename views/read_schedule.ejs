@@ -253,7 +253,8 @@
                     <div class="home-header-main">
                         <div style="padding-left: 15px; padding-right: 20px;">	
                             <a href="/">Home</a>  <i class="fa fa-angle-right"></i> <a href="/read_schedule">Schedule</a>
-							<a style="float:right" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#add_schedule"></a>
+							<a style="float:right" class="glyphicon glyphicon-edit" data-toggle="modal" data-target="#add_schedule"></a>
+							<a style="float:right" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="edit_schedule"></a>
                             <HR/>
 			    
 
@@ -316,7 +317,58 @@
 		</div>
 	  </div>					
 					
-					
+
+	  <!-- Modal -->
+	  <div class="modal fade" id="edit_schedule" role="dialog">
+		<div class="modal-dialog">
+		
+		  <!-- Modal content-->
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			  <h4 class="modal-title">Edit Schedule Event</h4>
+			</div>
+			<div class="modal-body">	
+			<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+				<div class="form-group">
+				  <label class="control-label col-sm-3" for="event_name">Event Name:</label>
+				  <div class="col-sm-9">
+					<input type="text" style="margin-left:-3%" class="form-control" id="event_name" name="event_name" required>
+				  </div>
+				</div>			
+				<div class="form-group">
+				  <label class="control-label col-sm-3" for="dtp_input1">Start Date:</label>
+				  <div class="col-sm-9 input-group date form_datetime" data-date="" data-date-format="yyyy-mm-ddThh:ii:ss" data-link-field="dtp_input1">
+					<input type="text" class="form-control" id="start_date" name="start_date" size="16" value="" readonly required>
+					<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+				  </div>
+				  <input type="hidden" id="dtp_input1" value="" />
+				</div>
+				<div class="form-group">
+				  <label class="control-label col-sm-3" for="dtp_input1">End Date:</label>
+				  <div class="col-sm-9 input-group date form_datetime" data-date="" data-date-format="yyyy-mm-ddThh:ii:ss" data-link-field="dtp_input1">
+					<input type="text" class="form-control" id="end_date" name="end_date" size="16" value="" readonly >
+					<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+				  </div>
+				  <input type="hidden" id="dtp_input1" value="" />
+				</div>				
+				<div class="form-group">        
+					<div class="col-sm-offset-3 col-sm-9">
+						<button type="submit"  class="btn btn-default">Update</button>
+						<button type="submit"  class="btn btn-default">Delete</button>
+					</div>
+				</div>
+				</form>			  
+			</div>
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		  </div>
+		  
+		</div>
+	  </div>					
 					
 					
 				
