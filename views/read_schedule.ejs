@@ -158,7 +158,7 @@
 						$('#start_date_edit').val('<%=result[i].start_date %>');
 						$('#end_date_edit').val('<%=result[i].end_date %>');
 						$('#_id').val('<%=result[i]._id %>');
-						$('#for_delete_button').html('<a href="/delete_schedule?_id=<%=result[i]._id %>"><button value="Delete" class="btn btn-default">Delete</button></a>');
+						$('#test').html('<a href="/delete_schedule?_id=<%=result[i]._id %>"  class="glyphicon glyphicon-trash"></a>');
 					}
 			<%
 				}
@@ -355,7 +355,7 @@
 				<div class="form-group">
 				  <label class="control-label col-sm-3" for="event_name_edit">Event Name:</label>
 				  <div class="col-sm-9">
-					  <select class="form-control" id="event_name_edit" name="event_name_edit">
+					  <select style="margin-left:-3.5%" class="form-control" id="event_name_edit" name="event_name_edit">
 						<%
 							for(var i=0; i<result.length; i++) { 
 						%>
@@ -386,8 +386,8 @@
 				</div>				
 				<div class="form-group">        
 					<div class="col-sm-offset-3 col-sm-9">
-						<button type="submit"  class="btn btn-default">Update</button>
-						<div id="for_delete_button"></div>
+						<button style="margin-left:-3.5%" type="submit"  class="btn btn-default">Update</button>
+						<div id="test"></div>
 					</div>
 				</div>
 				</form>			  
