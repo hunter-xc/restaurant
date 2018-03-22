@@ -334,7 +334,15 @@
 				<div class="form-group">
 				  <label class="control-label col-sm-3" for="event_name">Event Name:</label>
 				  <div class="col-sm-9">
-					<input type="text" style="margin-left:-3%" class="form-control" id="event_name" name="event_name" required>
+					  <select class="form-control" id="event_name">
+						<%
+							for(var i=0; i<result.length; i++) { 
+						%>
+							  <option><%=result[i].event_name %></option>
+						<%
+							}
+						%>					  
+					  </select>				  
 				  </div>
 				</div>			
 				<div class="form-group">
