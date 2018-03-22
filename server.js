@@ -396,7 +396,7 @@ app.get('/read_schedule', function(req, res) {
 
 app.post('/delete_schedule', function(req, res) {
 	var criteria = {};
-	criteria['_id'] = ObjectId(req.body._id);
+	criteria['_id'] = ObjectId(req.body._id_delete);
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err,null);   
 		console.log('Connected to MongoDB\n');
