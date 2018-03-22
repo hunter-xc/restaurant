@@ -177,7 +177,7 @@
 					if (event == '<%=result[i].event_name %>') {
 						$('#start_date_delete').val('<%=result[i].start_date %>');
 						$('#end_date_delete').val('<%=result[i].end_date %>');
-						$('#_id').val('<%=result[i]._id %>');
+						$('#_id_delete').val('<%=result[i]._id %>');
 					}
 			<%
 				}
@@ -371,7 +371,7 @@
 			</div>
 			<div class="modal-body">	
 			<form class="form-horizontal" action="edit_schedule" method="post" enctype="multipart/form-data">
-				 <input type="hidden" id="_id" name="_id" value="" />
+				 <input type="hidden" id="_id_delete" name="_id_delete" value="" />
 				<div class="form-group">
 				  <label class="control-label col-sm-3" for="event_name_edit">Event Name:</label>
 				  <div class="col-sm-9">
