@@ -165,7 +165,7 @@
                                 <thead style="background-color:lightpink;">
                                     <tr>
                                         <th>Table</th>
-										<th>Seat</th>
+									<!--	<th>Seat</th>  -->
                                         <th>Guest Name</th>
                                         <th>Groom's guest</th>
                                         <th>Bride's guest</th>
@@ -180,7 +180,7 @@
 								<% for(var i=0; i<result.length; i++) { %>
                                     <tr>
                                         <td><%=result[i].table %></td>
-                                        <td><%=result[i].seat %></td>
+                                    <!--    <td><%=result[i].seat %></td>  -->
 										<td><%=result[i].guest %></td>
 										<td>
 											<% 
@@ -308,12 +308,14 @@
 					<input type="text" class="form-control" id="table" name="table" required />
 				  </div>
 				</div>
+				<!--
 				<div class="form-group">
 				  <label class="control-label col-sm-3" for="seat">Seat:</label>
 				  <div class="col-sm-9">
 					<input type="text" class="form-control" id="seat" name="seat" required />
 				  </div>
 				</div>
+				-->
 				<div class="form-group">
 				  <label class="control-label col-sm-3" for="guest">Guest:</label>
 				  <div class="col-sm-9">
@@ -377,12 +379,14 @@
 					<input type="text" class="form-control" id="table" name="table" required value="<%=result[i].table %>" />
 				  </div>
 				</div>
+				<!--
 				<div class="form-group">
 				  <label class="control-label col-sm-3" for="seat">Seat:</label>
 				  <div class="col-sm-9">
 					<input type="text" class="form-control" id="seat" name="seat" value="<%=result[i].seat %>" required />
 				  </div>
 				</div>
+				-->
 				<div class="form-group">
 				  <label class="control-label col-sm-3" for="guest">Guest:</label>
 				  <div class="col-sm-9">
