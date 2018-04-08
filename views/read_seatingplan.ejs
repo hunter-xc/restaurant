@@ -131,13 +131,14 @@
 			    <%
 			    	var tables = [];
 					var each_table_people_count = [];
+					
 			    	for(var i=0; i<result.length; i++) {
 						if (tables.indexOf(result[i].table) < 0) {
 							tables.push(result[i].table);
 						}	
 					}
 					
-					for (var j=0;j<tables.length; j++) {
+					for (var j=0;j<userdata[0].num_of_table; j++) {
 						each_table_people_count[j] = 0;
 					}
 					
@@ -153,7 +154,7 @@
 			    
 			    
                             <h1>Seating Plan</h1>
-                            <p>Total table: <%=tables.length %> 						
+                            <p>Total table: <%=userdata[0].num_of_table %> 						
 							<div>Number of people in each table: <%=userdata[0].table_person_count %>
 								<a class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#edit_people_count"></a>
 							</div>								
@@ -220,7 +221,7 @@
 						<div style="margin-top: 20px;">
 							
 							<%
-								for (var i=1; i<=tables.length; i++) {
+								for (var i=1; i<=userdata[0].num_of_table; i++) {
 							%>
 							<div style="width:47%;float:left;margin-left:3%;">
 								<div class="task-info">
