@@ -306,7 +306,11 @@
 				  <div class="form-group">
 				  <label class="control-label col-sm-3" for="table">Table:</label>
 				  <div class="col-sm-9">
-					<input type="text" class="form-control" id="table" name="table" required />
+					<select class="form-control" id="table" name="table" required>
+						<%	for (var j=1;j<=userdata[0].num_of_table; j++) {	%>
+							<option value='T<%=j %>'>T<%=j %></option>
+						<% } %>
+					</select>
 				  </div>
 				</div>
 				<!--
@@ -377,7 +381,12 @@
 				  <div class="form-group">
 				  <label class="control-label col-sm-3" for="table">Table:</label>
 				  <div class="col-sm-9">
-					<input type="text" class="form-control" id="table" name="table" required value="<%=result[i].table %>" />
+					<select class="form-control" id="table" name="table" required>
+						<option selected value='<%=result[i].table %>'><%=result[i].table %></option>
+						<%	for (var j=1;j<=userdata[0].num_of_table; j++) {	%>
+							<option value='T<%=j %>'>T<%=j %></option>
+						<% } %>
+					</select>
 				  </div>
 				</div>
 				<!--
