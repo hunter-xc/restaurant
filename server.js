@@ -142,6 +142,7 @@ app.post('/edit_profile' ,function(req, res) {
 	criteria['bride'] = req.body.bride;
 	criteria['budget'] = req.body.budget;
 	criteria['big_day'] = req.body.big_day;
+	criteria['location'] = req.body.location;
 
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
