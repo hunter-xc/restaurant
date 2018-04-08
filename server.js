@@ -555,7 +555,7 @@ app.get('/add_seatingplan', function(req, res) {
 app.post('/add_seatingplan', function(req, res) {
 	var criteria = {};
 	criteria['table'] = req.body.table;
-	criteria['seat'] = req.body.seat;
+	//criteria['seat'] = req.body.seat;
 	criteria['guest'] = req.body.guest;
 	if (req.body.groom_guest) 
 		criteria['groom_guest'] = req.body.groom_guest;
@@ -579,7 +579,7 @@ app.post('/add_seatingplan', function(req, res) {
 app.post('/edit_seatingplan' ,function(req, res) {
 	var criteria = {};
 	criteria['table'] = req.body.table;
-	criteria['seat'] = req.body.seat;
+	//criteria['seat'] = req.body.seat;
 	criteria['guest'] = req.body.guest;
 	if (req.body.groom_guest) 
 		criteria['groom_guest'] = req.body.groom_guest;
