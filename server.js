@@ -1203,7 +1203,7 @@ function add_seatingplan(db, criteria, callback) {
 }
 
 function read_seatingplan(db, criteria, callback) {
-	db.collection('seatingplan').find(criteria).sort({'table': 1, 'seat': 1}).toArray(function(err, result) {
+	db.collection('seatingplan').find(criteria).sort({'table': 1}).toArray(function(err, result) {
 		assert.equal(err, null);
 		callback(result);
 	});
