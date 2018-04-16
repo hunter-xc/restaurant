@@ -133,7 +133,8 @@ app.get('/demo/album/family', function(req, res) {
 				db.close();
 				
 				var img = zip.folder('images');
-				img.file('test.jpg', result[0].image, {base64: true});
+				res.send(result[0].image);
+				//img.file('test.jpg', result[0].image, {base64: true});
 				
 				zip.generateAsync({type:"blob"}).then(function(content) {
 					// see FileSaver.js
