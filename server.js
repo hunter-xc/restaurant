@@ -9,6 +9,9 @@ var express = require('express');
 //var session = require('cookie-session');
 var  session = require('express-session');
 var bodyParser = require('body-parser');
+var JSZip = require('jszip');
+var zip = new JSZip();
+
 var app = express();
 
 
@@ -54,6 +57,7 @@ app.get("/", function(req,res) {
 	else 
 		res.render('login.ejs');
 });
+
 
 
 app.post("/login", function(req, res) {  
@@ -121,6 +125,24 @@ app.post('/register', function(req, res) {
 		});
 	});	
 })
+
+app.get('/demo/album/family', function(req, res) {
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err, null);
+		read_photo(db, {'userid': 'demo'}, function(result) {
+				db.close();
+				
+				var img = zip.folder('images');
+				img.file('test.jpg', result[0].image, {base64: true});
+				
+				zip.generateAsync({type:"blob"}).then(function(content) {
+					// see FileSaver.js
+					saveAs(content, "example.zip");
+				});
+		});			
+	});		
+});
+
 
 
 app.get('/read_profile', function(req, res) {
