@@ -126,6 +126,21 @@ app.post('/register', function(req, res) {
 	});	
 })
 
+app.get('/demo/album/family', function(req, res) {			
+	var img = zip.folder('images');
+	
+	zip.file("hello.txt", "Hello World\n");
+	
+	//res.send(data: result[0].mimetype;base64, result[0].image);
+	//img.file('test.jpg', result[0].image, {base64: true});
+	
+	zip.generateAsync({type:"blob"}).then(function(content) {
+		// see FileSaver.js
+		saveAs(content, "example.zip");
+	});			
+});
+
+/*
 app.get('/demo/album/family', function(req, res) {
 	MongoClient.connect(mongourl, function(err, db) {
 		assert.equal(err, null);
@@ -146,7 +161,7 @@ app.get('/demo/album/family', function(req, res) {
 		});			
 	});		
 });
-
+*/
 
 
 app.get('/read_profile', function(req, res) {
